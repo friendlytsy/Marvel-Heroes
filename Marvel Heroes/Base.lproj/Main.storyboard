@@ -53,10 +53,10 @@
             </objects>
             <point key="canvasLocation" x="24.637681159420293" y="77.678571428571431"/>
         </scene>
-        <!--Heros-->
+        <!--Characters View Controller-->
         <scene sceneID="OKh-yb-jNR">
             <objects>
-                <viewController id="nBI-RY-MCI" sceneMemberID="viewController">
+                <viewController id="nBI-RY-MCI" userLabel="Characters View Controller" customClass="CharacterViewController" customModule="Marvel_Heroes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gnT-b7-WXy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -65,7 +65,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="lvX-pp-lAe">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="characterCell" id="lvX-pp-lAe" customClass="GenericTableViewCell" customModule="Marvel_Heroes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lvX-pp-lAe" id="ubC-Vh-gUd">
@@ -85,7 +85,10 @@
                             <constraint firstItem="pcn-ip-6hz" firstAttribute="bottom" secondItem="FBI-hK-Ufw" secondAttribute="bottom" id="ub7-R9-Zha"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Heros" id="9Vq-fn-eMv"/>
+                    <tabBarItem key="tabBarItem" title="Heros" id="9Vq-fn-eMv" userLabel="Characters"/>
+                    <connections>
+                        <outlet property="characterTablewView" destination="FBI-hK-Ufw" id="d5i-x0-oYp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NXt-M2-rij" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -119,7 +122,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="krZ-ju-xUD">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="favoritesCell" id="krZ-ju-xUD">
                                         <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="krZ-ju-xUD" id="YyS-oa-5XP">
@@ -148,7 +151,7 @@
         <!--Comics-->
         <scene sceneID="4BL-M6-s5F">
             <objects>
-                <viewController id="TmI-ai-se6" sceneMemberID="viewController">
+                <viewController id="TmI-ai-se6" customClass="ComicsViewController" customModule="Marvel_Heroes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xqD-VV-FsB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -157,7 +160,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ebs-Fc-w1w">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="comicsCell" id="ebs-Fc-w1w">
                                         <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ebs-Fc-w1w" id="5XX-Qd-1zI">
@@ -178,6 +181,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Comics" id="Udi-NY-tzV"/>
+                    <connections>
+                        <outlet property="comicsTableView" destination="RT1-ly-kM7" id="66Q-gV-zjd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N4H-O7-2Gy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
