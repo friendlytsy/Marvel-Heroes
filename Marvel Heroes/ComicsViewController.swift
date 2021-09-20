@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ComicsViewController: UIViewController, UITableViewDataSource {
+class ComicsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var comicsTableView: UITableView!
     
@@ -16,6 +16,7 @@ class ComicsViewController: UIViewController, UITableViewDataSource {
         
         // Do any additional setup after loading the view.
         comicsTableView.dataSource = self
+        comicsTableView.delegate = self
         
         let nib = UINib(nibName: "GenericTableViewCell", bundle: nil)
         comicsTableView.register(nib, forCellReuseIdentifier: "GenericTableViewCell")
@@ -43,5 +44,16 @@ class ComicsViewController: UIViewController, UITableViewDataSource {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // segue for comics. Will reuse view controller depenpd on description required to desplay
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "segueComics", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is ItemDescriptionViewController {
+            comicsTableView.deselectRow(at: comicsTableView.indexPathForSelectedRow!, animated: true)
+        }
+    }
 
 }

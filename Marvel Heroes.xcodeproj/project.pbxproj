@@ -14,6 +14,7 @@
 		F923B5E226DE209F003F431B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F923B5E126DE209F003F431B /* Assets.xcassets */; };
 		F923B5E526DE209F003F431B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F923B5E326DE209F003F431B /* LaunchScreen.storyboard */; };
 		F978E49026F12F0A00CEF509 /* ComicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F978E48F26F12F0A00CEF509 /* ComicsViewController.swift */; };
+		F9D7F2F026F8620100BF37C7 /* ItemDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D7F2EF26F8620100BF37C7 /* ItemDescriptionViewController.swift */; };
 		F9FAD2C126EA040800D10FB9 /* CharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAD2C026EA040800D10FB9 /* CharacterModel.swift */; };
 		F9FAD2C526EA076300D10FB9 /* GenericTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAD2C326EA076300D10FB9 /* GenericTableViewCell.swift */; };
 		F9FAD2C626EA076300D10FB9 /* GenericTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9FAD2C426EA076300D10FB9 /* GenericTableViewCell.xib */; };
@@ -30,6 +31,7 @@
 		F923B5E426DE209F003F431B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F923B5E626DE209F003F431B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F978E48F26F12F0A00CEF509 /* ComicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicsViewController.swift; sourceTree = "<group>"; };
+		F9D7F2EF26F8620100BF37C7 /* ItemDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDescriptionViewController.swift; sourceTree = "<group>"; };
 		F9FAD2C026EA040800D10FB9 /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
 		F9FAD2C326EA076300D10FB9 /* GenericTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableViewCell.swift; sourceTree = "<group>"; };
 		F9FAD2C426EA076300D10FB9 /* GenericTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericTableViewCell.xib; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				F923B5DA26DE209C003F431B /* SceneDelegate.swift */,
 				F923B5DC26DE209C003F431B /* ViewController.swift */,
 				F923B5DE26DE209C003F431B /* Main.storyboard */,
+				F9D7F2EF26F8620100BF37C7 /* ItemDescriptionViewController.swift */,
 				F923B5E126DE209F003F431B /* Assets.xcassets */,
 				F923B5E326DE209F003F431B /* LaunchScreen.storyboard */,
 				F923B5E626DE209F003F431B /* Info.plist */,
@@ -173,6 +176,7 @@
 				F923B5DD26DE209C003F431B /* ViewController.swift in Sources */,
 				F9FAD2C126EA040800D10FB9 /* CharacterModel.swift in Sources */,
 				F978E49026F12F0A00CEF509 /* ComicsViewController.swift in Sources */,
+				F9D7F2F026F8620100BF37C7 /* ItemDescriptionViewController.swift in Sources */,
 				F9FAD2C526EA076300D10FB9 /* GenericTableViewCell.swift in Sources */,
 				F923B5D926DE209C003F431B /* AppDelegate.swift in Sources */,
 				F923B5DB26DE209C003F431B /* SceneDelegate.swift in Sources */,

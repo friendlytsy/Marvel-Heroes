@@ -7,18 +7,19 @@
 
 import UIKit
 
-class CharacterViewController: UIViewController, UITableViewDataSource {
+class CharacterViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
    
-    @IBOutlet weak var characterTablewView: UITableView!
+    @IBOutlet weak var characterTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        characterTablewView.dataSource = self
+        characterTableView.dataSource = self
+        characterTableView.delegate = self
         // Do any additional setup after loading the view.
         
         let nib = UINib(nibName: "GenericTableViewCell", bundle: nil)
-        characterTablewView.register(nib, forCellReuseIdentifier: "GenericTableViewCell")
+        characterTableView.register(nib, forCellReuseIdentifier: "GenericTableViewCell")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -26,7 +27,7 @@ class CharacterViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = characterTablewView.dequeueReusableCell(withIdentifier: "GenericTableViewCell", for: indexPath) as! GenericTableViewCell
+        let cell = characterTableView.dequeueReusableCell(withIdentifier: "GenericTableViewCell", for: indexPath) as! GenericTableViewCell
         
         cell.lbItemName.text = "Character name"
         cell.lbItemDescription.text = "Very short description of character"
@@ -34,5 +35,15 @@ class CharacterViewController: UIViewController, UITableViewDataSource {
         cell.lbItemDescription.textAlignment = .center
         return cell
     }
-
+    
+    // segue for comics. Will reuse view controller depenpd on description required to desplay
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "segueCharacter", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is ItemDescriptionViewController {
+            characterTableView.deselectRow(at: characterTableView.indexPathForSelectedRow!, animated: true)
+        }
+    }
 }
