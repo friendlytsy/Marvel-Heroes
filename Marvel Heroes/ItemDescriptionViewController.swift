@@ -9,14 +9,20 @@ import UIKit
 
 class ItemDescriptionViewController: UIViewController {
 
+    var itemName = ""
+    var itemDescription = ""
     
-    @IBOutlet weak var imgItemLogo: UIImageView!
-    @IBOutlet weak var lbItemName: UILabel!
-    @IBOutlet weak var txtitemDescription: UITextView!
+    
+    @IBOutlet weak var itemImage: UIImageView!
+    @IBOutlet weak var itemNameLabel: UILabel!
+    @IBOutlet weak var itemDescriptionTextField: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        itemImage.image = UIImage(named: "marvel_logo")
+        itemNameLabel.text = itemName
+        itemDescriptionTextField.text = itemDescription
         // Do any additional setup after loading the view.
     }
     

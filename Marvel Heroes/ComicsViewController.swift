@@ -29,9 +29,9 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = comicsTableView.dequeueReusableCell(withIdentifier: "GenericTableViewCell", for: indexPath) as! GenericTableViewCell
         
-        cell.lbItemName.text = "Comics name"
-        cell.lbItemDescription.text = "Very short description of comics"
-        cell.lbItemDescription.textAlignment = .center
+        cell.itemNameLabel.text = "Comics name"
+        cell.itemDescriptionLabel.text = "Very short description of comics"
+        cell.itemDescriptionLabel.textAlignment = .center
         return cell
     }
 
