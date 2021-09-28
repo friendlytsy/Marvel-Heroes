@@ -70,19 +70,16 @@
 		F923B5D726DE209C003F431B /* Marvel Heroes */ = {
 			isa = PBXGroup;
 			children = (
+				F9BF5BFF27031305005D66DF /* Controllers */,
 				F95E39F626FCF4BA005C2356 /* Extensions */,
 				F9FAD2C226EA073D00D10FB9 /* Cells */,
 				F9FAD2BF26EA03F000D10FB9 /* Models */,
 				F923B5D826DE209C003F431B /* AppDelegate.swift */,
 				F923B5DA26DE209C003F431B /* SceneDelegate.swift */,
-				F923B5DC26DE209C003F431B /* ViewController.swift */,
 				F923B5DE26DE209C003F431B /* Main.storyboard */,
-				F9D7F2EF26F8620100BF37C7 /* ItemDescriptionViewController.swift */,
 				F923B5E126DE209F003F431B /* Assets.xcassets */,
 				F923B5E326DE209F003F431B /* LaunchScreen.storyboard */,
 				F923B5E626DE209F003F431B /* Info.plist */,
-				F9FAD2C726EA0A5900D10FB9 /* CharacterViewController.swift */,
-				F978E48F26F12F0A00CEF509 /* ComicsViewController.swift */,
 			);
 			path = "Marvel Heroes";
 			sourceTree = "<group>";
@@ -93,6 +90,17 @@
 				F95E39F726FCF9E9005C2356 /* UIFonts.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F9BF5BFF27031305005D66DF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F923B5DC26DE209C003F431B /* ViewController.swift */,
+				F9D7F2EF26F8620100BF37C7 /* ItemDescriptionViewController.swift */,
+				F9FAD2C726EA0A5900D10FB9 /* CharacterViewController.swift */,
+				F978E48F26F12F0A00CEF509 /* ComicsViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		F9FAD2BF26EA03F000D10FB9 /* Models */ = {
