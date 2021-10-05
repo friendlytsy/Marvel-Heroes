@@ -6,15 +6,23 @@
 //
 
 import Foundation
+import UIKit
 
 struct CharacterModel {
     
-    var characterName: String?
-    var characterDescription: String?
+    var characterImage: UIImage
+    var characterName: String
+    var characterDescription: String
     
-    init( _ name: String, _ description: String) {
+    init( _ image: UIImage, _ name: String, _ description: String) {
+        self.characterImage = image
         self.characterName = name
         self.characterDescription = description
     }
     
 }
+
+extension CharacterModel: GenericTableViewCellModel {
+
+}
+
