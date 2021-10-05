@@ -15,12 +15,22 @@ class ViewController: UIViewController {
                 
         let urlBuilder = UrlBuilder()
         let url = URL(string: urlBuilder.getUrl(UrlPath.characteresUrl.rawValue))
-        let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
-            guard let data = data else { return }
-            print(String(data: data, encoding: .utf8)!)
-        }
-        task.resume()
+        let task = URLSession.shared.dataTask(with: url!, completionHandler: {(data, response, error) in
+            if let error = error {
+                print(error)
+            }
 
+            if let data = data{
+                print("data =\(data)")
+            }
+            if let response = response {
+                print("url = \(response.url!)")
+                print("response = \(response)")
+                let httpResponse = response as! HTTPURLResponse
+                print("response code = \(httpResponse.statusCode)")
+            }
+        })
+        task.resume()
     }
 }
 
