@@ -9,9 +9,9 @@ import UIKit
 
 class GenericTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var itemImage: UIImageView!
-    @IBOutlet weak var itemNameLabel: UILabel!
-    @IBOutlet weak var itemDescriptionLabel: UILabel!
+    @IBOutlet private weak var itemImage: UIImageView!
+    @IBOutlet private weak var itemNameLabel: UILabel!
+    @IBOutlet private weak var itemDescriptionLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,4 +24,12 @@ class GenericTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func configure(withViewModel viewModel: CharacterModel) {
+        itemImage.image = viewModel.characterImage
+        itemNameLabel.text = viewModel.characterName
+        itemDescriptionLabel.text = viewModel.characterDescription
+        
+        itemNameLabel.font = UIFont.regular
+        itemDescriptionLabel.font = UIFont.light
+    }
 }
