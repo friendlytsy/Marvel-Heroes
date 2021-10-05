@@ -18,52 +18,39 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dRa-cz-40C">
-                        <rect key="frame" x="80" y="0.0" width="280" height="88"/>
+                        <rect key="frame" x="80" y="0.0" width="280" height="46"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y4K-gk-eeV">
-                                <rect key="frame" x="0.0" y="0.0" width="280" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="JE2-Oz-JFp"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="0.0" width="280" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Very short item description" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXH-Oe-lBi">
-                                <rect key="frame" x="0.0" y="48" width="280" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="cda-xo-Blq"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Very short item description" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXH-Oe-lBi">
+                                <rect key="frame" x="0.0" y="25.5" width="280" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="gXH-Oe-lBi" secondAttribute="bottom" id="6A9-AF-Hb5"/>
-                            <constraint firstItem="y4K-gk-eeV" firstAttribute="leading" secondItem="dRa-cz-40C" secondAttribute="leading" id="B4i-bz-xeQ"/>
-                            <constraint firstAttribute="trailing" secondItem="y4K-gk-eeV" secondAttribute="trailing" id="CC0-Ps-iv6"/>
-                            <constraint firstItem="y4K-gk-eeV" firstAttribute="top" secondItem="dRa-cz-40C" secondAttribute="top" id="Ffr-jp-0IS"/>
-                            <constraint firstItem="gXH-Oe-lBi" firstAttribute="leading" secondItem="dRa-cz-40C" secondAttribute="leading" id="VpC-Bh-dsv"/>
-                            <constraint firstAttribute="trailing" secondItem="gXH-Oe-lBi" secondAttribute="trailing" id="aal-fl-iYw"/>
-                            <constraint firstItem="gXH-Oe-lBi" firstAttribute="top" secondItem="y4K-gk-eeV" secondAttribute="bottom" constant="8" symbolic="YES" id="las-fk-bMK"/>
+                            <constraint firstAttribute="trailing" secondItem="gXH-Oe-lBi" secondAttribute="trailing" id="Pdv-UK-XTS"/>
                         </constraints>
                     </stackView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DE9-kS-Rs4">
-                        <rect key="frame" x="0.0" y="0.0" width="80" height="88"/>
+                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="80" id="o6R-6m-GPo"/>
+                            <constraint firstAttribute="width" constant="80" id="Vkh-zJ-XvD"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="DE9-kS-Rs4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="CDi-IT-lT8"/>
-                    <constraint firstAttribute="trailing" secondItem="dRa-cz-40C" secondAttribute="trailing" id="OJs-V7-wky"/>
-                    <constraint firstItem="dRa-cz-40C" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="RvA-ry-dLB"/>
-                    <constraint firstItem="dRa-cz-40C" firstAttribute="leading" secondItem="DE9-kS-Rs4" secondAttribute="trailing" id="Y1k-id-gRn"/>
-                    <constraint firstAttribute="bottom" secondItem="dRa-cz-40C" secondAttribute="bottom" id="ii3-OS-qSw"/>
-                    <constraint firstItem="DE9-kS-Rs4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="jkm-tb-5w5"/>
-                    <constraint firstAttribute="bottom" secondItem="DE9-kS-Rs4" secondAttribute="bottom" id="xaa-f5-JXG"/>
+                    <constraint firstItem="DE9-kS-Rs4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9Uu-Mx-JBC"/>
+                    <constraint firstItem="dRa-cz-40C" firstAttribute="leading" secondItem="DE9-kS-Rs4" secondAttribute="trailing" id="NKT-3q-SFD"/>
+                    <constraint firstItem="DE9-kS-Rs4" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mwT-2F-LWs"/>
+                    <constraint firstAttribute="trailing" secondItem="dRa-cz-40C" secondAttribute="trailing" id="tRI-Jb-0gB"/>
+                    <constraint firstItem="DE9-kS-Rs4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="v9n-xQ-KyW"/>
+                    <constraint firstItem="DE9-kS-Rs4" firstAttribute="top" secondItem="dRa-cz-40C" secondAttribute="top" id="vDE-MR-Kdc"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
