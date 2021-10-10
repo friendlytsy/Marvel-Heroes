@@ -8,7 +8,7 @@
 import Foundation
 
 class UrlBuilder {
-    func getUrl(_ urlPath: String) -> String {
+    func getUrl(_ urlPath: UrlPath) -> String {
         
         let cryptoHelper = CryptoHelper()
 
@@ -22,7 +22,7 @@ class UrlBuilder {
         var urlComponents = URLComponents()
         urlComponents.scheme = UrlSchema.https.rawValue
         urlComponents.host = UrlHost.marverGateway.rawValue
-        urlComponents.path = urlPath
+        urlComponents.path = urlPath.rawValue
         urlComponents.queryItems = [
             URLQueryItem(name: "apikey", value: apiKeyPublic),
             URLQueryItem(name: "ts", value: timestemp),

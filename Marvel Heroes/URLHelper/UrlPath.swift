@@ -8,6 +8,6 @@
 import Foundation
 
 enum UrlPath: String {
-    case characteresUrl = "/v1/public/characters"
-    case comicsUrl = "/v1/public/comics"
+    case characteresListUrl = "/v1/public/characters"
+    case comicsListUrl = "/v1/public/comics"
 }
