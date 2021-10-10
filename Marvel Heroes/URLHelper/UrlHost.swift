@@ -8,5 +8,5 @@
 import Foundation
 
 enum UrlHost: String {
-    case marverGateway = "gateway.marvel.com"
+    case marvelGateway = "gateway.marvel.com"
 }

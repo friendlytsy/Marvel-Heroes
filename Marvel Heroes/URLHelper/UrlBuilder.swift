@@ -21,7 +21,7 @@ class UrlBuilder {
         
         var urlComponents = URLComponents()
         urlComponents.scheme = UrlSchema.https.rawValue
-        urlComponents.host = UrlHost.marverGateway.rawValue
+        urlComponents.host = UrlHost.marvelGateway.rawValue
         urlComponents.path = urlPath.rawValue
         urlComponents.queryItems = [
             URLQueryItem(name: "apikey", value: apiKeyPublic),
