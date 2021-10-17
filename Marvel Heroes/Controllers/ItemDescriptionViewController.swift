@@ -11,7 +11,7 @@ class ItemDescriptionViewController: UIViewController {
 
     var itemName = ""
     var itemDescription = ""
-    
+    var itemThumbnail = ""
     
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var itemNameLabel: UILabel!
@@ -19,8 +19,13 @@ class ItemDescriptionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let url = URL( string: itemThumbnail ) {
+            DispatchQueue.main.async {
+                self.itemImage.kf.setImage(with: url)
+            }
+        }
 
-        itemImage.image = UIImage(named: "marvel_logo")
         itemNameLabel.text = itemName
         itemDescriptionTextField.text = itemDescription
         // Do any additional setup after loading the view.
