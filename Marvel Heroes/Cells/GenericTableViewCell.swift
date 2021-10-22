@@ -39,4 +39,19 @@ class GenericTableViewCell: UITableViewCell {
         itemNameLabel.font = UIFont.regular
         itemDescriptionLabel.font = UIFont.light
     }
+    
+    func configureComic(withViewModel viewModel: ComicDataModel) {
+
+        if let url = URL( string: viewModel.thumbnail ?? "" ) {
+            DispatchQueue.main.async {
+                self.itemImage.kf.setImage(with: url)
+            }
+        }
+        
+        itemNameLabel.text = viewModel.title
+        itemDescriptionLabel.text = viewModel.comicDescription
+
+        itemNameLabel.font = UIFont.regular
+        itemDescriptionLabel.font = UIFont.light
+    }
 }

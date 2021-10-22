@@ -15,7 +15,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        RequestData().doRequest()
+        let characterDataModel = CharacterDataModel()
+        characterDataModel.updateData()
+        
+        let comicDataModel = ComicDataModel()
+        comicDataModel.updateData()
     }
 }
 

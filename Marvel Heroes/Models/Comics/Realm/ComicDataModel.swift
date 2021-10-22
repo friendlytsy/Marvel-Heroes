@@ -1,17 +1,17 @@
 //
-//  CharacterDataModel.swift
+//  ComicDataModel.swift
 //  Marvel Heroes
 //
-//  Created by Александр Цыганков on 17.10.2021.
+//  Created by Александр Цыганков on 18.10.2021.
 //
 
 import Foundation
 import RealmSwift
 
-class CharacterDataModel: Object {
+class ComicDataModel: Object {
     @Persisted (primaryKey: true) var id: Int?
-    @Persisted var name: String?
-    @Persisted var charDescription: String?
+    @Persisted var title: String?
+    @Persisted var comicDescription: String?
     @Persisted var thumbnail: String?
     
     var networkClient = NetworkClient()
@@ -29,25 +29,25 @@ class CharacterDataModel: Object {
         let realm = try! Realm()
         do {
             let urlBuilder = UrlBuilder()
-            guard let url = URL(string: urlBuilder.getUrl(UrlPath.characteresListUrl)) else { return print("ERROR") }
+            guard let url = URL(string: urlBuilder.getUrl(UrlPath.comicsListUrl)) else { return print("ERROR") }
             networkClient.downloadTask(url: url.absoluteString) { (json, data) in
                 do {
                     let decoder = JSONDecoder()
-                    let getData = try decoder.decode(CharacterDataWrapper.self, from: data)
+                    let getData = try decoder.decode(ComicDataWrapper.self, from: data)
                     
                     getData.data?.results?.forEach{item in
                         // - REALM data model
                         DispatchQueue.main.async {
                             do {
-                                let character = CharacterDataModel()
+                                let comic = ComicDataModel()
                                 
-                                character.id = item.id
-                                character.name = item.name
-                                character.charDescription = item.description
-                                character.thumbnail = item.thumbnail?.url?.absoluteString
+                                comic.id = item.id
+                                comic.title = item.title
+                                comic.comicDescription = item.description
+                                comic.thumbnail = item.thumbnail?.url?.absoluteString
                                 
                                 try! realm.write {
-                                    realm.add(character, update: .all)
+                                    realm.add(comic, update: .all)
                                     try realm.commitWrite()
                                 }
                             }

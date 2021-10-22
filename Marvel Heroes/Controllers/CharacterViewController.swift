@@ -13,7 +13,7 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
     var realm = try? Realm()
     
     var characterDataModel: Results<CharacterDataModel>? = nil
-    
+
     @IBOutlet weak var characterTableView: UITableView!
     
     //var characterDataModel = [CharacterModel]()
@@ -35,7 +35,7 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
         let nib = UINib(nibName: "GenericTableViewCell", bundle: nil)
         characterTableView.register(nib, forCellReuseIdentifier: "GenericTableViewCell")
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return characterDataModel!.count
     }

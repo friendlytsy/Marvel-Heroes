@@ -6,13 +6,22 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ComicsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    var realm = try? Realm()
+    
+    var comicDataModel: Results<ComicDataModel>? = nil
     
     @IBOutlet weak var comicsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+        
+        self.comicDataModel = realm?.objects(ComicDataModel.self)
         
         // Do any additional setup after loading the view.
         comicsTableView.dataSource = self
@@ -23,15 +32,13 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        return comicDataModel!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = comicsTableView.dequeueReusableCell(withIdentifier: "GenericTableViewCell", for: indexPath) as! GenericTableViewCell
         
-//        cell.itemNameLabel.text = "Comics name"
-//        cell.itemDescriptionLabel.text = "Very short description of comics"
-//        cell.itemDescriptionLabel.textAlignment = .center
+        cell.configureComic(withViewModel: (comicDataModel?[indexPath.row])!)
         return cell
     }
 
