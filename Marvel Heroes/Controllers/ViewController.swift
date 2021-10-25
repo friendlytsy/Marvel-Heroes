@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         
         let characterDataModel = CharacterDataModel()
         characterDataModel.updateData()
-        
+
         let comicDataModel = ComicDataModel()
         comicDataModel.updateData()
     }

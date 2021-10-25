@@ -25,7 +25,7 @@ class GenericTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(withViewModel viewModel: CharacterDataModel) {
+    func configureCharacter(withViewModel viewModel: CharacterDataModel) {
 
         if let url = URL( string: viewModel.thumbnail ?? "" ) {
             DispatchQueue.main.async {

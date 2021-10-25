@@ -11,23 +11,20 @@ import RealmSwift
 class CharacterViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
    
     var realm = try? Realm()
-    
+    var token: NotificationToken?
     var characterDataModel: Results<CharacterDataModel>? = nil
-
-    @IBOutlet weak var characterTableView: UITableView!
+    let characterDataModelRequest = CharacterDataModel()
     
-    //var characterDataModel = [CharacterModel]()
+    @IBOutlet weak var characterTableView: UITableView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         self.characterDataModel = realm?.objects(CharacterDataModel.self)
-        
         characterTableView.dataSource = self
         characterTableView.delegate = self
         // Do any additional setup after loading the view.
@@ -37,14 +34,17 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return characterDataModel!.count
+        return characterDataModel?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = characterTableView.dequeueReusableCell(withIdentifier: "GenericTableViewCell", for: indexPath) as! GenericTableViewCell
-
-        cell.configure(withViewModel: (characterDataModel?[indexPath.row])!)
+        cell.configureCharacter(withViewModel: (characterDataModel?[indexPath.row])!)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        print("Prefetch of data")
     }
     
     // segue for character. Will reuse view controller depenpd on description required to desplay
@@ -63,3 +63,5 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
 }
+
+
