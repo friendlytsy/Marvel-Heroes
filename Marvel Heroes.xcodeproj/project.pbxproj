@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		F923B5D926DE209C003F431B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F923B5D826DE209C003F431B /* AppDelegate.swift */; };
 		F923B5DB26DE209C003F431B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F923B5DA26DE209C003F431B /* SceneDelegate.swift */; };
-		F923B5DD26DE209C003F431B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F923B5DC26DE209C003F431B /* ViewController.swift */; };
+		F923B5DD26DE209C003F431B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F923B5DC26DE209C003F431B /* LoginViewController.swift */; };
 		F923B5E026DE209C003F431B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F923B5DE26DE209C003F431B /* Main.storyboard */; };
 		F923B5E226DE209F003F431B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F923B5E126DE209F003F431B /* Assets.xcassets */; };
 		F923B5E526DE209F003F431B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F923B5E326DE209F003F431B /* LaunchScreen.storyboard */; };
@@ -33,6 +33,7 @@
 		F9BF5C01270313C1005D66DF /* CryptoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF5C00270313C1005D66DF /* CryptoHelper.swift */; };
 		F9D3CBB327268D6F00AAB339 /* ComicsVСExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D3CBB227268D6F00AAB339 /* ComicsVСExtension.swift */; };
 		F9D3CBB527268D9A00AAB339 /* CharacterVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D3CBB427268D9A00AAB339 /* CharacterVCExtension.swift */; };
+		F9D3CBB72726A39E00AAB339 /* LoginVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D3CBB62726A39E00AAB339 /* LoginVCExtension.swift */; };
 		F9D7F2F026F8620100BF37C7 /* ItemDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D7F2EF26F8620100BF37C7 /* ItemDescriptionViewController.swift */; };
 		F9DDEA4B2713710800064115 /* ComicDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DDEA4A2713710800064115 /* ComicDataWrapper.swift */; };
 		F9DDEA4D271372EE00064115 /* ComicDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DDEA4C271372EE00064115 /* ComicDataContainer.swift */; };
@@ -46,7 +47,7 @@
 		F923B5D526DE209C003F431B /* Marvel Heroes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Marvel Heroes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F923B5D826DE209C003F431B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F923B5DA26DE209C003F431B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F923B5DC26DE209C003F431B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F923B5DC26DE209C003F431B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F923B5DF26DE209C003F431B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F923B5E126DE209F003F431B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F923B5E426DE209F003F431B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -68,6 +69,7 @@
 		F9BF5C00270313C1005D66DF /* CryptoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoHelper.swift; sourceTree = "<group>"; };
 		F9D3CBB227268D6F00AAB339 /* ComicsVСExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComicsVСExtension.swift"; sourceTree = "<group>"; };
 		F9D3CBB427268D9A00AAB339 /* CharacterVCExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterVCExtension.swift; sourceTree = "<group>"; };
+		F9D3CBB62726A39E00AAB339 /* LoginVCExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVCExtension.swift; sourceTree = "<group>"; };
 		F9D7F2EF26F8620100BF37C7 /* ItemDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDescriptionViewController.swift; sourceTree = "<group>"; };
 		F9DDEA4A2713710800064115 /* ComicDataWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDataWrapper.swift; sourceTree = "<group>"; };
 		F9DDEA4C271372EE00064115 /* ComicDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDataContainer.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				F95E39F726FCF9E9005C2356 /* UIFonts.swift */,
 				F9D3CBB227268D6F00AAB339 /* ComicsVСExtension.swift */,
 				F9D3CBB427268D9A00AAB339 /* CharacterVCExtension.swift */,
+				F9D3CBB62726A39E00AAB339 /* LoginVCExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -221,7 +224,7 @@
 		F9BF5BFF27031305005D66DF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F923B5DC26DE209C003F431B /* ViewController.swift */,
+				F923B5DC26DE209C003F431B /* LoginViewController.swift */,
 				F9D7F2EF26F8620100BF37C7 /* ItemDescriptionViewController.swift */,
 				F9FAD2C726EA0A5900D10FB9 /* CharacterViewController.swift */,
 				F978E48F26F12F0A00CEF509 /* ComicsViewController.swift */,
@@ -335,7 +338,8 @@
 				F9604B27270C1B0B0056BF0D /* GenericTableViewCellModel.swift in Sources */,
 				F95E39F826FCF9E9005C2356 /* UIFonts.swift in Sources */,
 				F985BB2D27033FCA00742139 /* UrlHost.swift in Sources */,
-				F923B5DD26DE209C003F431B /* ViewController.swift in Sources */,
+				F923B5DD26DE209C003F431B /* LoginViewController.swift in Sources */,
+				F9D3CBB72726A39E00AAB339 /* LoginVCExtension.swift in Sources */,
 				F9D3CBB327268D6F00AAB339 /* ComicsVСExtension.swift in Sources */,
 				F951BDCC2712F55400F63C66 /* CharactersContainer.swift in Sources */,
 				F985BB2527033CC200742139 /* UrlPath.swift in Sources */,
