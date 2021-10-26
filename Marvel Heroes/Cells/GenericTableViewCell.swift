@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class GenericTableViewCell: UITableViewCell {
 
@@ -24,11 +25,32 @@ class GenericTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(withViewModel viewModel: CharacterModel) {
-        itemImage.image = viewModel.characterImage
-        itemNameLabel.text = viewModel.characterName
-        itemDescriptionLabel.text = viewModel.characterDescription
+    func configureCharacter(withViewModel viewModel: CharacterDataModel) {
+
+        if let url = URL( string: viewModel.thumbnail ?? "" ) {
+            DispatchQueue.main.async {
+                self.itemImage.kf.setImage(with: url)
+            }
+        }
         
+        itemNameLabel.text = viewModel.name
+        itemDescriptionLabel.text = viewModel.charDescription
+
+        itemNameLabel.font = UIFont.regular
+        itemDescriptionLabel.font = UIFont.light
+    }
+    
+    func configureComic(withViewModel viewModel: ComicDataModel) {
+
+        if let url = URL( string: viewModel.thumbnail ?? "" ) {
+            DispatchQueue.main.async {
+                self.itemImage.kf.setImage(with: url)
+            }
+        }
+        
+        itemNameLabel.text = viewModel.title
+        itemDescriptionLabel.text = viewModel.comicDescription
+
         itemNameLabel.font = UIFont.regular
         itemDescriptionLabel.font = UIFont.light
     }

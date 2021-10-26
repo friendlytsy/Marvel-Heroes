@@ -40,7 +40,9 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DE9-kS-Rs4">
                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                         <constraints>
+                            <constraint firstAttribute="height" constant="80" id="0Z4-dg-V5f"/>
                             <constraint firstAttribute="width" constant="80" id="Vkh-zJ-XvD"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="uyR-2K-PK8"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -59,7 +61,7 @@
                 <outlet property="itemImage" destination="DE9-kS-Rs4" id="3pp-dY-UY4"/>
                 <outlet property="itemNameLabel" destination="y4K-gk-eeV" id="beI-hy-DOB"/>
             </connections>
-            <point key="canvasLocation" x="257.97101449275362" y="65.625"/>
+            <point key="canvasLocation" x="49" y="64"/>
         </tableViewCell>
     </objects>
 </document>

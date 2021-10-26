@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 
 protocol GenericTableViewCellModel {
-    var characterImage: UIImage { get }
-    var characterName: String { get }
-    var characterDescription: String { get }
+    var itemImage: UIImage { get }
+    var itemTitle: String { get }
+    var itemDescription: String { get }
 }
 
 

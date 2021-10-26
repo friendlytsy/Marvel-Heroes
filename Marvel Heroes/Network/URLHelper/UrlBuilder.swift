@@ -12,7 +12,8 @@ class UrlBuilder {
         
         let cryptoHelper = CryptoHelper()
 
-        let apiKeyPublic = "6365e29ac17d2e2f2dc319a02fc0c26e"
+        let apiKeyPublic = UserDefaults.standard.string(forKey: "restKey") ?? ""
+        //let apiKeyPublic = "6365e29ac17d2e2f2dc319a02fc0c26e"
         let apiKeyPrivate = "ecb3ab193999da9dd3431f0d2499dbe5023d1be2"
 
         let timestemp: String = String(format: "%f", Date().timeIntervalSince1970)
@@ -21,7 +22,7 @@ class UrlBuilder {
         
         var urlComponents = URLComponents()
         urlComponents.scheme = UrlSchema.https.rawValue
-        urlComponents.host = UrlHost.marverGateway.rawValue
+        urlComponents.host = UrlHost.marvelGateway.rawValue
         urlComponents.path = urlPath.rawValue
         urlComponents.queryItems = [
             URLQueryItem(name: "apikey", value: apiKeyPublic),
