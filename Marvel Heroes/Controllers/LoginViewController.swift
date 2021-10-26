@@ -15,18 +15,11 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBAction func doLogonButton(_ sender: UIButton) {
         self.saveLogin()
-        
-        let characterDataModel = CharacterDataModel()
-        characterDataModel.updateData()
-
-        let comicDataModel = ComicDataModel()
-        comicDataModel.updateData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
+        // Do any additional setup after loading the view.        
         self.isSavedLogin()
     }
 }

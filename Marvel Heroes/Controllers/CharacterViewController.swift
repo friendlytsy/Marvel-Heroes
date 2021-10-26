@@ -13,7 +13,7 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
     var realm = try? Realm()
     var token: NotificationToken?
     var characterDataModel: Results<CharacterDataModel>? = nil
-    let characterDataModelRequest = CharacterDataModel()
+    
     
     @IBOutlet weak var characterTableView: UITableView!
     
@@ -23,7 +23,7 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         self.characterDataModel = realm?.objects(CharacterDataModel.self)
         characterTableView.dataSource = self
         characterTableView.delegate = self
@@ -31,6 +31,9 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
         
         let nib = UINib(nibName: "GenericTableViewCell", bundle: nil)
         characterTableView.register(nib, forCellReuseIdentifier: "GenericTableViewCell")
+        
+        CharacterDataModel.updateData()
+        observeRealm()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
