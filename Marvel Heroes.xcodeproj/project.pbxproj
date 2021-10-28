@@ -38,6 +38,9 @@
 		F9DDEA4B2713710800064115 /* ComicDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DDEA4A2713710800064115 /* ComicDataWrapper.swift */; };
 		F9DDEA4D271372EE00064115 /* ComicDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DDEA4C271372EE00064115 /* ComicDataContainer.swift */; };
 		F9DDEA4F2713735B00064115 /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DDEA4E2713735B00064115 /* Comic.swift */; };
+		F9F7DC2B27299C8600885A5F /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F7DC2A27299C8600885A5F /* AsyncOperation.swift */; };
+		F9F7DC2D27299CB700885A5F /* DownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F7DC2C27299CB700885A5F /* DownloadOperation.swift */; };
+		F9F7DC2F2729D5A600885A5F /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F7DC2E2729D5A600885A5F /* DownloadManager.swift */; };
 		F9FAD2C526EA076300D10FB9 /* GenericTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAD2C326EA076300D10FB9 /* GenericTableViewCell.swift */; };
 		F9FAD2C626EA076300D10FB9 /* GenericTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9FAD2C426EA076300D10FB9 /* GenericTableViewCell.xib */; };
 		F9FAD2C826EA0A5900D10FB9 /* CharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAD2C726EA0A5900D10FB9 /* CharacterViewController.swift */; };
@@ -74,6 +77,9 @@
 		F9DDEA4A2713710800064115 /* ComicDataWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDataWrapper.swift; sourceTree = "<group>"; };
 		F9DDEA4C271372EE00064115 /* ComicDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDataContainer.swift; sourceTree = "<group>"; };
 		F9DDEA4E2713735B00064115 /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
+		F9F7DC2A27299C8600885A5F /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
+		F9F7DC2C27299CB700885A5F /* DownloadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadOperation.swift; sourceTree = "<group>"; };
+		F9F7DC2E2729D5A600885A5F /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
 		F9FAD2C326EA076300D10FB9 /* GenericTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableViewCell.swift; sourceTree = "<group>"; };
 		F9FAD2C426EA076300D10FB9 /* GenericTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericTableViewCell.xib; sourceTree = "<group>"; };
 		F9FAD2C726EA0A5900D10FB9 /* CharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +203,7 @@
 		F985C42F271C08B000394C81 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				F9F7DC30272A803E00885A5F /* OperationQueue */,
 				F985C431271C091000394C81 /* NetworkClient.swift */,
 				F985BB2E2703463500742139 /* URLHelper */,
 			);
@@ -230,6 +237,16 @@
 				F978E48F26F12F0A00CEF509 /* ComicsViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		F9F7DC30272A803E00885A5F /* OperationQueue */ = {
+			isa = PBXGroup;
+			children = (
+				F9F7DC2A27299C8600885A5F /* AsyncOperation.swift */,
+				F9F7DC2C27299CB700885A5F /* DownloadOperation.swift */,
+				F9F7DC2E2729D5A600885A5F /* DownloadManager.swift */,
+			);
+			path = OperationQueue;
 			sourceTree = "<group>";
 		};
 		F9FAD2BF26EA03F000D10FB9 /* Models */ = {
@@ -333,11 +350,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9FAD2C826EA0A5900D10FB9 /* CharacterViewController.swift in Sources */,
+				F9F7DC2F2729D5A600885A5F /* DownloadManager.swift in Sources */,
 				F9DDEA4B2713710800064115 /* ComicDataWrapper.swift in Sources */,
 				F985BB2B27033FA100742139 /* UrlSchema.swift in Sources */,
 				F9604B27270C1B0B0056BF0D /* GenericTableViewCellModel.swift in Sources */,
 				F95E39F826FCF9E9005C2356 /* UIFonts.swift in Sources */,
 				F985BB2D27033FCA00742139 /* UrlHost.swift in Sources */,
+				F9F7DC2B27299C8600885A5F /* AsyncOperation.swift in Sources */,
 				F923B5DD26DE209C003F431B /* LoginViewController.swift in Sources */,
 				F9D3CBB72726A39E00AAB339 /* LoginVCExtension.swift in Sources */,
 				F9D3CBB327268D6F00AAB339 /* ComicsVСExtension.swift in Sources */,
@@ -345,6 +364,7 @@
 				F985BB2527033CC200742139 /* UrlPath.swift in Sources */,
 				F9BF5C01270313C1005D66DF /* CryptoHelper.swift in Sources */,
 				F978E49026F12F0A00CEF509 /* ComicsViewController.swift in Sources */,
+				F9F7DC2D27299CB700885A5F /* DownloadOperation.swift in Sources */,
 				F9DDEA4F2713735B00064115 /* Comic.swift in Sources */,
 				F951BDE0271330B300F63C66 /* Image.swift in Sources */,
 				F9B43D2A271D6F5500D99A4F /* ComicDataModel.swift in Sources */,

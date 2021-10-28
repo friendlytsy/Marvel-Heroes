@@ -20,7 +20,7 @@ class ComicDataModel: Object {
         
         let urlBuilder = UrlBuilder()
         guard let url = URL(string: urlBuilder.getUrl(UrlPath.comicsListUrl)) else { return print("ERROR") }
-        networkClient.downloadTask(url: url.absoluteString) { (json, data) in
+        DownloadManager.shared.downloadData(urlPath: url.absoluteString) { data in
             do {
                 let decoder = JSONDecoder()
                 let getData = try decoder.decode(ComicDataWrapper.self, from: data)
