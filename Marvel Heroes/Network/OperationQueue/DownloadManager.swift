@@ -14,14 +14,14 @@ class DownloadManager {
     func downloadData(urlPath: String, completion: @escaping(Data) -> Void) {
         let dataWrapper = DataWrapper()
         let operation = DownloadOperation(urlPath: urlPath, dataWrapper: dataWrapper)
-        let finishOperation = BlockOperation {
-          if let data = dataWrapper.data {
-                completion(data)
+        let checkCompletionOperation = BlockOperation {
+          if dataWrapper.data != nil {
+                completion(dataWrapper.data!)
             }
         }
-        finishOperation.addDependency(operation)
+        checkCompletionOperation.addDependency(operation)
         let operationQueue = OperationQueue()
         operationQueue.maxConcurrentOperationCount = 1
-        operationQueue.addOperations([operation, finishOperation], waitUntilFinished: true)
+        operationQueue.addOperations([operation, checkCompletionOperation], waitUntilFinished: true)
     }
 }

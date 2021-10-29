@@ -24,7 +24,6 @@ class DownloadOperation : AsyncOperation {
     }()
     
     var urlPath: String = ""
-    var dataResult: Data? = nil
     var dataTask: URLSessionDataTask?
     
     override init() {
@@ -43,7 +42,6 @@ class DownloadOperation : AsyncOperation {
         let urlRequest = URLRequest(url: url)
         self.dataTask = urlSession.dataTask(with: urlRequest, completionHandler: { data, response, error in
             if let data = data {
-                self.dataResult = data
                 self.dataWrapper?.data = data
                 print(data)
             }
