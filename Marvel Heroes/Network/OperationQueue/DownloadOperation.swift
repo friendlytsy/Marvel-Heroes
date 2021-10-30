@@ -6,17 +6,10 @@
 //
 
 import Foundation
+import SwiftUI
 
-class DataWrapper {
-    var data: Data? = nil
-    init() {}
-    init(data: Data?) {
-        self.data = data
-    }
-}
-
-class DownloadOperation : AsyncOperation {
-
+class DownloadOperation : Operation {
+    
     private weak var dataWrapper: DataWrapper? = nil
     
     lazy var urlSession: URLSession = {
@@ -24,33 +17,34 @@ class DownloadOperation : AsyncOperation {
     }()
     
     var urlPath: String = ""
+    var data: Data? = nil
     var dataTask: URLSessionDataTask?
     
-    override init() {
-        super.init()
-    }
-    
-    convenience init(urlPath: String, dataWrapper: DataWrapper) {
-        self.init()
+    init(urlPath: String, dataWrapper: DataWrapper) {
         self.urlPath = urlPath
         self.dataWrapper = dataWrapper
     }
     
     override func main() {
-        self.dataTask?.cancel()
-        guard let url = URL(string: urlPath) else {return}
-        let urlRequest = URLRequest(url: url)
-        self.dataTask = urlSession.dataTask(with: urlRequest, completionHandler: { data, response, error in
-            if let data = data {
-                self.dataWrapper?.data = data
-                print(data)
-            }
-            self.state = .finished
-            
-            if let error = error {
-                print("JSON error: \(error.localizedDescription)")
-            }
-        })
-        dataTask?.resume()
+        let semaphore = DispatchSemaphore(value: 0)
+        let urlSessionTaskWrapper = DispatchQueue(label: "urlSessionTaskWrapper")
+        urlSessionTaskWrapper.async {
+            self.dataTask?.cancel()
+            guard let url = URL(string: self.urlPath) else {return self.urlPath = ""}
+            let urlRequest = URLRequest(url: url)
+            self.dataTask = self.urlSession.dataTask(with: urlRequest, completionHandler: { data, response, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                if let httpResponse = response as? HTTPURLResponse{
+                    if httpResponse.statusCode == 200{
+                        self.dataWrapper?.data = data
+                    }
+                }
+                semaphore.signal()
+            })
+            self.dataTask?.resume()
+        }
+        semaphore.wait()
     }
 }

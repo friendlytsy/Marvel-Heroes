@@ -17,7 +17,6 @@ class CharacterDataModel: Object {
     static private let networkClient = NetworkClient()
     
     static func updateData() {
-        
         let urlBuilder = UrlBuilder()
         guard let url = URL(string: urlBuilder.getUrl(UrlPath.characteresListUrl)) else { return print("ERROR") }
         DownloadManager.shared.downloadData(urlPath: url.absoluteString) { data in
@@ -39,6 +38,7 @@ class CharacterDataModel: Object {
                     }
                 }
             }
+            
             catch {
                 print(error.localizedDescription)
             }

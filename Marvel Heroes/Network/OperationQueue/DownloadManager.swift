@@ -10,18 +10,17 @@ import UIKit
 
 class DownloadManager {
     static let shared = DownloadManager()
-    
+    static private let operationQueue = OperationQueue()
+
     func downloadData(urlPath: String, completion: @escaping(Data) -> Void) {
         let dataWrapper = DataWrapper()
         let operation = DownloadOperation(urlPath: urlPath, dataWrapper: dataWrapper)
-        let checkCompletionOperation = BlockOperation {
-          if dataWrapper.data != nil {
-                completion(dataWrapper.data!)
-            }
+        operation.completionBlock = {
+            if dataWrapper.data != nil {
+                  completion(dataWrapper.data!)
+              }
         }
-        checkCompletionOperation.addDependency(operation)
-        let operationQueue = OperationQueue()
-        operationQueue.maxConcurrentOperationCount = 1
-        operationQueue.addOperations([operation, checkCompletionOperation], waitUntilFinished: true)
+        DownloadManager.operationQueue.addOperations([operation], waitUntilFinished: false)
     }
 }
+
