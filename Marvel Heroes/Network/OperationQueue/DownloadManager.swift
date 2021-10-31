@@ -11,14 +11,14 @@ import UIKit
 class DownloadManager {
     static let shared = DownloadManager()
     static private let operationQueue = OperationQueue()
-
+    private let urlSession: URLSession = {
+        return URLSession(configuration: .default)
+    }()
+    
     func downloadData(urlPath: String, completion: @escaping(Data) -> Void) {
-        let dataWrapper = DataWrapper()
-        let operation = DownloadOperation(urlPath: urlPath, dataWrapper: dataWrapper)
+        let operation = DownloadOperation(urlSession: urlSession, urlPath: urlPath)
         operation.completionBlock = {
-            if dataWrapper.data != nil {
-                  completion(dataWrapper.data!)
-              }
+            completion(operation.operationResult!)
         }
         DownloadManager.operationQueue.addOperations([operation], waitUntilFinished: false)
     }

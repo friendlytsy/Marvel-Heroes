@@ -9,42 +9,41 @@ import Foundation
 import SwiftUI
 
 class DownloadOperation : Operation {
+
+//    lazy var urlSession: URLSession = {
+//        return URLSession(configuration: .default)
+//    }()
     
-    private weak var dataWrapper: DataWrapper? = nil
-    
-    lazy var urlSession: URLSession = {
-        return URLSession(configuration: .default)
-    }()
-    
+    var operationResult: Data? = nil
     var urlPath: String = ""
-    var data: Data? = nil
-    var dataTask: URLSessionDataTask?
+    private var dataTask: URLSessionDataTask?
+    var urlSession: URLSession
     
-    init(urlPath: String, dataWrapper: DataWrapper) {
+    init(urlSession: URLSession, urlPath: String) {
+        self.urlSession = urlSession
         self.urlPath = urlPath
-        self.dataWrapper = dataWrapper
     }
     
     override func main() {
         let semaphore = DispatchSemaphore(value: 0)
-        let urlSessionTaskWrapper = DispatchQueue(label: "urlSessionTaskWrapper")
-        urlSessionTaskWrapper.async {
-            self.dataTask?.cancel()
-            guard let url = URL(string: self.urlPath) else {return self.urlPath = ""}
-            let urlRequest = URLRequest(url: url)
-            self.dataTask = self.urlSession.dataTask(with: urlRequest, completionHandler: { data, response, error in
-                if let error = error {
-                    print(error.localizedDescription)
+        guard let url = URL(string: self.urlPath) else {return self.urlPath = ""}
+        let urlRequest = URLRequest(url: url)
+        dataTask = urlSession.dataTask(with: urlRequest, completionHandler: { data, response, error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            if let httpResponse = response as? HTTPURLResponse{
+                if httpResponse.statusCode == 200{
+                    self.operationResult = data
                 }
-                if let httpResponse = response as? HTTPURLResponse{
-                    if httpResponse.statusCode == 200{
-                        self.dataWrapper?.data = data
-                    }
-                }
-                semaphore.signal()
-            })
-            self.dataTask?.resume()
-        }
+            }
+            semaphore.signal()
+        })
+        self.dataTask?.resume()
         semaphore.wait()
+    }
+    
+    override func cancel() {
+        super.cancel()
     }
 }

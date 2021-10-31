@@ -38,7 +38,6 @@
 		F9DDEA4B2713710800064115 /* ComicDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DDEA4A2713710800064115 /* ComicDataWrapper.swift */; };
 		F9DDEA4D271372EE00064115 /* ComicDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DDEA4C271372EE00064115 /* ComicDataContainer.swift */; };
 		F9DDEA4F2713735B00064115 /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DDEA4E2713735B00064115 /* Comic.swift */; };
-		F9E2357F272D403F00D2EA6A /* DataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E2357E272D403F00D2EA6A /* DataWrapper.swift */; };
 		F9F7DC2D27299CB700885A5F /* DownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F7DC2C27299CB700885A5F /* DownloadOperation.swift */; };
 		F9F7DC2F2729D5A600885A5F /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F7DC2E2729D5A600885A5F /* DownloadManager.swift */; };
 		F9FAD2C526EA076300D10FB9 /* GenericTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAD2C326EA076300D10FB9 /* GenericTableViewCell.swift */; };
@@ -77,7 +76,6 @@
 		F9DDEA4A2713710800064115 /* ComicDataWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDataWrapper.swift; sourceTree = "<group>"; };
 		F9DDEA4C271372EE00064115 /* ComicDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDataContainer.swift; sourceTree = "<group>"; };
 		F9DDEA4E2713735B00064115 /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
-		F9E2357E272D403F00D2EA6A /* DataWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataWrapper.swift; sourceTree = "<group>"; };
 		F9F7DC2C27299CB700885A5F /* DownloadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadOperation.swift; sourceTree = "<group>"; };
 		F9F7DC2E2729D5A600885A5F /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
 		F9FAD2C326EA076300D10FB9 /* GenericTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableViewCell.swift; sourceTree = "<group>"; };
@@ -244,7 +242,6 @@
 			children = (
 				F9F7DC2C27299CB700885A5F /* DownloadOperation.swift */,
 				F9F7DC2E2729D5A600885A5F /* DownloadManager.swift */,
-				F9E2357E272D403F00D2EA6A /* DataWrapper.swift */,
 			);
 			path = OperationQueue;
 			sourceTree = "<group>";
@@ -374,7 +371,6 @@
 				F9FAD2C526EA076300D10FB9 /* GenericTableViewCell.swift in Sources */,
 				F985BB2927033F7000742139 /* UrlBuilder.swift in Sources */,
 				F923B5D926DE209C003F431B /* AppDelegate.swift in Sources */,
-				F9E2357F272D403F00D2EA6A /* DataWrapper.swift in Sources */,
 				F951BDDA27132F7000F63C66 /* CharacterDataWrapper.swift in Sources */,
 				F951BDD827132F4B00F63C66 /* Character.swift in Sources */,
 				F923B5DB26DE209C003F431B /* SceneDelegate.swift in Sources */,
