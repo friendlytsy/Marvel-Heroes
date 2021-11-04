@@ -9,10 +9,6 @@ import Foundation
 import SwiftUI
 
 class DownloadOperation : Operation {
-
-//    lazy var urlSession: URLSession = {
-//        return URLSession(configuration: .default)
-//    }()
     
     var operationResult: Data? = nil
     var urlPath: String = ""
@@ -22,6 +18,12 @@ class DownloadOperation : Operation {
     init(urlSession: URLSession, urlPath: String) {
         self.urlSession = urlSession
         self.urlPath = urlPath
+        super.init()
+        print("init\(self)")
+    }
+    
+    deinit {
+        print("deinit\(self)")
     }
     
     override func main() {

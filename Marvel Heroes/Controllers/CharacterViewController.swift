@@ -36,6 +36,16 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
         observeRealm()
     }
 
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let contextItem = UIContextualAction(style: .normal, title: "Favorite") { (contextualAction, view, boolValue) in
+            boolValue(true) // pass true if you want the handler to allow the action
+        }
+        contextItem.backgroundColor =  UIColor.systemBlue
+        let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
+
+        return swipeActions
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return characterDataModel?.count ?? 0
     }
@@ -46,8 +56,11 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
         return cell
     }
     
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        print("Prefetch of data")
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastItem = self.characterDataModel!.count - 1
+        if indexPath.row == lastItem {
+            print("LOAD MODRE DATA")
+        }
     }
     
     // segue for character. Will reuse view controller depenpd on description required to desplay
