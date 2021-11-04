@@ -5,13 +5,14 @@
 //  Created by Александр Цыганков on 17.10.2021.
 //
 
+// DEPRICATED since HW4
+
 import Foundation
 import RealmSwift
 
 class NetworkClient {
     
     func downloadTask(url: String, complition: @escaping (_ json: Any, _ data: Data) -> Void) {
-        
         guard let url = URL(string: url) else { return print("ERROR") }
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -39,5 +40,6 @@ class NetworkClient {
             }
         }
         task.resume()
+        
     }
 }

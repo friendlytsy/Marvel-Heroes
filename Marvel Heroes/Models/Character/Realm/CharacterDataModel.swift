@@ -8,30 +8,6 @@
 import Foundation
 import RealmSwift
 
-//protocol DataUpdatable {
-//    associatedtype Item
-//    
-//    static func updatedata(networkClient: NetworkClient, modelType: Item, urlPath: UrlPath)
-//}
-//
-//extension DataUpdatable {
-//    static func updatedata(networkClient: NetworkClient, modelType: Item, urlPath: UrlPath) {
-//        let urlBuilder = UrlBuilder()
-//        guard let url = URL(string: urlBuilder.getUrl(urlPath)) else {return}
-//        networkClient.downloadTask(url: url.absoluteString) { (json, data) in
-//            do {
-//                let decoder = JSONDecoder()
-//                let getData = try decoder.decode(Item as! Decodable, from: data)
-//            }
-//            catch {
-//                print(error.localizedDescription)
-//            }
-//        }
-//     
-//    }
-//}
-
-
 class CharacterDataModel: Object {
     @Persisted (primaryKey: true) var id: Int?
     @Persisted var name: String?
@@ -41,10 +17,9 @@ class CharacterDataModel: Object {
     static private let networkClient = NetworkClient()
     
     static func updateData() {
-        
         let urlBuilder = UrlBuilder()
         guard let url = URL(string: urlBuilder.getUrl(UrlPath.characteresListUrl)) else { return print("ERROR") }
-        networkClient.downloadTask(url: url.absoluteString) { (json, data) in
+        DownloadManager.shared.downloadData(urlPath: url.absoluteString) { data in
             do {
                 let decoder = JSONDecoder()
                 let getData = try decoder.decode(CharacterDataWrapper.self, from: data)
@@ -63,6 +38,7 @@ class CharacterDataModel: Object {
                     }
                 }
             }
+            
             catch {
                 print(error.localizedDescription)
             }

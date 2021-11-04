@@ -179,7 +179,7 @@
         <!--Favorites-->
         <scene sceneID="dEr-oK-p6l">
             <objects>
-                <viewController id="u1b-H7-oIQ" sceneMemberID="viewController">
+                <viewController id="u1b-H7-oIQ" customClass="FavoritesViewController" customModule="Marvel_Heroes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sAb-YF-7oy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -209,6 +209,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Favorites" id="HN5-pc-aby"/>
+                    <connections>
+                        <outlet property="favoritesTableView" destination="Np7-kE-cic" id="BBG-xC-ik5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xby-aT-kNG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -278,7 +281,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="lSF-ZE-l83"/>
+        <segue reference="24G-ub-sg6"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">
