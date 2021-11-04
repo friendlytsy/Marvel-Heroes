@@ -14,12 +14,12 @@ class ComicDataModel: Object {
     @Persisted var comicDescription: String?
     @Persisted var thumbnail: String?
     
-    static private var networkClient = NetworkClient()
+    //static private var networkClient = NetworkClient()
     
     static func updateData() {
         
         let urlBuilder = UrlBuilder()
-        guard let url = URL(string: urlBuilder.getUrl(UrlPath.comicsListUrl)) else { return print("ERROR") }
+        guard let url = URL(string: urlBuilder.getUrl(UrlPath.comicsListUrl, "0")) else { return print("ERROR") }
         DownloadManager.shared.downloadData(urlPath: url.absoluteString) { data in
             do {
                 let decoder = JSONDecoder()

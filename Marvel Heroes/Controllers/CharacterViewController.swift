@@ -14,7 +14,6 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
     var token: NotificationToken?
     var characterDataModel: Results<CharacterDataModel>? = nil
     
-    
     @IBOutlet weak var characterTableView: UITableView!
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,7 +31,9 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
         let nib = UINib(nibName: "GenericTableViewCell", bundle: nil)
         characterTableView.register(nib, forCellReuseIdentifier: "GenericTableViewCell")
         
-        CharacterDataModel.updateData()
+        let offset = "0"
+        
+        CharacterDataModel.updateData(offset)
         observeRealm()
     }
 
@@ -60,6 +61,7 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
         let lastItem = self.characterDataModel!.count - 1
         if indexPath.row == lastItem {
             print("LOAD MODRE DATA")
+            CharacterDataModel.updateData(String(self.characterDataModel!.count))
         }
     }
     

@@ -29,6 +29,7 @@ class DownloadOperation : Operation {
     override func main() {
         let semaphore = DispatchSemaphore(value: 0)
         guard let url = URL(string: self.urlPath) else {return self.urlPath = ""}
+        print(url)
         let urlRequest = URLRequest(url: url)
         dataTask = urlSession.dataTask(with: urlRequest, completionHandler: { data, response, error in
             if let error = error {

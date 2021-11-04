@@ -27,7 +27,6 @@
 		F985BB2B27033FA100742139 /* UrlSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = F985BB2A27033FA100742139 /* UrlSchema.swift */; };
 		F985BB2D27033FCA00742139 /* UrlHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = F985BB2C27033FCA00742139 /* UrlHost.swift */; };
 		F985C42E271C05CF00394C81 /* CharacterDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F985C42D271C05CF00394C81 /* CharacterDataModel.swift */; };
-		F985C432271C091000394C81 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F985C431271C091000394C81 /* NetworkClient.swift */; };
 		F985C437271C1B5D00394C81 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = F985C436271C1B5D00394C81 /* Kingfisher */; };
 		F9B43D2A271D6F5500D99A4F /* ComicDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B43D29271D6F5500D99A4F /* ComicDataModel.swift */; };
 		F9BF5C01270313C1005D66DF /* CryptoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF5C00270313C1005D66DF /* CryptoHelper.swift */; };
@@ -67,7 +66,6 @@
 		F985BB2A27033FA100742139 /* UrlSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSchema.swift; sourceTree = "<group>"; };
 		F985BB2C27033FCA00742139 /* UrlHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlHost.swift; sourceTree = "<group>"; };
 		F985C42D271C05CF00394C81 /* CharacterDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDataModel.swift; sourceTree = "<group>"; };
-		F985C431271C091000394C81 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		F9B43D29271D6F5500D99A4F /* ComicDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDataModel.swift; sourceTree = "<group>"; };
 		F9BF5C00270313C1005D66DF /* CryptoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoHelper.swift; sourceTree = "<group>"; };
 		F9C3D78927302758009C2337 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
@@ -204,7 +202,6 @@
 			isa = PBXGroup;
 			children = (
 				F9F7DC30272A803E00885A5F /* OperationQueue */,
-				F985C431271C091000394C81 /* NetworkClient.swift */,
 				F985BB2E2703463500742139 /* URLHelper */,
 			);
 			path = Network;
@@ -369,7 +366,6 @@
 				F9B43D2A271D6F5500D99A4F /* ComicDataModel.swift in Sources */,
 				F9D7F2F026F8620100BF37C7 /* ItemDescriptionViewController.swift in Sources */,
 				F9D3CBB527268D9A00AAB339 /* CharacterVCExtension.swift in Sources */,
-				F985C432271C091000394C81 /* NetworkClient.swift in Sources */,
 				F985C42E271C05CF00394C81 /* CharacterDataModel.swift in Sources */,
 				F9FAD2C526EA076300D10FB9 /* GenericTableViewCell.swift in Sources */,
 				F985BB2927033F7000742139 /* UrlBuilder.swift in Sources */,

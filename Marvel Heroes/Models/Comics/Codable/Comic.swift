@@ -14,7 +14,6 @@ struct Comic {
     let title: String?
     let description: String?
     let thumbnail: Image?
-//    let comics: ComicsList?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -32,7 +31,6 @@ extension Comic: Decodable {
         self.title = try container.decodeIfPresent(String.self, forKey: .title)
         self.description = try container.decodeIfPresent(String.self, forKey: .description)
         self.thumbnail = try container.decodeIfPresent(Image.self, forKey: .thumbnail)
-//        self.comics = try container.decodeIfPresent(ComicsList.self, forKey: .comics)
     }
 }
 
@@ -43,6 +41,5 @@ extension Comic: Encodable {
         try container.encodeIfPresent(title, forKey: .title)
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(thumbnail, forKey: .thumbnail)
-//        try container.encodeIfPresent(comics, forKey: .comics)
     }
 }

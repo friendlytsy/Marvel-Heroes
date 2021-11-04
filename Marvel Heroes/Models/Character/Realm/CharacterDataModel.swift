@@ -13,12 +13,10 @@ class CharacterDataModel: Object {
     @Persisted var name: String?
     @Persisted var charDescription: String?
     @Persisted var thumbnail: String?
-    
-    static private let networkClient = NetworkClient()
-    
-    static func updateData() {
+        
+    static func updateData(_ offset: String) {
         let urlBuilder = UrlBuilder()
-        guard let url = URL(string: urlBuilder.getUrl(UrlPath.characteresListUrl)) else { return print("ERROR") }
+        guard let url = URL(string: urlBuilder.getUrl(UrlPath.characteresListUrl, offset)) else { return print("ERROR") }
         DownloadManager.shared.downloadData(urlPath: url.absoluteString) { data in
             do {
                 let decoder = JSONDecoder()
