@@ -27,7 +27,9 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
         let nib = UINib(nibName: "GenericTableViewCell", bundle: nil)
         comicsTableView.register(nib, forCellReuseIdentifier: "GenericTableViewCell")
         
-        ComicDataModel.updateData()
+        let offset = "0"
+        
+        ComicDataModel.updateData(offset)
         observeRealm()
     }
     
@@ -41,6 +43,13 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastItem = self.comicDataModel!.count - 1
+        if indexPath.row == lastItem {
+            print("LOAD MODRE DATA")
+            ComicDataModel.updateData(String(self.comicDataModel!.count))
+        }
+    }
     
     // segue for comics. Will reuse view controller depenpd on description required to desplay
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

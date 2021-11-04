@@ -13,17 +13,20 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
     var realm = try? Realm()
     var token: NotificationToken?
     var characterDataModel: Results<CharacterDataModel>? = nil
+    var favoriteItemDataModel: Results<FavoriteItemDataModel>? = nil
     
     @IBOutlet weak var characterTableView: UITableView!
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(true)
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.characterDataModel = realm?.objects(CharacterDataModel.self)
+        self.favoriteItemDataModel = realm?.objects(FavoriteItemDataModel.self)
+        
         characterTableView.dataSource = self
         characterTableView.delegate = self
         // Do any additional setup after loading the view.
@@ -40,6 +43,7 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let contextItem = UIContextualAction(style: .normal, title: "Favorite") { (contextualAction, view, boolValue) in
             boolValue(true) // pass true if you want the handler to allow the action
+            FavoriteItemDataModel.makeFavorite()
         }
         contextItem.backgroundColor =  UIColor.systemBlue
         let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
