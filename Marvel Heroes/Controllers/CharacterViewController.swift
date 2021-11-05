@@ -28,9 +28,7 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
         let nib = UINib(nibName: "GenericTableViewCell", bundle: nil)
         characterTableView.register(nib, forCellReuseIdentifier: "GenericTableViewCell")
         
-        let offset = "0"
-        
-        CharacterDataModel.updateData(offset)
+        CharacterDataModel.updateData(UrlBuilder.offset)
         observeRealm()
     }
     
@@ -38,12 +36,8 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let contextItem = UIContextualAction(style: .normal, title: "Favorite") { [self] (contextualAction, view, boolValue) in
             boolValue(true) // pass true if you want the handler to allow the action
-            if FavoriteItemDataModel.makeFavorite((characterDataModel?[indexPath.row].id)!,
-                                                  (characterDataModel?[indexPath.row].name)!,
-                                                  (characterDataModel?[indexPath.row].charDescription)!,
-                                                  (characterDataModel?[indexPath.row].thumbnail)!)
-            {
-                print("Added")
+            if (!FavoriteItemDataModel.makeFavorite(characterDataModel: characterDataModel![indexPath.row])) {
+                self.showAlert()
             }
         }
         contextItem.backgroundColor =  UIColor.systemBlue
@@ -64,8 +58,7 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
     
     // Paging
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let lastItem = self.characterDataModel!.count - 1
-        if indexPath.row == lastItem {
+        if ((indexPath.row == self.characterDataModel!.count - 1) && !DownloadManager.isDataLoading) {
             print("LOAD MODRE DATA")
             CharacterDataModel.updateData(String(self.characterDataModel!.count))
         }
@@ -87,5 +80,3 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
 }
-
-

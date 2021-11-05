@@ -14,30 +14,46 @@ class FavoriteItemDataModel: Object {
     @Persisted var itemDescription: String?
     @Persisted var itemThumbnail: String?
     
-    static func makeFavorite(_ id: Int, _ name: String, _ description: String, _ thumbnail: String) -> Bool {
+    static func makeFavorite(characterDataModel: CharacterDataModel) -> Bool {
+        var status = true
+        
         do {
-            let favItem = FavoriteItemDataModel()
-            
+            let favoriteItem = FavoriteItemDataModel()
             let realm = try Realm()
-            
-            favItem.id = id
-            favItem.itemTitle = name
-            favItem.itemDescription = description
-            favItem.itemThumbnail = thumbnail
+            // - check if this item.id exist at FavoriteDataModel
+            if (realm.object(ofType: FavoriteItemDataModel.self, forPrimaryKey: characterDataModel.id) == nil) {
+                favoriteItem.id = characterDataModel.id
+                favoriteItem.itemTitle = characterDataModel.name
+                favoriteItem.itemDescription = characterDataModel.charDescription
+                favoriteItem.itemThumbnail = characterDataModel.thumbnail
+                
+                try realm.write {
+                    realm.add(favoriteItem, update: .all)
+                }
+                print(Realm.Configuration.defaultConfiguration.fileURL!)
+            } else {
+                status = false
+            }
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+        return status
+    }
+    
+    static func makeUnfavorite(favoriteItemDataModel: FavoriteItemDataModel){
+        do {
+            let realm = try Realm()
+            // - find object by item.id
+            let objectToDelete = realm.object(ofType: FavoriteItemDataModel.self, forPrimaryKey: favoriteItemDataModel.id)!
             
             try realm.write {
-                realm.add(favItem, update: .all)
+                realm.delete(objectToDelete)
             }
             print(Realm.Configuration.defaultConfiguration.fileURL!)
         }
         catch {
             print(error.localizedDescription)
         }
-        return true
     }
-    
-    static func makeUnfavorite() {
-        
-    }
-    
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import SwiftUI
 
 extension CharacterViewController {
     func observeRealm() {
@@ -25,5 +26,10 @@ extension CharacterViewController {
                 fatalError("\(error)")
             }
         }
+    }
+    func showAlert() {
+        let alert = UIAlertController(title: "API wasn't saved", message: "Something goes wrong, API will not be saved. Please try later", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
     }
 }

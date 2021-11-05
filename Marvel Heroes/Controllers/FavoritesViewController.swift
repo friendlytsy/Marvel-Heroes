@@ -14,7 +14,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     var realm = try? Realm()
     var token: NotificationToken?
     var favoriteItemDataModel: Results<FavoriteItemDataModel>? = nil
-
+    
     @IBOutlet weak var favoritesTableView: UITableView!
     
     override func viewDidLoad(){
@@ -33,6 +33,18 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return favoriteItemDataModel?.count ?? 0
+    }
+    
+    // Favorite slider
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let contextItem = UIContextualAction(style: .normal, title: "Unfavorite") { [self] (contextualAction, view, boolValue) in
+            boolValue(true) // pass true if you want the handler to allow the action
+            FavoriteItemDataModel.makeUnfavorite(favoriteItemDataModel: favoriteItemDataModel![indexPath.row])
+        }
+        contextItem.backgroundColor =  UIColor.systemRed
+        let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
+        
+        return swipeActions
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

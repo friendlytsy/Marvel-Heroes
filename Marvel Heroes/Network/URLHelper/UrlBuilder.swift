@@ -8,6 +8,9 @@
 import Foundation
 
 class UrlBuilder {
+    
+    static let offset = "0"
+    
     func getUrl(_ urlPath: UrlPath, _ offset: String) -> String {
         
         let cryptoHelper = CryptoHelper()
@@ -18,7 +21,6 @@ class UrlBuilder {
         
         let timestemp: String = String(format: "%f", Date().timeIntervalSince1970)
         let hash = cryptoHelper.getHash(ts: timestemp, apiKeyPrivate: apiKeyPrivate, apiKeyPublic: apiKeyPublic)
-
         
         var urlComponents = URLComponents()
         urlComponents.scheme = UrlSchema.https.rawValue

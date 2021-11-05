@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import SwiftUI
 
 extension FavoritesViewController {
     func observeRealm() {
