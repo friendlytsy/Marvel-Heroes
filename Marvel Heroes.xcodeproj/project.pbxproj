@@ -39,6 +39,7 @@
 		F9DDEA4D271372EE00064115 /* ComicDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DDEA4C271372EE00064115 /* ComicDataContainer.swift */; };
 		F9DDEA4F2713735B00064115 /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DDEA4E2713735B00064115 /* Comic.swift */; };
 		F9E3453727341EC200FE5AA2 /* FavoriteItemDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E3453627341EC200FE5AA2 /* FavoriteItemDataModel.swift */; };
+		F9E3453927343F0F00FE5AA2 /* FavoriteVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E3453827343F0F00FE5AA2 /* FavoriteVCExtension.swift */; };
 		F9F7DC2D27299CB700885A5F /* DownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F7DC2C27299CB700885A5F /* DownloadOperation.swift */; };
 		F9F7DC2F2729D5A600885A5F /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F7DC2E2729D5A600885A5F /* DownloadManager.swift */; };
 		F9FAD2C526EA076300D10FB9 /* GenericTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAD2C326EA076300D10FB9 /* GenericTableViewCell.swift */; };
@@ -78,6 +79,7 @@
 		F9DDEA4C271372EE00064115 /* ComicDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDataContainer.swift; sourceTree = "<group>"; };
 		F9DDEA4E2713735B00064115 /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
 		F9E3453627341EC200FE5AA2 /* FavoriteItemDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteItemDataModel.swift; sourceTree = "<group>"; };
+		F9E3453827343F0F00FE5AA2 /* FavoriteVCExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteVCExtension.swift; sourceTree = "<group>"; };
 		F9F7DC2C27299CB700885A5F /* DownloadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadOperation.swift; sourceTree = "<group>"; };
 		F9F7DC2E2729D5A600885A5F /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
 		F9FAD2C326EA076300D10FB9 /* GenericTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableViewCell.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				F9D3CBB227268D6F00AAB339 /* ComicsVСExtension.swift */,
 				F9D3CBB427268D9A00AAB339 /* CharacterVCExtension.swift */,
 				F9D3CBB62726A39E00AAB339 /* LoginVCExtension.swift */,
+				F9E3453827343F0F00FE5AA2 /* FavoriteVCExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				F985BB2B27033FA100742139 /* UrlSchema.swift in Sources */,
 				F9604B27270C1B0B0056BF0D /* GenericTableViewCellModel.swift in Sources */,
 				F95E39F826FCF9E9005C2356 /* UIFonts.swift in Sources */,
+				F9E3453927343F0F00FE5AA2 /* FavoriteVCExtension.swift in Sources */,
 				F985BB2D27033FCA00742139 /* UrlHost.swift in Sources */,
 				F923B5DD26DE209C003F431B /* LoginViewController.swift in Sources */,
 				F9D3CBB72726A39E00AAB339 /* LoginVCExtension.swift in Sources */,

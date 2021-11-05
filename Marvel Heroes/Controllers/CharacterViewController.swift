@@ -9,23 +9,17 @@ import UIKit
 import RealmSwift
 
 class CharacterViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-   
+    
     var realm = try? Realm()
     var token: NotificationToken?
     var characterDataModel: Results<CharacterDataModel>? = nil
-    var favoriteItemDataModel: Results<FavoriteItemDataModel>? = nil
     
     @IBOutlet weak var characterTableView: UITableView!
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(true)
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.characterDataModel = realm?.objects(CharacterDataModel.self)
-        self.favoriteItemDataModel = realm?.objects(FavoriteItemDataModel.self)
         
         characterTableView.dataSource = self
         characterTableView.delegate = self
@@ -39,15 +33,22 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
         CharacterDataModel.updateData(offset)
         observeRealm()
     }
-
+    
+    // Favorite slider
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let contextItem = UIContextualAction(style: .normal, title: "Favorite") { (contextualAction, view, boolValue) in
+        let contextItem = UIContextualAction(style: .normal, title: "Favorite") { [self] (contextualAction, view, boolValue) in
             boolValue(true) // pass true if you want the handler to allow the action
-            FavoriteItemDataModel.makeFavorite()
+            if FavoriteItemDataModel.makeFavorite((characterDataModel?[indexPath.row].id)!,
+                                                  (characterDataModel?[indexPath.row].name)!,
+                                                  (characterDataModel?[indexPath.row].charDescription)!,
+                                                  (characterDataModel?[indexPath.row].thumbnail)!)
+            {
+                print("Added")
+            }
         }
         contextItem.backgroundColor =  UIColor.systemBlue
         let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
-
+        
         return swipeActions
     }
     
@@ -61,6 +62,7 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
         return cell
     }
     
+    // Paging
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastItem = self.characterDataModel!.count - 1
         if indexPath.row == lastItem {
@@ -69,7 +71,7 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    // segue for character. Will reuse view controller depenpd on description required to desplay
+    // Segue for character. Will reuse view controller depenpd on description required to desplay
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "segueCharacter", sender: self)
     }

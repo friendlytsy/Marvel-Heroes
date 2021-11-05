@@ -211,6 +211,7 @@
                     <tabBarItem key="tabBarItem" title="Favorites" id="HN5-pc-aby"/>
                     <connections>
                         <outlet property="favoritesTableView" destination="Np7-kE-cic" id="BBG-xC-ik5"/>
+                        <segue destination="XR9-kc-sr4" kind="show" identifier="segueFavorites" id="get-0f-ZiA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xby-aT-kNG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

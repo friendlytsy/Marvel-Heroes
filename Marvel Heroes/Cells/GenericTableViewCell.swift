@@ -25,12 +25,29 @@ class GenericTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    // - SOMETHING TO IMPROVE
+    
+    func configureFavorite(withViewModel viewModel: FavoriteItemDataModel) {
+        if let url = URL( string: viewModel.itemThumbnail ?? "" ) {
+            DispatchQueue.main.async {
+                self.itemImage.kf.setImage(with: url)
+            }
+        }
+        
+        itemNameLabel.text = viewModel.itemTitle
+        itemDescriptionLabel.text = viewModel.itemDescription
+        
+        itemNameLabel.font = UIFont.regular
+        itemDescriptionLabel.font = UIFont.light
+    }
+    
     func configureCharacter(withViewModel viewModel: CharacterDataModel) {
 
         if let url = URL( string: viewModel.thumbnail ?? "" ) {
             DispatchQueue.main.async {
                 self.itemImage.kf.setImage(with: url)
             }
+            //DispatchQueue.async(self.itemImage.kf.setImage(with: url))
         }
         
         itemNameLabel.text = viewModel.name
