@@ -68,7 +68,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FBI-hK-Ufw">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="83" width="414" height="730"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="characterCell" id="lvX-pp-lAe" customClass="GenericTableViewCell" customModule="Marvel_Heroes" customModuleProvider="target">
@@ -81,25 +81,42 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kdC-E8-xMb" userLabel="Character Segment">
+                                <rect key="frame" x="107" y="44" width="200" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="aRf-Th-Fdf"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                                <connections>
+                                    <action selector="onChangeSegment:" destination="nBI-RY-MCI" eventType="valueChanged" id="r64-sC-m3y"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pcn-ip-6hz"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="FBI-hK-Ufw" firstAttribute="leading" secondItem="pcn-ip-6hz" secondAttribute="leading" id="9cH-sf-b9t"/>
-                            <constraint firstItem="pcn-ip-6hz" firstAttribute="trailing" secondItem="FBI-hK-Ufw" secondAttribute="trailing" id="F8Z-u7-xuf"/>
-                            <constraint firstItem="FBI-hK-Ufw" firstAttribute="top" secondItem="pcn-ip-6hz" secondAttribute="top" id="hO0-Op-XrT"/>
-                            <constraint firstItem="pcn-ip-6hz" firstAttribute="bottom" secondItem="FBI-hK-Ufw" secondAttribute="bottom" id="ub7-R9-Zha"/>
+                            <constraint firstItem="FBI-hK-Ufw" firstAttribute="trailing" secondItem="pcn-ip-6hz" secondAttribute="trailing" id="AHr-bB-LWu"/>
+                            <constraint firstItem="FBI-hK-Ufw" firstAttribute="leading" secondItem="pcn-ip-6hz" secondAttribute="leading" id="H7O-9R-clX"/>
+                            <constraint firstItem="FBI-hK-Ufw" firstAttribute="top" secondItem="kdC-E8-xMb" secondAttribute="bottom" constant="8" id="MFX-eH-vr7"/>
+                            <constraint firstItem="FBI-hK-Ufw" firstAttribute="top" secondItem="kdC-E8-xMb" secondAttribute="bottom" constant="8" id="P9x-Ri-li9"/>
+                            <constraint firstItem="kdC-E8-xMb" firstAttribute="centerX" secondItem="gnT-b7-WXy" secondAttribute="centerX" id="SVf-7V-SF1"/>
+                            <constraint firstItem="kdC-E8-xMb" firstAttribute="top" secondItem="pcn-ip-6hz" secondAttribute="top" id="Vzl-mp-fan"/>
+                            <constraint firstItem="FBI-hK-Ufw" firstAttribute="bottom" secondItem="pcn-ip-6hz" secondAttribute="bottom" id="qCj-vs-OqN"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Heros" id="9Vq-fn-eMv" userLabel="Characters"/>
                     <connections>
+                        <outlet property="characterSegmentControl" destination="kdC-E8-xMb" id="4kO-Op-hip"/>
                         <outlet property="characterTableView" destination="FBI-hK-Ufw" id="d5i-x0-oYp"/>
                         <segue destination="XR9-kc-sr4" kind="show" identifier="segueCharacter" id="24G-ub-sg6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NXt-M2-rij" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1742" y="78"/>
+            <point key="canvasLocation" x="1740.5797101449277" y="77.678571428571431"/>
         </scene>
         <!--Character Details View Controller-->
         <scene sceneID="khK-xn-xX6">
@@ -176,19 +193,19 @@
             </objects>
             <point key="canvasLocation" x="25" y="801"/>
         </scene>
-        <!--Favorites-->
+        <!--Search-->
         <scene sceneID="dEr-oK-p6l">
             <objects>
-                <viewController id="u1b-H7-oIQ" customClass="FavoritesViewController" customModule="Marvel_Heroes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="u1b-H7-oIQ" customClass="SearchViewController" customModule="Marvel_Heroes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sAb-YF-7oy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Np7-kE-cic">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Np7-kE-cic" userLabel="Search Table View">
+                                <rect key="frame" x="0.0" y="95" width="414" height="718"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="favoritesCell" id="krZ-ju-xUD">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="favoritesCell" id="krZ-ju-xUD" userLabel="searchCell">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="krZ-ju-xUD" id="YyS-oa-5XP">
@@ -198,21 +215,24 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="AAz-X6-hSP">
+                                <rect key="frame" x="0.0" y="44" width="414" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Jwq-w3-e6r"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Jwq-w3-e6r" firstAttribute="trailing" secondItem="Np7-kE-cic" secondAttribute="trailing" id="2wc-eT-qKx"/>
+                            <constraint firstItem="AAz-X6-hSP" firstAttribute="trailing" secondItem="Jwq-w3-e6r" secondAttribute="trailing" id="F0p-VR-y6x"/>
                             <constraint firstItem="Jwq-w3-e6r" firstAttribute="bottom" secondItem="Np7-kE-cic" secondAttribute="bottom" id="VUZ-s1-SC2"/>
+                            <constraint firstItem="AAz-X6-hSP" firstAttribute="leading" secondItem="Jwq-w3-e6r" secondAttribute="leading" id="ayI-h9-wfu"/>
                             <constraint firstItem="Np7-kE-cic" firstAttribute="leading" secondItem="Jwq-w3-e6r" secondAttribute="leading" id="dtQ-AW-AQE"/>
-                            <constraint firstItem="Np7-kE-cic" firstAttribute="top" secondItem="Jwq-w3-e6r" secondAttribute="top" id="eIp-dO-huN"/>
+                            <constraint firstItem="AAz-X6-hSP" firstAttribute="top" secondItem="Jwq-w3-e6r" secondAttribute="top" id="fax-Kg-gVH"/>
+                            <constraint firstItem="Np7-kE-cic" firstAttribute="top" secondItem="AAz-X6-hSP" secondAttribute="bottom" id="xZv-b3-YrZ"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favorites" id="HN5-pc-aby"/>
-                    <connections>
-                        <outlet property="favoritesTableView" destination="Np7-kE-cic" id="BBG-xC-ik5"/>
-                        <segue destination="XR9-kc-sr4" kind="show" identifier="segueFavorites" id="get-0f-ZiA"/>
-                    </connections>
+                    <tabBarItem key="tabBarItem" title="Search" id="HN5-pc-aby"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xby-aT-kNG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -227,7 +247,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RT1-ly-kM7">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="83" width="414" height="730"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="comicsCell" id="ebs-Fc-w1w">
@@ -240,25 +260,43 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bM0-OF-lEx">
+                                <rect key="frame" x="107" y="44" width="200" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="NaE-2k-czf"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                                <connections>
+                                    <action selector="onChangeSegment:" destination="TmI-ai-se6" eventType="valueChanged" id="HzI-7D-syX"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0h3-Ey-Hd7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="RT1-ly-kM7" firstAttribute="leading" secondItem="0h3-Ey-Hd7" secondAttribute="leading" id="R9x-bU-vFA"/>
+                            <constraint firstItem="RT1-ly-kM7" firstAttribute="bottom" secondItem="0h3-Ey-Hd7" secondAttribute="bottom" id="DaX-c0-Vcw"/>
+                            <constraint firstItem="bM0-OF-lEx" firstAttribute="top" secondItem="0h3-Ey-Hd7" secondAttribute="top" id="DqB-p8-dX9"/>
+                            <constraint firstItem="RT1-ly-kM7" firstAttribute="leading" secondItem="0h3-Ey-Hd7" secondAttribute="leading" id="KMi-ds-h9M"/>
+                            <constraint firstItem="RT1-ly-kM7" firstAttribute="top" secondItem="bM0-OF-lEx" secondAttribute="bottom" constant="8" symbolic="YES" id="QWj-JU-2Oe"/>
                             <constraint firstItem="0h3-Ey-Hd7" firstAttribute="bottom" secondItem="RT1-ly-kM7" secondAttribute="bottom" id="aOp-qs-JgA"/>
                             <constraint firstItem="0h3-Ey-Hd7" firstAttribute="trailing" secondItem="RT1-ly-kM7" secondAttribute="trailing" id="eIu-QW-Ry3"/>
-                            <constraint firstItem="RT1-ly-kM7" firstAttribute="top" secondItem="0h3-Ey-Hd7" secondAttribute="top" id="jeT-NZ-2rQ"/>
+                            <constraint firstItem="bM0-OF-lEx" firstAttribute="centerX" secondItem="xqD-VV-FsB" secondAttribute="centerX" id="ngj-MY-80N"/>
+                            <constraint firstItem="RT1-ly-kM7" firstAttribute="trailing" secondItem="0h3-Ey-Hd7" secondAttribute="trailing" id="yCh-4r-aDm"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Comics" id="Udi-NY-tzV"/>
                     <connections>
+                        <outlet property="comicSegmentControl" destination="bM0-OF-lEx" id="The-wI-Dbf"/>
                         <outlet property="comicsTableView" destination="RT1-ly-kM7" id="66Q-gV-zjd"/>
                         <segue destination="XR9-kc-sr4" kind="show" identifier="segueComics" id="lSF-ZE-l83"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N4H-O7-2Gy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1741" y="801"/>
+            <point key="canvasLocation" x="1740.5797101449277" y="800.89285714285711"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="BTw-pc-yTX">

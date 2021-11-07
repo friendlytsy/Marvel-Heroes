@@ -27,7 +27,7 @@ class GenericTableViewCell: UITableViewCell {
     
     // - SOMETHING TO IMPROVE
     
-    func configureFavorite(withViewModel viewModel: FavoriteItemDataModel) {
+    func configureCharacterFavorite(withViewModel viewModel: FavoriteCharacterDataModel) {
         if let url = URL( string: viewModel.itemThumbnail ?? "" ) {
             DispatchQueue.main.async {
                 self.itemImage.kf.setImage(with: url)
@@ -40,7 +40,21 @@ class GenericTableViewCell: UITableViewCell {
         itemNameLabel.font = UIFont.regular
         itemDescriptionLabel.font = UIFont.light
     }
-    
+
+    func configureComicFavorite(withViewModel viewModel: FavoriteComicDataModel) {
+        if let url = URL( string: viewModel.itemThumbnail ?? "" ) {
+            DispatchQueue.main.async {
+                self.itemImage.kf.setImage(with: url)
+            }
+        }
+        
+        itemNameLabel.text = viewModel.itemTitle
+        itemDescriptionLabel.text = viewModel.itemDescription
+        
+        itemNameLabel.font = UIFont.regular
+        itemDescriptionLabel.font = UIFont.light
+    }
+
     func configureCharacter(withViewModel viewModel: CharacterDataModel) {
 
         if let url = URL( string: viewModel.thumbnail ?? "" ) {

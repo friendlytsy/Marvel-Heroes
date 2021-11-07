@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class FavoriteItemDataModel: Object {
+class FavoriteCharacterDataModel: Object {
     @Persisted (primaryKey: true) var id: Int?
     @Persisted var itemTitle: String?
     @Persisted var itemDescription: String?
@@ -18,19 +18,18 @@ class FavoriteItemDataModel: Object {
         var status = true
         
         do {
-            let favoriteItem = FavoriteItemDataModel()
+            let favoriteCharacter = FavoriteCharacterDataModel()
             let realm = try Realm()
             // - check if this item.id exist at FavoriteDataModel
-            if (realm.object(ofType: FavoriteItemDataModel.self, forPrimaryKey: characterDataModel.id) == nil) {
-                favoriteItem.id = characterDataModel.id
-                favoriteItem.itemTitle = characterDataModel.name
-                favoriteItem.itemDescription = characterDataModel.charDescription
-                favoriteItem.itemThumbnail = characterDataModel.thumbnail
+            if (realm.object(ofType: FavoriteCharacterDataModel.self, forPrimaryKey: characterDataModel.id) == nil) {
+                favoriteCharacter.id = characterDataModel.id
+                favoriteCharacter.itemTitle = characterDataModel.name
+                favoriteCharacter.itemDescription = characterDataModel.charDescription
+                favoriteCharacter.itemThumbnail = characterDataModel.thumbnail
                 
                 try realm.write {
-                    realm.add(favoriteItem, update: .all)
+                    realm.add(favoriteCharacter, update: .all)
                 }
-                print(Realm.Configuration.defaultConfiguration.fileURL!)
             } else {
                 status = false
             }
@@ -41,16 +40,15 @@ class FavoriteItemDataModel: Object {
         return status
     }
     
-    static func makeUnfavorite(favoriteItemDataModel: FavoriteItemDataModel){
+    static func makeUnfavorite(favoriteCharacterDataModel: FavoriteCharacterDataModel){
         do {
             let realm = try Realm()
             // - find object by item.id
-            let objectToDelete = realm.object(ofType: FavoriteItemDataModel.self, forPrimaryKey: favoriteItemDataModel.id)!
+            let objectToDelete = realm.object(ofType: FavoriteCharacterDataModel.self, forPrimaryKey: favoriteCharacterDataModel.id)!
             
             try realm.write {
                 realm.delete(objectToDelete)
             }
-            print(Realm.Configuration.defaultConfiguration.fileURL!)
         }
         catch {
             print(error.localizedDescription)
