@@ -20,7 +20,7 @@ class DataModelFactory:DataModelMaking {
         character.name = model.name
         character.charDescription = model.description
         character.thumbnail = model.thumbnail?.url?.absoluteString
-        character.favorite = true
+        character.favorite = false
          
         return character
     }
@@ -35,5 +35,4 @@ class DataModelFactory:DataModelMaking {
         
         return comic
     }
-    
 }

@@ -15,6 +15,8 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
     var characterDataModel: Results<CharacterDataModel>? = nil
     var favoriteCharacterDataModel: Results<FavoriteCharacterDataModel>? = nil
     
+    var characterService = CharacterService()
+    
     @IBOutlet weak var characterTableView: UITableView!
     @IBOutlet weak var characterSegmentControl: UISegmentedControl!
     
@@ -38,7 +40,7 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
         let nib = UINib(nibName: "GenericTableViewCell", bundle: nil)
         characterTableView.register(nib, forCellReuseIdentifier: "GenericTableViewCell")
         
-        CharacterDataModel.updateData(UrlBuilder.offset)
+        characterService.updateData(0)
         observeRealm()
     }
     
@@ -50,9 +52,10 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
         case 0:
             let contextItem = UIContextualAction(style: .normal, title: "Favorite") { [self] (contextualAction, view, boolValue) in
                 boolValue(true) // pass true if you want the handler to allow the action
-                if (!FavoriteCharacterDataModel.makeFavorite(characterDataModel: characterDataModel![indexPath.row])) {
-                    self.showAlert()
-                }
+                characterService.makeFavorite(characterDataModel: characterDataModel![indexPath.row])
+//                if (!FavoriteCharacterDataModel.makeFavorite(characterDataModel: characterDataModel![indexPath.row])) {
+//                    self.showAlert()
+//                }
             }
             contextItem.backgroundColor =  UIColor.systemBlue
             let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
@@ -104,7 +107,7 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
     // Paging
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if ((indexPath.row == self.characterDataModel!.count - 1) && !DownloadManager.isDataLoading) {
-            CharacterDataModel.updateData(String(self.characterDataModel!.count))
+            characterService.updateData(self.characterDataModel!.count)
         }
     }
     

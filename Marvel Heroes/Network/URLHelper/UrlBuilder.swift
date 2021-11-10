@@ -9,9 +9,7 @@ import Foundation
 
 class UrlBuilder {
     
-    static let offset = "0"
-    
-    func getUrl(_ urlPath: UrlPath, _ offset: String) -> String {
+    func getUrl(_ urlPath: UrlPath, _ offset: Int) -> String {
         
         let cryptoHelper = CryptoHelper()
 
@@ -30,7 +28,7 @@ class UrlBuilder {
             URLQueryItem(name: "apikey", value: apiKeyPublic),
             URLQueryItem(name: "ts", value: timestemp),
             URLQueryItem(name: "hash", value: hash),
-            URLQueryItem(name: "offset", value: offset),
+            URLQueryItem(name: "offset", value: String(offset)),
             URLQueryItem(name: "limit", value: "50")
         ]
         

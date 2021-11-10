@@ -15,6 +15,8 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
     var comicDataModel: Results<ComicDataModel>? = nil
     var favoriteComicDataModel: Results<FavoriteComicDataModel>? = nil
     
+    let comicService = ComicService()
+    
     @IBOutlet weak var comicSegmentControl: UISegmentedControl!
     @IBOutlet weak var comicsTableView: UITableView!
     @IBAction func onChangeSegment(_ sender: UISegmentedControl) {
@@ -36,7 +38,7 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
         let nib = UINib(nibName: "GenericTableViewCell", bundle: nil)
         comicsTableView.register(nib, forCellReuseIdentifier: "GenericTableViewCell")
         
-        ComicDataModel.updateData(UrlBuilder.offset)
+        comicService.updateData(0)
         observeRealm()
     }
     
@@ -101,7 +103,7 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if ((indexPath.row == self.comicDataModel!.count - 1) && !DownloadManager.isDataLoading) {
-            ComicDataModel.updateData(String(self.comicDataModel!.count))
+            comicService.updateData(self.comicDataModel!.count)
         }
     }
     
