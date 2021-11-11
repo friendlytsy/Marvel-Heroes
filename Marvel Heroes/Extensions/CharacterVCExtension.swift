@@ -12,53 +12,25 @@ import Accelerate
 
 extension CharacterViewController {
     func observeRealm() {
-        let indexSelected = characterSegmentControl.selectedSegmentIndex
-        switch indexSelected{
-        case 0:
-            self.token = self.characterDataModel?.observe {  [weak self] ( changes: RealmCollectionChange) in
-                guard (self?.characterTableView) != nil else {return}
-                switch changes {
-                case .initial:
-                    UIView.transition(with: self!.characterTableView,
-                                      duration: 0.5,
-                                      options: .transitionCrossDissolve,
-                                      animations: { self!.characterTableView.reloadData() })
-                case .update(_, let deletions, let insertions, let modifications):
-                    self?.characterTableView.beginUpdates()
-                    self?.characterTableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                    self?.characterTableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                    self?.characterTableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                    self?.characterTableView.endUpdates()
-                case .error(let error):
-                    fatalError("\(error)")
-                }
+        self.token = self.characterDataModel?.observe {  [weak self] ( changes: RealmCollectionChange) in
+            guard (self?.characterTableView) != nil else {return}
+            switch changes {
+            case .initial:
+                self!.characterTableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                self?.characterTableView.beginUpdates()
+                self?.characterTableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                self?.characterTableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                self?.characterTableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                self?.characterTableView.endUpdates()
+            case .error(let error):
+                fatalError("\(error)")
             }
-        case 1:
-            self.token = self.favoriteCharacterDataModel?.observe {  [weak self] ( changes: RealmCollectionChange) in
-                guard (self?.characterTableView) != nil else {return}
-                switch changes {
-                case .initial:
-                    UIView.transition(with: self!.characterTableView,
-                                      duration: 0.5,
-                                      options: .transitionCrossDissolve,
-                                      animations: { self!.characterTableView.reloadData() })
-                case .update(_, let deletions, let insertions, let modifications):
-                    self?.characterTableView.beginUpdates()
-                    self?.characterTableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                    self?.characterTableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0) }), with: UITableView.RowAnimation.automatic)
-                    self?.characterTableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: UITableView.RowAnimation.automatic)
-                    self?.characterTableView.endUpdates()
-                case .error(let error):
-                    fatalError("\(error)")
-                }
-            }
-        default:
-            print("fatal error")
         }
     }
     
     func showAlert() {
-        let alert = UIAlertController(title: "Can't add to favorite", message: "This character already adde to favorite", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Can't add to favorite", message: "This character already added to favorite", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true)
     }

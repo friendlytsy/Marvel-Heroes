@@ -13,13 +13,11 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
     var realm = try? Realm()
     var token: NotificationToken?
     var characterDataModel: Results<CharacterDataModel>? = nil
-    var favoriteCharacterDataModel: Results<FavoriteCharacterDataModel>? = nil
     
-    var characterService = CharacterService()
+    let characterService = CharacterService()
     
     @IBOutlet weak var characterTableView: UITableView!
     @IBOutlet weak var characterSegmentControl: UISegmentedControl!
-    
     @IBAction func onChangeSegment(_ sender: UISegmentedControl) {
         characterTableView.reloadData()
         observeRealm()
@@ -32,7 +30,6 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
         characterSegmentControl.setTitle("Favorite", forSegmentAt: 1)
         
         self.characterDataModel = realm?.objects(CharacterDataModel.self)
-        self.favoriteCharacterDataModel = realm?.objects(FavoriteCharacterDataModel.self)
         
         characterTableView.dataSource = self
         characterTableView.delegate = self
@@ -52,10 +49,10 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
         case 0:
             let contextItem = UIContextualAction(style: .normal, title: "Favorite") { [self] (contextualAction, view, boolValue) in
                 boolValue(true) // pass true if you want the handler to allow the action
-                characterService.makeFavorite(characterDataModel: characterDataModel![indexPath.row])
-//                if (!FavoriteCharacterDataModel.makeFavorite(characterDataModel: characterDataModel![indexPath.row])) {
-//                    self.showAlert()
-//                }
+                if (!(characterService.makeFavorite(characterDataModel: characterDataModel![indexPath.row])))
+                {
+                    self.showAlert()
+                }
             }
             contextItem.backgroundColor =  UIColor.systemBlue
             let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
@@ -64,8 +61,9 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
         case 1:
             let contextItem = UIContextualAction(style: .normal, title: "Unfavorite") { [self] (contextualAction, view, boolValue) in
                 boolValue(true) // pass true if you want the handler to allow the action
-                FavoriteCharacterDataModel.makeUnfavorite(favoriteCharacterDataModel: favoriteCharacterDataModel![indexPath.row])
-                observeRealm()
+                if(characterService.makeUnfavorite(characterDataModel: characterService.getFavorites()[indexPath.row])) {
+                    observeRealm()
+                }
             }
             contextItem.backgroundColor =  UIColor.systemRed
             let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
@@ -82,7 +80,7 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
         case 0:
             return characterDataModel?.count ?? 0
         case 1:
-            return favoriteCharacterDataModel?.count ?? 0
+            return characterService.getCharacterFavoriteCount()
         default:
             return 0
         }
@@ -97,7 +95,7 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
             return cell
         case 1:
             let cell = characterTableView.dequeueReusableCell(withIdentifier: "GenericTableViewCell", for: indexPath) as! GenericTableViewCell
-            cell.configureCharacterFavorite(withViewModel: (favoriteCharacterDataModel?[indexPath.row])!)
+            cell.configureCharacter(withViewModel: (characterService.getFavorites()[indexPath.row]))
             return cell
         default:
             return UITableViewCell()
@@ -119,17 +117,12 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is ItemDescriptionViewController {
             let vc = segue.destination as? ItemDescriptionViewController
-            
             let indexSelected = self.characterSegmentControl.selectedSegmentIndex
             switch indexSelected {
             case 0:
-                vc?.itemName = (characterDataModel?[characterTableView.indexPathForSelectedRow!.row].name)!   // Pass value of characterDataModel.characterName by selected row
-                vc?.itemDescription = (characterDataModel?[characterTableView.indexPathForSelectedRow!.row].charDescription)! // Pass value of characterDataModel.characterDescription by selected row
-                vc?.itemThumbnail = (characterDataModel?[characterTableView.indexPathForSelectedRow!.row].thumbnail)! // Pass string of characterDataModel.thumbnail by selected row
+                vc!.item = characterService.passCharacterItem(from: (characterDataModel?[characterTableView.indexPathForSelectedRow!.row])!)
             case 1:
-                vc?.itemName = (favoriteCharacterDataModel?[characterTableView.indexPathForSelectedRow!.row].itemTitle)!   // Pass value of characterDataModel.characterName by selected row
-                vc?.itemDescription = (favoriteCharacterDataModel?[characterTableView.indexPathForSelectedRow!.row].itemDescription)! // Pass value of characterDataModel.characterDescription by selected row
-                vc?.itemThumbnail = (favoriteCharacterDataModel?[characterTableView.indexPathForSelectedRow!.row].itemThumbnail)! // Pass string of characterDataModel.thumbnail by selected row
+                vc!.item = characterService.passCharacterItem(from: (characterService.getFavorites()[characterTableView.indexPathForSelectedRow!.row]))
             default:
                 break
             }

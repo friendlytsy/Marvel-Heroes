@@ -13,7 +13,6 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
     var realm = try? Realm()
     var token: NotificationToken?
     var comicDataModel: Results<ComicDataModel>? = nil
-    var favoriteComicDataModel: Results<FavoriteComicDataModel>? = nil
     
     let comicService = ComicService()
     
@@ -31,7 +30,6 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
         comicSegmentControl.setTitle("Favorite", forSegmentAt: 1)
         
         self.comicDataModel = realm?.objects(ComicDataModel.self)
-        self.favoriteComicDataModel = realm?.objects(FavoriteComicDataModel.self)
         comicsTableView.dataSource = self
         comicsTableView.delegate = self
         
@@ -48,7 +46,7 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
         case 0:
             return comicDataModel?.count ?? 0
         case 1:
-            return favoriteComicDataModel?.count ?? 0
+            return comicService.getComicFavoriteCount()
         default:
             return 0
         }
@@ -62,7 +60,8 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
         case 0:
             let contextItem = UIContextualAction(style: .normal, title: "Favorite") { [self] (contextualAction, view, boolValue) in
                 boolValue(true) // pass true if you want the handler to allow the action
-                if (!FavoriteComicDataModel.makeFavorite(comicDataModel: comicDataModel![indexPath.row])) {
+                if (!(comicService.makeFavorite(comicDataModel: comicDataModel![indexPath.row])))
+                {
                     self.showAlert()
                 }
             }
@@ -73,8 +72,9 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
         case 1:
             let contextItem = UIContextualAction(style: .normal, title: "Unfavorite") { [self] (contextualAction, view, boolValue) in
                 boolValue(true) // pass true if you want the handler to allow the action
-                FavoriteComicDataModel.makeUnfavorite(favoriteComicDataModel: favoriteComicDataModel![indexPath.row])
-                observeRealm()
+                if(comicService.makeUnfavorite(comicDataModel: comicService.getFavorites()[indexPath.row])) {
+                    observeRealm()
+                }
             }
             contextItem.backgroundColor =  UIColor.systemRed
             let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
@@ -94,7 +94,7 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
             return cell
         case 1:
             let cell = comicsTableView.dequeueReusableCell(withIdentifier: "GenericTableViewCell", for: indexPath) as! GenericTableViewCell
-            cell.configureComicFavorite(withViewModel: (favoriteComicDataModel?[indexPath.row])!)
+            cell.configureComic(withViewModel: (comicService.getFavorites()[indexPath.row]))
             return cell
         default:
             return UITableViewCell()
@@ -119,13 +119,9 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
             let indexSelected = self.comicSegmentControl.selectedSegmentIndex
             switch indexSelected {
             case 0:
-                vc?.itemName = (comicDataModel?[comicsTableView.indexPathForSelectedRow!.row].title)!   // Pass value of characterDataModel.characterName by selected row
-                vc?.itemDescription = (comicDataModel?[comicsTableView.indexPathForSelectedRow!.row].comicDescription) ?? "" // Pass value of characterDataModel.characterDescription by selected row
-                vc?.itemThumbnail = (comicDataModel?[comicsTableView.indexPathForSelectedRow!.row].thumbnail)! // Pass string of characterDataModel.thumbnail by selected row
+                vc?.item = comicService.passComicItem(from: (comicDataModel?[comicsTableView.indexPathForSelectedRow!.row])!)
             case 1:
-                vc?.itemName = (favoriteComicDataModel?[comicsTableView.indexPathForSelectedRow!.row].itemTitle)!   // Pass value of characterDataModel.characterName by selected row
-                vc?.itemDescription = (favoriteComicDataModel?[comicsTableView.indexPathForSelectedRow!.row].itemDescription) ?? "" // Pass value of characterDataModel.characterDescription by selected row
-                vc?.itemThumbnail = (favoriteComicDataModel?[comicsTableView.indexPathForSelectedRow!.row].itemThumbnail)! // Pass string of characterDataModel.thumbnail by selected row
+                vc?.item = comicService.passComicItem(from: (comicService.getFavorites()[comicsTableView.indexPathForSelectedRow!.row]))
             default:
                 break
             }
