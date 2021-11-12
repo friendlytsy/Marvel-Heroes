@@ -61,7 +61,7 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
         case 1:
             let contextItem = UIContextualAction(style: .normal, title: "Unfavorite") { [self] (contextualAction, view, boolValue) in
                 boolValue(true) // pass true if you want the handler to allow the action
-                if(characterService.makeUnfavorite(characterDataModel: characterService.getFavorites()[indexPath.row])) {
+                if(characterService.makeUnfavorite(characterDataModel: characterService.getFavorite(with: indexPath.row))) {
                     observeRealm()
                 }
             }
@@ -95,7 +95,7 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
             return cell
         case 1:
             let cell = characterTableView.dequeueReusableCell(withIdentifier: "GenericTableViewCell", for: indexPath) as! GenericTableViewCell
-            cell.configureCharacter(withViewModel: (characterService.getFavorites()[indexPath.row]))
+            cell.configureCharacter(withViewModel: (characterService.getFavorite(with: indexPath.row)))
             return cell
         default:
             return UITableViewCell()
@@ -122,7 +122,7 @@ class CharacterViewController: UIViewController, UITableViewDataSource, UITableV
             case 0:
                 vc!.item = characterService.passCharacterItem(from: (characterDataModel?[characterTableView.indexPathForSelectedRow!.row])!)
             case 1:
-                vc!.item = characterService.passCharacterItem(from: (characterService.getFavorites()[characterTableView.indexPathForSelectedRow!.row]))
+                vc!.item = characterService.passCharacterItem(from: (characterService.getFavorite(with: characterTableView.indexPathForSelectedRow!.row)))
             default:
                 break
             }

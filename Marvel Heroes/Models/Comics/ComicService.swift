@@ -41,57 +41,39 @@ class ComicService {
     
     func makeFavorite(comicDataModel: ComicDataModel) -> Bool{
         var result = false
-        do {
-            let realm = try Realm()
-            // - check if this item.id exist
-            if (realm.object(ofType: ComicDataModel.self, forPrimaryKey: comicDataModel.id) != nil && comicDataModel.favorite != true) {
-                try realm.write {
-                    comicDataModel.setValue(true, forKey: "favorite")
-                }
-                print(realm.configuration.fileURL!.absoluteString)
-                result = true
-            } else { result = false }
-        }
-        catch {
-            print(error.localizedDescription)
+        
+        let userDefaults = UserDefaults.standard
+        var favorites: [String] = userDefaults.stringArray(forKey: "comicFavorites") ?? []
+
+        if (!favorites.contains(String(comicDataModel.id!))) {
+            favorites.append(String(comicDataModel.id!))
+            userDefaults.set(favorites, forKey: "comicFavorites")
+            result = true
         }
         return result
     }
     
     func makeUnfavorite(comicDataModel: ComicDataModel) -> Bool{
-        var result = false
-        do {
-            let realm = try Realm()
-            try realm.write {
-                comicDataModel.setValue(false, forKey: "favorite")
-            }
-            print(realm.configuration.fileURL!.absoluteString)
-            result = true
-            
-        }
-        catch {
-            print(error.localizedDescription)
-        }
-        return result
+        let userDefaults = UserDefaults.standard
+        var favorites: [String] = userDefaults.stringArray(forKey: "comicFavorites") ?? []
+        favorites.removeAll { $0 == String(comicDataModel.id!) }
+        userDefaults.set(favorites, forKey: "comicFavorites")
+        
+        return true
     }
 
     func getComicFavoriteCount() -> Int {
-        var filter = 0
-        do {
-            let realm = try Realm()
-            filter = (realm.objects(ComicDataModel.self).filter("favorite == true")).count
-        }
-        catch {
-            print(error.localizedDescription)
-        }
-        return filter
+        return UserDefaults.standard.stringArray(forKey: "comicFavorites")!.count
     }
     
-    func getFavorites() -> Results<ComicDataModel> {
-        var result: Results<ComicDataModel>? = nil
+    func getFavorite(with id: Int) -> ComicDataModel {
+        var result: ComicDataModel? = nil
+        let userDefaults = UserDefaults.standard
+        let favorites: [String] = userDefaults.stringArray(forKey: "comicFavorites") ?? []
+        
         do {
             let realm = try Realm()
-            result = realm.objects(ComicDataModel.self).filter("favorite == true")
+            result = realm.objects(ComicDataModel.self).filter("id == \(favorites[id])").first
         }
         catch {
             print(error.localizedDescription)

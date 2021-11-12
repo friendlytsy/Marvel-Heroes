@@ -16,7 +16,6 @@ class CharacterDataModelFactory {
         character.name = model.name
         character.charDescription = model.description
         character.thumbnail = model.thumbnail?.url?.absoluteString
-        character.favorite = false
          
         return character
     }

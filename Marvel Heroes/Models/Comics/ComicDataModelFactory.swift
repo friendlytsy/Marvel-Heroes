@@ -15,7 +15,6 @@ class ComicDataModelFactory {
         comic.title = model.title
         comic.comicDescription = model.description
         comic.thumbnail = model.thumbnail?.url?.absoluteString
-        comic.favorite = false
         
         return comic
     }

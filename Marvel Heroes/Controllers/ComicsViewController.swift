@@ -72,7 +72,7 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
         case 1:
             let contextItem = UIContextualAction(style: .normal, title: "Unfavorite") { [self] (contextualAction, view, boolValue) in
                 boolValue(true) // pass true if you want the handler to allow the action
-                if(comicService.makeUnfavorite(comicDataModel: comicService.getFavorites()[indexPath.row])) {
+                if(comicService.makeUnfavorite(comicDataModel: comicService.getFavorite(with: indexPath.row))) {
                     observeRealm()
                 }
             }
@@ -94,7 +94,7 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
             return cell
         case 1:
             let cell = comicsTableView.dequeueReusableCell(withIdentifier: "GenericTableViewCell", for: indexPath) as! GenericTableViewCell
-            cell.configureComic(withViewModel: (comicService.getFavorites()[indexPath.row]))
+            cell.configureComic(withViewModel: (comicService.getFavorite(with: indexPath.row)))
             return cell
         default:
             return UITableViewCell()
@@ -121,7 +121,7 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
             case 0:
                 vc?.item = comicService.passComicItem(from: (comicDataModel?[comicsTableView.indexPathForSelectedRow!.row])!)
             case 1:
-                vc?.item = comicService.passComicItem(from: (comicService.getFavorites()[comicsTableView.indexPathForSelectedRow!.row]))
+                vc?.item = comicService.passComicItem(from: (comicService.getFavorite(with: comicsTableView.indexPathForSelectedRow!.row)))
             default:
                 break
             }

@@ -13,5 +13,4 @@ class ComicDataModel: Object {
     @Persisted var title: String?
     @Persisted var comicDescription: String?
     @Persisted var thumbnail: String?
-    @Persisted var favorite: Bool?
 }
