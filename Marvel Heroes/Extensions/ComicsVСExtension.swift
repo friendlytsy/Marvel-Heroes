@@ -39,7 +39,7 @@ extension ComicsViewController {
 extension ComicsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if (searchController.searchBar.text != "") {
-            comicService.searchComic(by: searchController.searchBar.text ?? "")
+            comicSearchService.searchComic(by: searchController.searchBar.text ?? "")
             comicsTableView.reloadData()
         }
     }
@@ -52,7 +52,7 @@ extension ComicsViewController: UISearchResultsUpdating {
 extension ComicsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.isActive && searchController.searchBar.text != "" {
-            return comicService.getSearchCount()
+            return comicSearchService.getSearchCount()
         }
         return comicDataModel?.count ?? 0
     }
@@ -63,7 +63,7 @@ extension ComicsViewController: UITableViewDataSource {
         if (!searchController.isActive && searchController.searchBar.text == "") {
             cell.configureComic(withViewModel: (comicDataModel?[indexPath.row])!)
         } else {
-            cell.configureComicSearchResult(result: comicService.getSearchItems(index: indexPath.row))
+            cell.configureComicSearchResult(result: comicSearchService.getSearchItems(index: indexPath.row))
         }
         return cell
     }

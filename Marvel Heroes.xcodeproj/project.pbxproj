@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		F911422F2738246100542367 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F911422E2738246100542367 /* SearchViewController.swift */; };
+		F9192E112743B7D00080FC29 /* CharacterSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9192E102743B7D00080FC29 /* CharacterSearchService.swift */; };
+		F9192E132743BB660080FC29 /* ComicSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9192E122743BB660080FC29 /* ComicSearchService.swift */; };
+		F9192E152743BE970080FC29 /* ComicFavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9192E142743BE970080FC29 /* ComicFavoriteService.swift */; };
+		F9192E172743BEE60080FC29 /* CharacterFavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9192E162743BEE60080FC29 /* CharacterFavoriteService.swift */; };
 		F923B5D926DE209C003F431B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F923B5D826DE209C003F431B /* AppDelegate.swift */; };
 		F923B5DB26DE209C003F431B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F923B5DA26DE209C003F431B /* SceneDelegate.swift */; };
 		F923B5DD26DE209C003F431B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F923B5DC26DE209C003F431B /* LoginViewController.swift */; };
@@ -51,6 +55,10 @@
 
 /* Begin PBXFileReference section */
 		F911422E2738246100542367 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		F9192E102743B7D00080FC29 /* CharacterSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSearchService.swift; sourceTree = "<group>"; };
+		F9192E122743BB660080FC29 /* ComicSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicSearchService.swift; sourceTree = "<group>"; };
+		F9192E142743BE970080FC29 /* ComicFavoriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicFavoriteService.swift; sourceTree = "<group>"; };
+		F9192E162743BEE60080FC29 /* CharacterFavoriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFavoriteService.swift; sourceTree = "<group>"; };
 		F923B5D526DE209C003F431B /* Marvel Heroes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Marvel Heroes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F923B5D826DE209C003F431B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F923B5DA26DE209C003F431B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +163,8 @@
 				F985C42B271C059300394C81 /* Codable */,
 				F9DAE1DA273BB4D400E72111 /* CharacterService.swift */,
 				F9DAE1D6273BA4D700E72111 /* CharacterDataModelFactory.swift */,
+				F9192E102743B7D00080FC29 /* CharacterSearchService.swift */,
+				F9192E162743BEE60080FC29 /* CharacterFavoriteService.swift */,
 			);
 			path = Character;
 			sourceTree = "<group>";
@@ -165,7 +175,9 @@
 				F9B43D28271D6F3B00D99A4F /* Realm */,
 				F9B43D27271D6F2700D99A4F /* Codable */,
 				F9DAE1DC273BB4F000E72111 /* ComicService.swift */,
+				F9192E142743BE970080FC29 /* ComicFavoriteService.swift */,
 				F9DAE1DE273BFBAB00E72111 /* ComicDataModelFactory.swift */,
+				F9192E122743BB660080FC29 /* ComicSearchService.swift */,
 			);
 			path = Comics;
 			sourceTree = "<group>";
@@ -383,14 +395,18 @@
 				F9D3CBB527268D9A00AAB339 /* CharacterVCExtension.swift in Sources */,
 				F985C42E271C05CF00394C81 /* CharacterDataModel.swift in Sources */,
 				F9FAD2C526EA076300D10FB9 /* GenericTableViewCell.swift in Sources */,
+				F9192E152743BE970080FC29 /* ComicFavoriteService.swift in Sources */,
 				F985BB2927033F7000742139 /* UrlBuilder.swift in Sources */,
 				F923B5D926DE209C003F431B /* AppDelegate.swift in Sources */,
 				F951BDDA27132F7000F63C66 /* CharacterDataWrapper.swift in Sources */,
 				F9DAE1DD273BB4F000E72111 /* ComicService.swift in Sources */,
 				F951BDD827132F4B00F63C66 /* Character.swift in Sources */,
+				F9192E132743BB660080FC29 /* ComicSearchService.swift in Sources */,
+				F9192E172743BEE60080FC29 /* CharacterFavoriteService.swift in Sources */,
 				F923B5DB26DE209C003F431B /* SceneDelegate.swift in Sources */,
 				F9DDEA4D271372EE00064115 /* ComicDataContainer.swift in Sources */,
 				F9DAE1DB273BB4D400E72111 /* CharacterService.swift in Sources */,
+				F9192E112743B7D00080FC29 /* CharacterSearchService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

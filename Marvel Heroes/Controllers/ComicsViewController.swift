@@ -15,7 +15,8 @@ class ComicsViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     var comicDataModel: Results<ComicDataModel>? = nil
     
     let comicService = ComicService()
-    
+    let comicSearchService = ComicSearchService()
+    let comicFavoriteService = ComicFavoriteService()
     let searchController = UISearchController(searchResultsController: nil)
 
     @IBOutlet weak var comicsTableView: UITableView!
@@ -51,7 +52,7 @@ class ComicsViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         
         let contextItem = UIContextualAction(style: .normal, title: "Favorite") { [self] (contextualAction, view, boolValue) in
             boolValue(true) // pass true if you want the handler to allow the action
-            if (!(comicService.makeFavorite(isSearch: searchActive, comicDataModel: comicDataModel!, index: indexPath.row)))
+            if (!(comicFavoriteService.makeFavorite(isSearch: searchActive, comicDataModel: comicDataModel!, index: indexPath.row)))
             {
                 self.showAlert()
             }
@@ -75,10 +76,15 @@ class ComicsViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is ItemDescriptionViewController {
             let vc = segue.destination as? ItemDescriptionViewController
+            // - NEED TO RE DO HERE
             if (searchController.searchBar.text != "") {
-//                vc!.item = comicService.getSearchItems(index: comicsTableView.indexPathForSelectedRow!.row)
+                vc!.item = [String(comicSearchService.getSearchItems(index: comicsTableView.indexPathForSelectedRow!.row).title!),
+                            String((comicSearchService.getSearchItems(index: comicsTableView.indexPathForSelectedRow!.row).description) ?? ""),
+                            String((comicSearchService.getSearchItems(index: comicsTableView.indexPathForSelectedRow!.row).thumbnail?.url?.absoluteString)!)]
             } else {
-                vc!.itemArray = comicService.passComicItem(from: (comicDataModel?[comicsTableView.indexPathForSelectedRow!.row])!)
+                vc!.item = [String((comicDataModel?[comicsTableView.indexPathForSelectedRow!.row].title)!),
+                            String((comicDataModel?[comicsTableView.indexPathForSelectedRow!.row].comicDescription) ?? ""),
+                            String((comicDataModel?[comicsTableView.indexPathForSelectedRow!.row].thumbnail)!)]
             }
             comicsTableView.deselectRow(at: comicsTableView.indexPathForSelectedRow!, animated: true) // Deselect row
         }
