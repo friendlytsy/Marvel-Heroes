@@ -39,18 +39,80 @@ class CharacterService {
         }
     }
     
-    func makeFavorite(characterDataModel: CharacterDataModel) -> Bool{
-        var result = false
+    func searchCharacter(by name: String) {
+        // Access Shared Defaults Object
+        let userDefaults = UserDefaults.standard
+        let urlBuilder = UrlBuilder()
+        guard let url = URL(string: urlBuilder.getUrl(UrlPath.characteresListUrl, 0, queryCharacter: name)) else { return print("ERROR") }
+        var characters: [Character] = []
+        let semaphore = DispatchSemaphore(value: 0)
+        DownloadManager.shared.downloadData(urlPath: url.absoluteString) { data in
+            do {
+                let decoder = JSONDecoder()
+                let getData = try decoder.decode(CharacterDataWrapper.self, from: data)
+                // - Decode from JSON to array of struct
+                try getData.data?.results?.forEach{item in
+                    characters.append(item)
+                }
+                
+                // - Encode to save at UserDefaults
+                let encoder = JSONEncoder()
+                do {
+                    let encodedCharacters = try encoder.encode(characters)
+                    userDefaults.set(encodedCharacters, forKey: "characterSearch")
+                }
+                semaphore.signal()
+            }
+            catch {
+                print(error.localizedDescription)
+            }
+        }
+        semaphore.wait()
+    }
+    
+    func getSearchCount() -> Int {
+        if let items = UserDefaults.standard.data(forKey: "characterSearch") {
+            let decoder = JSONDecoder()
+            if let decoded = try? decoder.decode([Character].self, from: items) {
+                return decoded.count
+            }
+        }
+        return 0
+    }
+    
+    func getSearchItems(index: Int) -> Character {
+        let items = UserDefaults.standard.data(forKey: "characterSearch")!
+        let decoder = JSONDecoder()
+        let decoded = try? decoder.decode([Character].self, from: items)
         
+        return decoded![index]
+    }
+    
+    func makeFavorite(isSearch: Bool, characterDataModel: Results<CharacterDataModel>, index: Int) -> Bool{
         let userDefaults = UserDefaults.standard
         var favorites: [String] = userDefaults.stringArray(forKey: "characterFavorites") ?? []
-
-        if (!favorites.contains(String(characterDataModel.id!))) {
-            favorites.append(String(characterDataModel.id!))
-            userDefaults.set(favorites, forKey: "characterFavorites")
-            result = true
+        
+        // if makeFavorite not from search
+        if !isSearch {
+            if (!favorites.contains(String(characterDataModel[index].id!))) {
+                favorites.append(String(characterDataModel[index].id!))
+                userDefaults.set(favorites, forKey: "characterFavorites")
+                return true
+            }
         }
-        return result
+        // if makeFavorite from search
+        if isSearch {
+            let search = UserDefaults.standard.data(forKey: "characterSearch")
+            // - decode from userDefaults
+            let decoder = JSONDecoder()
+            let decoded = try? decoder.decode([Character].self, from: search!)
+            if(!favorites.contains(String(decoded![index].id!))) {
+                favorites.append(String(decoded![index].id!))
+                userDefaults.set(favorites, forKey: "characterFavorites")
+                return true
+            }
+        }
+        return false
     }
     
     func makeUnfavorite(characterDataModel: CharacterDataModel) -> Bool{
@@ -61,7 +123,7 @@ class CharacterService {
         
         return true
     }
-
+    
     func getCharacterFavoriteCount() -> Int {
         return UserDefaults.standard.stringArray(forKey: "characterFavorites")!.count
     }

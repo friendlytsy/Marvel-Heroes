@@ -9,8 +9,9 @@ import UIKit
 import Foundation
 
 class ItemDescriptionViewController: UIViewController {
-
-    var item: Array<String?> = []
+    
+    var item: Character? = nil
+    var itemArray: Array<String?> = []
     
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var itemNameLabel: UILabel!
@@ -18,27 +19,23 @@ class ItemDescriptionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let url = URL( string: item[2]! ) {
-            DispatchQueue.main.async {
-                self.itemImage.kf.setImage(with: url)
+        
+        if item != nil {
+            if let url = URL( string: (item?.thumbnail?.url!.absoluteString)! ) {
+                DispatchQueue.main.async {
+                    self.itemImage.kf.setImage(with: url)
+                }
             }
+            
+            itemNameLabel.text = item?.name ?? ""
+            itemDescriptionTextField.text = item?.description ?? ""
+        } else {
+            if let url = URL( string: itemArray[2]! ) {
+                DispatchQueue.main.async {
+                    self.itemImage.kf.setImage(with: url)}
+            }
+            itemNameLabel.text = itemArray[0] ?? ""
+            itemDescriptionTextField.text = itemArray[1] ?? ""
         }
-
-        itemNameLabel.text = item[0] ?? ""
-        itemDescriptionTextField.text = item[1] ?? ""
-        // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

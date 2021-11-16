@@ -26,6 +26,26 @@ class GenericTableViewCell: UITableViewCell {
     }
     
     // - SOMETHING TO IMPROVE
+    func configureCharacterSearchResult(result character: Character) {
+        let url = URL(string: (character.thumbnail?.url?.absoluteString)!)
+        DispatchQueue.main.async {
+                self.itemImage.kf.setImage(with: url)
+            }
+            //DispatchQueue.async(self.itemImage.kf.setImage(with: url))
+        itemNameLabel.text = character.name
+        itemDescriptionLabel.text = character.description
+    }
+    
+    func configureComicSearchResult(result comic: Comic) {
+        let url = URL(string: (comic.thumbnail?.url?.absoluteString)!)
+        DispatchQueue.main.async {
+                self.itemImage.kf.setImage(with: url)
+            }
+            //DispatchQueue.async(self.itemImage.kf.setImage(with: url))
+        itemNameLabel.text = comic.title
+        itemDescriptionLabel.text = comic.description
+    }
+    
     func configureCharacter(withViewModel viewModel: CharacterDataModel) {
 
         if let url = URL( string: viewModel.thumbnail ?? "" ) {

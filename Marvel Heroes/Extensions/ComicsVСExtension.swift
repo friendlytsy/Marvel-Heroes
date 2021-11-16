@@ -35,3 +35,36 @@ extension ComicsViewController {
         self.present(alert, animated: true)
     }
 }
+
+extension ComicsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if (searchController.searchBar.text != "") {
+            comicService.searchComic(by: searchController.searchBar.text ?? "")
+            comicsTableView.reloadData()
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        observeRealm()
+    }
+}
+
+extension ComicsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return comicService.getSearchCount()
+        }
+        return comicDataModel?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = comicsTableView.dequeueReusableCell(withIdentifier: "GenericTableViewCell", for: indexPath) as! GenericTableViewCell
+        
+        if (!searchController.isActive && searchController.searchBar.text == "") {
+            cell.configureComic(withViewModel: (comicDataModel?[indexPath.row])!)
+        } else {
+            cell.configureComicSearchResult(result: comicService.getSearchItems(index: indexPath.row))
+        }
+        return cell
+    }
+}

@@ -9,7 +9,7 @@ import Foundation
 
 class UrlBuilder {
     
-    func getUrl(_ urlPath: UrlPath, _ offset: Int) -> String {
+    func getUrl(_ urlPath: UrlPath, _ offset: Int, queryCharacter character: String? = nil, queryComic comic: String? = nil) -> String {
         
         let cryptoHelper = CryptoHelper()
 
@@ -31,6 +31,13 @@ class UrlBuilder {
             URLQueryItem(name: "offset", value: String(offset)),
             URLQueryItem(name: "limit", value: "50")
         ]
+        if (character != nil) {
+            urlComponents.queryItems?.append(URLQueryItem(name: "nameStartsWith", value: character))
+        }
+        
+        if (comic != nil) {
+            urlComponents.queryItems?.append(URLQueryItem(name: "titleStartsWith", value: comic))
+        }
         
         return urlComponents.url?.absoluteString ?? ""
     }

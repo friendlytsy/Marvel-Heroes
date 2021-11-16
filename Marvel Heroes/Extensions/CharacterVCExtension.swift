@@ -10,7 +10,8 @@ import RealmSwift
 import SwiftUI
 import Accelerate
 
-extension CharacterViewController {
+extension CharacterViewController{
+    
     func observeRealm() {
         self.token = self.characterDataModel?.observe {  [weak self] ( changes: RealmCollectionChange) in
             guard (self?.characterTableView) != nil else {return}
@@ -33,5 +34,38 @@ extension CharacterViewController {
         let alert = UIAlertController(title: "Can't add to favorite", message: "This character already added to favorite", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true)
+    }
+}
+
+extension CharacterViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if (searchController.searchBar.text != "") {
+            characterService.searchCharacter(by: searchController.searchBar.text ?? "")
+            characterTableView.reloadData()
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        observeRealm()
+    }
+}
+
+extension CharacterViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return characterService.getSearchCount()
+        }
+        return characterDataModel?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = characterTableView.dequeueReusableCell(withIdentifier: "GenericTableViewCell", for: indexPath) as! GenericTableViewCell
+        
+        if (!searchController.isActive && searchController.searchBar.text == "") {
+            cell.configureCharacter(withViewModel: (characterDataModel?[indexPath.row])!)
+        } else {
+            cell.configureCharacterSearchResult(result: characterService.getSearchItems(index: indexPath.row))
+        }
+        return cell
     }
 }

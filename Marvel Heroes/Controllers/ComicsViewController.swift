@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class ComicsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ComicsViewController: UIViewController, UITableViewDelegate, UISearchBarDelegate {
     
     var realm = try? Realm()
     var token: NotificationToken?
@@ -16,89 +16,49 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
     
     let comicService = ComicService()
     
-    @IBOutlet weak var comicSegmentControl: UISegmentedControl!
+    let searchController = UISearchController(searchResultsController: nil)
+
     @IBOutlet weak var comicsTableView: UITableView!
-    @IBAction func onChangeSegment(_ sender: UISegmentedControl) {
-        comicsTableView.reloadData()
-        observeRealm()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        comicSegmentControl.setTitle("Catalog", forSegmentAt: 0)
-        comicSegmentControl.setTitle("Favorite", forSegmentAt: 1)
         
         self.comicDataModel = realm?.objects(ComicDataModel.self)
         comicsTableView.dataSource = self
         comicsTableView.delegate = self
         
+        // - Register GenericTableViewCell
         let nib = UINib(nibName: "GenericTableViewCell", bundle: nil)
         comicsTableView.register(nib, forCellReuseIdentifier: "GenericTableViewCell")
         
         comicService.updateData(0)
         observeRealm()
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let indexSelected = self.comicSegmentControl.selectedSegmentIndex
-        switch indexSelected {
-        case 0:
-            return comicDataModel?.count ?? 0
-        case 1:
-            return comicService.getComicFavoriteCount()
-        default:
-            return 0
-        }
+        
+        // - Configure UISearch Controller
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Characters"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        searchController.searchBar.delegate = self
+        comicsTableView.tableHeaderView = searchController.searchBar
     }
     
     // Favorite slider
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let indexSelected = self.comicSegmentControl.selectedSegmentIndex
-        switch indexSelected
-        {
-        case 0:
-            let contextItem = UIContextualAction(style: .normal, title: "Favorite") { [self] (contextualAction, view, boolValue) in
-                boolValue(true) // pass true if you want the handler to allow the action
-                if (!(comicService.makeFavorite(comicDataModel: comicDataModel![indexPath.row])))
-                {
-                    self.showAlert()
-                }
+        var searchActive = false
+        if (searchController.searchBar.text != "") {searchActive = true}
+        
+        let contextItem = UIContextualAction(style: .normal, title: "Favorite") { [self] (contextualAction, view, boolValue) in
+            boolValue(true) // pass true if you want the handler to allow the action
+            if (!(comicService.makeFavorite(isSearch: searchActive, comicDataModel: comicDataModel!, index: indexPath.row)))
+            {
+                self.showAlert()
             }
-            contextItem.backgroundColor =  UIColor.systemBlue
-            let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
-            return swipeActions
-            
-        case 1:
-            let contextItem = UIContextualAction(style: .normal, title: "Unfavorite") { [self] (contextualAction, view, boolValue) in
-                boolValue(true) // pass true if you want the handler to allow the action
-                if(comicService.makeUnfavorite(comicDataModel: comicService.getFavorite(with: indexPath.row))) {
-                    observeRealm()
-                }
-            }
-            contextItem.backgroundColor =  UIColor.systemRed
-            let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
-            return swipeActions
-            
-        default:
-            return UISwipeActionsConfiguration()
         }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let indexSelected = self.comicSegmentControl.selectedSegmentIndex
-        switch indexSelected {
-        case 0:
-            let cell = comicsTableView.dequeueReusableCell(withIdentifier: "GenericTableViewCell", for: indexPath) as! GenericTableViewCell
-            cell.configureComic(withViewModel: (comicDataModel?[indexPath.row])!)
-            return cell
-        case 1:
-            let cell = comicsTableView.dequeueReusableCell(withIdentifier: "GenericTableViewCell", for: indexPath) as! GenericTableViewCell
-            cell.configureComic(withViewModel: (comicService.getFavorite(with: indexPath.row)))
-            return cell
-        default:
-            return UITableViewCell()
-        }
+        contextItem.backgroundColor =  UIColor.systemBlue
+        let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
+        return swipeActions
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -115,17 +75,12 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is ItemDescriptionViewController {
             let vc = segue.destination as? ItemDescriptionViewController
-            
-            let indexSelected = self.comicSegmentControl.selectedSegmentIndex
-            switch indexSelected {
-            case 0:
-                vc?.item = comicService.passComicItem(from: (comicDataModel?[comicsTableView.indexPathForSelectedRow!.row])!)
-            case 1:
-                vc?.item = comicService.passComicItem(from: (comicService.getFavorite(with: comicsTableView.indexPathForSelectedRow!.row)))
-            default:
-                break
+            if (searchController.searchBar.text != "") {
+//                vc!.item = comicService.getSearchItems(index: comicsTableView.indexPathForSelectedRow!.row)
+            } else {
+                vc!.itemArray = comicService.passComicItem(from: (comicDataModel?[comicsTableView.indexPathForSelectedRow!.row])!)
             }
-            comicsTableView.deselectRow(at: comicsTableView.indexPathForSelectedRow!, animated: true)
+            comicsTableView.deselectRow(at: comicsTableView.indexPathForSelectedRow!, animated: true) // Deselect row
         }
     }
 }

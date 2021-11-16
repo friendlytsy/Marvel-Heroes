@@ -39,18 +39,31 @@ class ComicService {
         }
     }
     
-    func makeFavorite(comicDataModel: ComicDataModel) -> Bool{
-        var result = false
-        
+    func makeFavorite(isSearch: Bool, comicDataModel: Results<ComicDataModel>, index: Int) -> Bool{
         let userDefaults = UserDefaults.standard
         var favorites: [String] = userDefaults.stringArray(forKey: "comicFavorites") ?? []
-
-        if (!favorites.contains(String(comicDataModel.id!))) {
-            favorites.append(String(comicDataModel.id!))
-            userDefaults.set(favorites, forKey: "comicFavorites")
-            result = true
+        
+        // if makeFavorite not from search
+        if !isSearch {
+            if (!favorites.contains(String(comicDataModel[index].id!))) {
+                favorites.append(String(comicDataModel[index].id!))
+                userDefaults.set(favorites, forKey: "comicFavorites")
+                return true
+            }
         }
-        return result
+        // if makeFavorite from search
+        if isSearch {
+            let search = UserDefaults.standard.data(forKey: "comicSearch")
+            // - decode from userDefaults
+            let decoder = JSONDecoder()
+            let decoded = try? decoder.decode([Character].self, from: search!)
+            if(!favorites.contains(String(decoded![index].id!))) {
+                favorites.append(String(decoded![index].id!))
+                userDefaults.set(favorites, forKey: "comicFavorites")
+                return true
+            }
+        }
+        return false
     }
     
     func makeUnfavorite(comicDataModel: ComicDataModel) -> Bool{
@@ -84,4 +97,55 @@ class ComicService {
     func passComicItem(from comic: ComicDataModel) -> Array<String?>{
         return [comic.title, comic.comicDescription, comic.thumbnail]
     }
+    
+    // SEARCH
+    func searchComic(by name: String) {
+        // Access Shared Defaults Object
+        let userDefaults = UserDefaults.standard
+        let urlBuilder = UrlBuilder()
+        guard let url = URL(string: urlBuilder.getUrl(UrlPath.comicsListUrl, 0, queryComic: name)) else { return print("ERROR") }
+        var comics: [Comic] = []
+        let semaphore = DispatchSemaphore(value: 0)
+        DownloadManager.shared.downloadData(urlPath: url.absoluteString) { data in
+            do {
+                let decoder = JSONDecoder()
+                let getData = try decoder.decode(ComicDataWrapper.self, from: data)
+                // - Decode from JSON to array of struct
+                try getData.data?.results?.forEach{item in
+                    comics.append(item)
+                }
+                
+                // - Encode to save at UserDefaults
+                let encoder = JSONEncoder()
+                do {
+                    let encodedCharacters = try encoder.encode(comics)
+                    userDefaults.set(encodedCharacters, forKey: "comicSearch")
+                }
+                semaphore.signal()
+            }
+            catch {
+                print(error.localizedDescription)
+            }
+        }
+        semaphore.wait()
+    }
+    
+    func getSearchCount() -> Int {
+        if let items = UserDefaults.standard.data(forKey: "comicSearch") {
+            let decoder = JSONDecoder()
+            if let decoded = try? decoder.decode([Comic].self, from: items) {
+                return decoded.count
+            }
+        }
+        return 0
+    }
+    
+    func getSearchItems(index: Int) -> Comic {
+        let items = UserDefaults.standard.data(forKey: "comicSearch")!
+        let decoder = JSONDecoder()
+        let decoded = try? decoder.decode([Comic].self, from: items)
+        
+        return decoded![index]
+    }
+ 
 }
