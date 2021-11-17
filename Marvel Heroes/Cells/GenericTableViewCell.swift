@@ -101,7 +101,6 @@ class GenericTableViewCell: UITableViewCell {
                 self.itemImage.kf.setImage(with: url)
             }
         }
-        
         itemNameLabel.text = viewModel.title
         itemDescriptionLabel.text = viewModel.comicDescription
 

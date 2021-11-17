@@ -58,9 +58,9 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "GenericTableViewCell", for: indexPath) as! GenericTableViewCell
         switch (segmentControl.selectedSegmentIndex){
         case 0:
-            cell.configureCharacterFavorite(characterDataModel: characterFavoriteService.getFavorite(with: indexPath.row))
+            cell.configureCharacter(withViewModel: characterFavoriteService.getFavorite(with: indexPath.row))
         case 1:
-            cell.configureComicFavorite(comicDataModel: comicFavoriteService.getFavorite(with: indexPath.row))
+            cell.configureComic(withViewModel: comicFavoriteService.getFavorite(with: indexPath.row))
         default:
             return UITableViewCell()
         }
@@ -82,7 +82,7 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
             boolValue(true) // pass true if you want the handler to allow the action
             if (characterFavoriteService.makeUnfavorite(forkey: key, index: indexPath.row))
             {
-                favoriteTableView.reloadData()
+                favoriteTableView.deleteRows(at: [indexPath], with: .fade)
             }
         }
         contextItem.backgroundColor =  UIColor.systemRed
