@@ -176,10 +176,10 @@
             </objects>
             <point key="canvasLocation" x="25" y="801"/>
         </scene>
-        <!--Search-->
+        <!--Favorites-->
         <scene sceneID="dEr-oK-p6l">
             <objects>
-                <viewController id="u1b-H7-oIQ" customClass="SearchViewController" customModule="Marvel_Heroes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="u1b-H7-oIQ" userLabel="Favorites" customClass="FavoriteViewController" customModule="Marvel_Heroes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sAb-YF-7oy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -222,10 +222,11 @@
                             <constraint firstItem="Np7-kE-cic" firstAttribute="bottom" secondItem="Jwq-w3-e6r" secondAttribute="bottom" id="vUW-dx-LO2"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" id="HN5-pc-aby"/>
+                    <tabBarItem key="tabBarItem" title="Search" id="HN5-pc-aby" userLabel="Favorites"/>
                     <connections>
-                        <outlet property="searchTableView" destination="Np7-kE-cic" id="JN3-bQ-0Gs"/>
+                        <outlet property="favoriteTableView" destination="Np7-kE-cic" id="JN3-bQ-0Gs"/>
                         <outlet property="segmentControl" destination="lL3-n6-MK1" id="tnt-KN-tEj"/>
+                        <segue destination="XR9-kc-sr4" kind="show" identifier="details" id="AR8-e7-uJ4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xby-aT-kNG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -298,7 +299,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="lSF-ZE-l83"/>
+        <segue reference="AR8-e7-uJ4"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">

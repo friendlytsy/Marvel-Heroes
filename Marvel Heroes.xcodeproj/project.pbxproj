@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F911422F2738246100542367 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F911422E2738246100542367 /* SearchViewController.swift */; };
+		F911422F2738246100542367 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F911422E2738246100542367 /* FavoriteViewController.swift */; };
 		F9192E112743B7D00080FC29 /* CharacterSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9192E102743B7D00080FC29 /* CharacterSearchService.swift */; };
 		F9192E132743BB660080FC29 /* ComicSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9192E122743BB660080FC29 /* ComicSearchService.swift */; };
 		F9192E152743BE970080FC29 /* ComicFavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9192E142743BE970080FC29 /* ComicFavoriteService.swift */; };
@@ -54,7 +54,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F911422E2738246100542367 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		F911422E2738246100542367 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		F9192E102743B7D00080FC29 /* CharacterSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSearchService.swift; sourceTree = "<group>"; };
 		F9192E122743BB660080FC29 /* ComicSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicSearchService.swift; sourceTree = "<group>"; };
 		F9192E142743BE970080FC29 /* ComicFavoriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicFavoriteService.swift; sourceTree = "<group>"; };
@@ -256,7 +256,7 @@
 				F9D7F2EF26F8620100BF37C7 /* ItemDescriptionViewController.swift */,
 				F9FAD2C726EA0A5900D10FB9 /* CharacterViewController.swift */,
 				F978E48F26F12F0A00CEF509 /* ComicsViewController.swift */,
-				F911422E2738246100542367 /* SearchViewController.swift */,
+				F911422E2738246100542367 /* FavoriteViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -376,7 +376,7 @@
 				F985BB2B27033FA100742139 /* UrlSchema.swift in Sources */,
 				F9604B27270C1B0B0056BF0D /* GenericTableViewCellModel.swift in Sources */,
 				F95E39F826FCF9E9005C2356 /* UIFonts.swift in Sources */,
-				F911422F2738246100542367 /* SearchViewController.swift in Sources */,
+				F911422F2738246100542367 /* FavoriteViewController.swift in Sources */,
 				F9DAE1DF273BFBAB00E72111 /* ComicDataModelFactory.swift in Sources */,
 				F985BB2D27033FCA00742139 /* UrlHost.swift in Sources */,
 				F923B5DD26DE209C003F431B /* LoginViewController.swift in Sources */,

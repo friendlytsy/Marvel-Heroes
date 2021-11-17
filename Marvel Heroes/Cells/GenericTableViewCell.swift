@@ -26,6 +26,32 @@ class GenericTableViewCell: UITableViewCell {
     }
     
     // - SOMETHING TO IMPROVE
+    func configureComicFavorite(comicDataModel: ComicDataModel){
+        let url = URL(string: (comicDataModel.thumbnail)!)
+        DispatchQueue.main.async {
+                self.itemImage.kf.setImage(with: url)
+            }
+            //DispatchQueue.async(self.itemImage.kf.setImage(with: url))
+        itemNameLabel.text = comicDataModel.title
+        itemDescriptionLabel.text = comicDataModel.comicDescription
+        
+        itemNameLabel.font = UIFont.regular
+        itemDescriptionLabel.font = UIFont.light
+    }
+    
+    func configureCharacterFavorite(characterDataModel: CharacterDataModel){
+        let url = URL(string: (characterDataModel.thumbnail)!)
+        DispatchQueue.main.async {
+                self.itemImage.kf.setImage(with: url)
+            }
+            //DispatchQueue.async(self.itemImage.kf.setImage(with: url))
+        itemNameLabel.text = characterDataModel.name
+        itemDescriptionLabel.text = characterDataModel.charDescription
+        
+        itemNameLabel.font = UIFont.regular
+        itemDescriptionLabel.font = UIFont.light
+    }
+    
     func configureCharacterSearchResult(result character: Character) {
         let url = URL(string: (character.thumbnail?.url?.absoluteString)!)
         DispatchQueue.main.async {
@@ -34,6 +60,9 @@ class GenericTableViewCell: UITableViewCell {
             //DispatchQueue.async(self.itemImage.kf.setImage(with: url))
         itemNameLabel.text = character.name
         itemDescriptionLabel.text = character.description
+        
+        itemNameLabel.font = UIFont.regular
+        itemDescriptionLabel.font = UIFont.light
     }
     
     func configureComicSearchResult(result comic: Comic) {
@@ -44,6 +73,9 @@ class GenericTableViewCell: UITableViewCell {
             //DispatchQueue.async(self.itemImage.kf.setImage(with: url))
         itemNameLabel.text = comic.title
         itemDescriptionLabel.text = comic.description
+        
+        itemNameLabel.font = UIFont.regular
+        itemDescriptionLabel.font = UIFont.light
     }
     
     func configureCharacter(withViewModel viewModel: CharacterDataModel) {
