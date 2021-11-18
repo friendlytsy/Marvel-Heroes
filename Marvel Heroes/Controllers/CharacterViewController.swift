@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import FirebaseAnalytics
 
 class CharacterViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate {
     
@@ -44,13 +45,16 @@ class CharacterViewController: UIViewController, UISearchBarDelegate, UITableVie
         definesPresentationContext = true
         searchController.searchBar.delegate = self
         characterTableView.tableHeaderView = searchController.searchBar
+        
+        // - Analytics
+        FirebaseAnalytics.Analytics.logEvent("character_screen_viewed", parameters: [
+            AnalyticsParameterScreenName: "characters-tab"])
     }
     
     // Favorite slider
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         var searchActive = false
         if (searchController.searchBar.text != "") {searchActive = true}
-        
         let contextItem = UIContextualAction(style: .normal, title: "Favorite") { [self] (contextualAction, view, boolValue) in
             boolValue(true) // pass true if you want the handler to allow the action
             if (!(characterFavoriteService.makeFavorite(isSearch: searchActive, characterDataModel: characterDataModel!, index: indexPath.row)))

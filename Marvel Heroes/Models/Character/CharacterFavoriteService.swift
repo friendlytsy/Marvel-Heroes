@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import Firebase
 
 class CharacterFavoriteService{
     func makeFavorite(isSearch: Bool, characterDataModel: Results<CharacterDataModel>, index: Int) -> Bool{

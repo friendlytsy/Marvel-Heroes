@@ -26,32 +26,6 @@ class GenericTableViewCell: UITableViewCell {
     }
     
     // - SOMETHING TO IMPROVE
-    func configureComicFavorite(comicDataModel: ComicDataModel){
-        let url = URL(string: (comicDataModel.thumbnail)!)
-        DispatchQueue.main.async {
-                self.itemImage.kf.setImage(with: url)
-            }
-            //DispatchQueue.async(self.itemImage.kf.setImage(with: url))
-        itemNameLabel.text = comicDataModel.title
-        itemDescriptionLabel.text = comicDataModel.comicDescription
-        
-        itemNameLabel.font = UIFont.regular
-        itemDescriptionLabel.font = UIFont.light
-    }
-    
-    func configureCharacterFavorite(characterDataModel: CharacterDataModel){
-        let url = URL(string: (characterDataModel.thumbnail)!)
-        DispatchQueue.main.async {
-                self.itemImage.kf.setImage(with: url)
-            }
-            //DispatchQueue.async(self.itemImage.kf.setImage(with: url))
-        itemNameLabel.text = characterDataModel.name
-        itemDescriptionLabel.text = characterDataModel.charDescription
-        
-        itemNameLabel.font = UIFont.regular
-        itemDescriptionLabel.font = UIFont.light
-    }
-    
     func configureCharacterSearchResult(result character: Character) {
         let url = URL(string: (character.thumbnail?.url?.absoluteString)!)
         DispatchQueue.main.async {

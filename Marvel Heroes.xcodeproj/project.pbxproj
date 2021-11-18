@@ -26,6 +26,10 @@
 		F951BDE0271330B300F63C66 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = F951BDDF271330B300F63C66 /* Image.swift */; };
 		F95E39F826FCF9E9005C2356 /* UIFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95E39F726FCF9E9005C2356 /* UIFonts.swift */; };
 		F9604B27270C1B0B0056BF0D /* GenericTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9604B26270C1B0B0056BF0D /* GenericTableViewCellModel.swift */; };
+		F96F5350274633F500E3B6AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F96F534F274633F500E3B6AC /* GoogleService-Info.plist */; };
+		F96F535327463A8A00E3B6AC /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F96F535227463A8A00E3B6AC /* FirebaseAnalytics */; };
+		F96F535527463A8A00E3B6AC /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = F96F535427463A8A00E3B6AC /* FirebaseCrashlytics */; };
+		F96F535727463BAA00E3B6AC /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96F535627463BAA00E3B6AC /* AnalyticsManager.swift */; };
 		F978E49026F12F0A00CEF509 /* ComicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F978E48F26F12F0A00CEF509 /* ComicsViewController.swift */; };
 		F985BB2527033CC200742139 /* UrlPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = F985BB2427033CC200742139 /* UrlPath.swift */; };
 		F985BB2927033F7000742139 /* UrlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F985BB2827033F7000742139 /* UrlBuilder.swift */; };
@@ -73,6 +77,8 @@
 		F951BDDF271330B300F63C66 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		F95E39F726FCF9E9005C2356 /* UIFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFonts.swift; sourceTree = "<group>"; };
 		F9604B26270C1B0B0056BF0D /* GenericTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableViewCellModel.swift; sourceTree = "<group>"; };
+		F96F534F274633F500E3B6AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F96F535627463BAA00E3B6AC /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		F978E48F26F12F0A00CEF509 /* ComicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicsViewController.swift; sourceTree = "<group>"; };
 		F985BB2427033CC200742139 /* UrlPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlPath.swift; sourceTree = "<group>"; };
 		F985BB2827033F7000742139 /* UrlBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlBuilder.swift; sourceTree = "<group>"; };
@@ -106,6 +112,8 @@
 			files = (
 				F985C437271C1B5D00394C81 /* Kingfisher in Frameworks */,
 				F951BDD627132E6800F63C66 /* RealmSwift in Frameworks */,
+				F96F535527463A8A00E3B6AC /* FirebaseCrashlytics in Frameworks */,
+				F96F535327463A8A00E3B6AC /* FirebaseAnalytics in Frameworks */,
 				F951BDD427132E6800F63C66 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -132,6 +140,8 @@
 		F923B5D726DE209C003F431B /* Marvel Heroes */ = {
 			isa = PBXGroup;
 			children = (
+				F96F535627463BAA00E3B6AC /* AnalyticsManager.swift */,
+				F96F534F274633F500E3B6AC /* GoogleService-Info.plist */,
 				F985C42F271C08B000394C81 /* Network */,
 				F951BDCA2712F4DB00F63C66 /* Tools */,
 				F9BF5BFF27031305005D66DF /* Controllers */,
@@ -300,6 +310,7 @@
 				F923B5D126DE209C003F431B /* Sources */,
 				F923B5D226DE209C003F431B /* Frameworks */,
 				F923B5D326DE209C003F431B /* Resources */,
+				F973B84E2746755300890937 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -310,6 +321,8 @@
 				F951BDD327132E6800F63C66 /* Realm */,
 				F951BDD527132E6800F63C66 /* RealmSwift */,
 				F985C436271C1B5D00394C81 /* Kingfisher */,
+				F96F535227463A8A00E3B6AC /* FirebaseAnalytics */,
+				F96F535427463A8A00E3B6AC /* FirebaseCrashlytics */,
 			);
 			productName = "Marvel Heroes";
 			productReference = F923B5D526DE209C003F431B /* Marvel Heroes.app */;
@@ -341,6 +354,7 @@
 			packageReferences = (
 				F951BDD227132E6800F63C66 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				F985C435271C1B5D00394C81 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				F96F535127463A8A00E3B6AC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = F923B5D626DE209C003F431B /* Products */;
 			projectDirPath = "";
@@ -358,12 +372,35 @@
 			files = (
 				F923B5E526DE209F003F431B /* LaunchScreen.storyboard in Resources */,
 				F923B5E226DE209F003F431B /* Assets.xcassets in Resources */,
+				F96F5350274633F500E3B6AC /* GoogleService-Info.plist in Resources */,
 				F923B5E026DE209C003F431B /* Main.storyboard in Resources */,
 				F9FAD2C626EA076300D10FB9 /* GenericTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F973B84E2746755300890937 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${BUILD_DIR%Build/*}SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F923B5D126DE209C003F431B /* Sources */ = {
@@ -402,6 +439,7 @@
 				F9DAE1DD273BB4F000E72111 /* ComicService.swift in Sources */,
 				F951BDD827132F4B00F63C66 /* Character.swift in Sources */,
 				F9192E132743BB660080FC29 /* ComicSearchService.swift in Sources */,
+				F96F535727463BAA00E3B6AC /* AnalyticsManager.swift in Sources */,
 				F9192E172743BEE60080FC29 /* CharacterFavoriteService.swift in Sources */,
 				F923B5DB26DE209C003F431B /* SceneDelegate.swift in Sources */,
 				F9DDEA4D271372EE00064115 /* ComicDataContainer.swift in Sources */,
@@ -467,7 +505,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -620,6 +658,14 @@
 				version = 10.17.0;
 			};
 		};
+		F96F535127463A8A00E3B6AC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 		F985C435271C1B5D00394C81 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -640,6 +686,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F951BDD227132E6800F63C66 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
+		};
+		F96F535227463A8A00E3B6AC /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F96F535127463A8A00E3B6AC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		F96F535427463A8A00E3B6AC /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F96F535127463A8A00E3B6AC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 		F985C436271C1B5D00394C81 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class FavoriteViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -36,6 +37,11 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         favoriteTableView.register(nib, forCellReuseIdentifier: "GenericTableViewCell")
         
         favoriteTableView.reloadData()
+        
+        // - Analytics
+        FirebaseAnalytics.Analytics.logEvent("favorite_screen_viewed", parameters: [
+            AnalyticsParameterScreenName: "favorites-tab"])
+
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -91,7 +91,7 @@
                             <constraint firstItem="FBI-hK-Ufw" firstAttribute="bottom" secondItem="pcn-ip-6hz" secondAttribute="bottom" id="qCj-vs-OqN"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Heros" id="9Vq-fn-eMv" userLabel="Characters"/>
+                    <tabBarItem key="tabBarItem" title="Heroes" image="person" catalog="system" id="9Vq-fn-eMv" userLabel="Characters"/>
                     <connections>
                         <outlet property="characterTableView" destination="FBI-hK-Ufw" id="d5i-x0-oYp"/>
                         <segue destination="XR9-kc-sr4" kind="show" identifier="segueCharacter" id="24G-ub-sg6"/>
@@ -170,7 +170,7 @@
                         <viewLayoutGuide key="safeArea" id="x0m-Oh-LWO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" id="SPy-vX-9ba"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="wrench.and.screwdriver" catalog="system" id="SPy-vX-9ba"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ltm-ci-BSh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -184,11 +184,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Np7-kE-cic" userLabel="Search Table View">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Np7-kE-cic" userLabel="Favorite Table View">
                                 <rect key="frame" x="0.0" y="83" width="414" height="730"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="favoritesCell" id="krZ-ju-xUD" userLabel="searchCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="favoritesCell" id="krZ-ju-xUD" userLabel="favoriteCell">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="krZ-ju-xUD" id="YyS-oa-5XP">
@@ -222,7 +222,7 @@
                             <constraint firstItem="Np7-kE-cic" firstAttribute="bottom" secondItem="Jwq-w3-e6r" secondAttribute="bottom" id="vUW-dx-LO2"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" id="HN5-pc-aby" userLabel="Favorites"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="star" catalog="system" id="HN5-pc-aby" userLabel="Favorites"/>
                     <connections>
                         <outlet property="favoriteTableView" destination="Np7-kE-cic" id="JN3-bQ-0Gs"/>
                         <outlet property="segmentControl" destination="lL3-n6-MK1" id="tnt-KN-tEj"/>
@@ -267,7 +267,7 @@
                             <constraint firstItem="RT1-ly-kM7" firstAttribute="trailing" secondItem="0h3-Ey-Hd7" secondAttribute="trailing" id="yCh-4r-aDm"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Comics" id="Udi-NY-tzV"/>
+                    <tabBarItem key="tabBarItem" title="Comics" image="book" catalog="system" id="Udi-NY-tzV"/>
                     <connections>
                         <outlet property="comicsTableView" destination="RT1-ly-kM7" id="66Q-gV-zjd"/>
                         <segue destination="XR9-kc-sr4" kind="show" identifier="segueComics" id="lSF-ZE-l83"/>
@@ -299,9 +299,13 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="AR8-e7-uJ4"/>
+        <segue reference="lSF-ZE-l83"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="book" catalog="system" width="128" height="99"/>
+        <image name="person" catalog="system" width="128" height="117"/>
+        <image name="star" catalog="system" width="128" height="116"/>
+        <image name="wrench.and.screwdriver" catalog="system" width="128" height="120"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import Firebase
 
 class ComicsViewController: UIViewController, UITableViewDelegate, UISearchBarDelegate {
     
@@ -43,6 +44,11 @@ class ComicsViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         definesPresentationContext = true
         searchController.searchBar.delegate = self
         comicsTableView.tableHeaderView = searchController.searchBar
+        
+        // - Analytics
+        FirebaseAnalytics.Analytics.logEvent("comic_screen_viewed", parameters: [
+            AnalyticsParameterScreenName: "comics-tab"])
+
     }
     
     // Favorite slider
