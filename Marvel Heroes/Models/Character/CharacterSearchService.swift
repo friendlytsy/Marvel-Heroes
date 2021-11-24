@@ -9,13 +9,12 @@ import Foundation
 
 class CharacterSearchService {
     
-    func searchCharacter(by name: String) {
+    func searchCharacter(by name: String, onComplete: @escaping() -> Void) {
         // Access Shared Defaults Object
         let userDefaults = UserDefaults.standard
         let urlBuilder = UrlBuilder()
         guard let url = URL(string: urlBuilder.getUrl(UrlPath.characteresListUrl, 0, queryCharacter: name)) else { return print("ERROR") }
         var characters: [Character] = []
-        let semaphore = DispatchSemaphore(value: 0)
         DownloadManager.shared.downloadData(urlPath: url.absoluteString) { data in
             do {
                 let decoder = JSONDecoder()
@@ -24,20 +23,18 @@ class CharacterSearchService {
                 try getData.data?.results?.forEach{item in
                     characters.append(item)
                 }
-                
                 // - Encode to save at UserDefaults
                 let encoder = JSONEncoder()
                 do {
                     let encodedCharacters = try encoder.encode(characters)
                     userDefaults.set(encodedCharacters, forKey: "characterSearch")
                 }
-                semaphore.signal()
             }
             catch {
                 print(error.localizedDescription)
             }
+            onComplete()
         }
-        semaphore.wait()
     }
     
     func getSearchCount() -> Int {
@@ -57,5 +54,4 @@ class CharacterSearchService {
         
         return decoded![index]
     }
-    
 }

@@ -29,4 +29,24 @@ class ComicService {
             }
         }
     }
+    
+    func prepareItemForSegue(for comicDataModel: ComicDataModel? = nil, where index: Int = 0) -> [String: String] {
+        
+        let comicSearchService = ComicSearchService()
+        
+        var item = ["id":"", "name":"", "description":"","thumbnail":""]
+        // - if a search
+        if (comicDataModel != nil) {
+            item["name"] = comicDataModel?.title
+            item["description"] = comicDataModel?.comicDescription
+            item["thumbnail"] = comicDataModel?.thumbnail
+        } else {
+            item["name"] = comicSearchService.getSearchItems(index: index).title
+            item["description"] = comicSearchService.getSearchItems(index: index).description
+            item["thumbnail"] = comicSearchService.getSearchItems(index: index).thumbnail?.url?.absoluteString
+        }
+        
+        return item
+    }
+
 }

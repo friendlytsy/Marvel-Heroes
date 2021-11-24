@@ -160,21 +160,35 @@
             </objects>
             <point key="canvasLocation" x="2569.5652173913045" y="77.678571428571431"/>
         </scene>
-        <!--Settings-->
+        <!--Settings View Controller-->
         <scene sceneID="lG6-Wa-Kli">
             <objects>
-                <viewController id="8b9-zz-Bax" sceneMemberID="viewController">
+                <viewController id="8b9-zz-Bax" userLabel="Settings View Controller" customClass="SettingsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5wq-vF-JnI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qd6-tG-z1h">
+                                <rect key="frame" x="174" y="432.5" width="66.5" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Crash!"/>
+                                <connections>
+                                    <action selector="crashApp:" destination="8b9-zz-Bax" eventType="touchUpInside" id="fOc-J9-osc"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="x0m-Oh-LWO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Qd6-tG-z1h" firstAttribute="centerX" secondItem="5wq-vF-JnI" secondAttribute="centerX" id="16W-mk-sYe"/>
+                            <constraint firstItem="Qd6-tG-z1h" firstAttribute="centerY" secondItem="5wq-vF-JnI" secondAttribute="centerY" id="9b8-wq-VHf"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="wrench.and.screwdriver" catalog="system" id="SPy-vX-9ba"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ltm-ci-BSh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="25" y="801"/>
+            <point key="canvasLocation" x="24.637681159420293" y="800.89285714285711"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="dEr-oK-p6l">
@@ -299,7 +313,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="lSF-ZE-l83"/>
+        <segue reference="24G-ub-sg6"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="book" catalog="system" width="128" height="99"/>

@@ -84,13 +84,9 @@ class ComicsViewController: UIViewController, UITableViewDelegate, UISearchBarDe
             let vc = segue.destination as? ItemDescriptionViewController
             // - NEED TO RE DO HERE
             if (searchController.searchBar.text != "") {
-                vc!.item = [String(comicSearchService.getSearchItems(index: comicsTableView.indexPathForSelectedRow!.row).title!),
-                            String((comicSearchService.getSearchItems(index: comicsTableView.indexPathForSelectedRow!.row).description) ?? ""),
-                            String((comicSearchService.getSearchItems(index: comicsTableView.indexPathForSelectedRow!.row).thumbnail?.url?.absoluteString)!)]
+                vc!.item = comicService.prepareItemForSegue(for: nil, where: comicsTableView.indexPathForSelectedRow!.row)
             } else {
-                vc!.item = [String((comicDataModel?[comicsTableView.indexPathForSelectedRow!.row].title)!),
-                            String((comicDataModel?[comicsTableView.indexPathForSelectedRow!.row].comicDescription) ?? ""),
-                            String((comicDataModel?[comicsTableView.indexPathForSelectedRow!.row].thumbnail)!)]
+                vc!.item = comicService.prepareItemForSegue(for: comicDataModel?[comicsTableView.indexPathForSelectedRow!.row])
             }
             comicsTableView.deselectRow(at: comicsTableView.indexPathForSelectedRow!, animated: true) // Deselect row
         }

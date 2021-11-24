@@ -10,9 +10,8 @@ import Foundation
 import Firebase
 
 class ItemDescriptionViewController: UIViewController {
-        
-    let analyticsManager = AnalyticsManager()
-    var item: Array<String> = Array()
+    
+    var item = ["id":"", "name":"", "description":"","thumbnail":""]
     
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var itemNameLabel: UILabel!
@@ -21,16 +20,14 @@ class ItemDescriptionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-            if let url = URL( string: item[2]) {
-                DispatchQueue.main.async { self.itemImage.kf.setImage(with: url)}
-            }
-            itemNameLabel.text = item[0]
-            itemDescriptionTextField.text = item[1]
-        
-        FirebaseAnalytics.Analytics.logEvent("detail_screen_viewed", parameters: [
-            AnalyticsParameterScreenName: "item_detail_view",
-            "item_name": item[0]
-        ])
-        
+        if let url = URL( string: item["thumbnail"] ?? "") {
+            DispatchQueue.main.async { self.itemImage.kf.setImage(with: url)}
         }
+        itemNameLabel.text = item["name"]
+        if item["description"] == "" {
+            itemDescriptionTextField.text = "Sorry, there is no description here :("
+        } else {
+            itemDescriptionTextField.text = item["description"]
+        }
+    }
 }

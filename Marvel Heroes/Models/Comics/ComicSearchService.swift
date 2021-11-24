@@ -9,13 +9,12 @@ import Foundation
 
 class ComicSearchService {
     
-    func searchComic(by name: String) {
+    func searchComic(by name: String, onComplete: @escaping() -> Void) {
         // Access Shared Defaults Object
         let userDefaults = UserDefaults.standard
         let urlBuilder = UrlBuilder()
         guard let url = URL(string: urlBuilder.getUrl(UrlPath.comicsListUrl, 0, queryComic: name)) else { return print("ERROR") }
         var comics: [Comic] = []
-        let semaphore = DispatchSemaphore(value: 0)
         DownloadManager.shared.downloadData(urlPath: url.absoluteString) { data in
             do {
                 let decoder = JSONDecoder()
@@ -31,13 +30,12 @@ class ComicSearchService {
                     let encodedCharacters = try encoder.encode(comics)
                     userDefaults.set(encodedCharacters, forKey: "comicSearch")
                 }
-                semaphore.signal()
             }
             catch {
                 print(error.localizedDescription)
             }
+            onComplete()
         }
-        semaphore.wait()
     }
     
     func getSearchCount() -> Int {

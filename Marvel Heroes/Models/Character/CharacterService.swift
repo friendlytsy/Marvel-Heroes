@@ -29,4 +29,23 @@ class CharacterService {
             }
         }
     }
+    
+    func prepareItemForSegue(for characterDataModel: CharacterDataModel? = nil, where index: Int = 0) -> [String: String] {
+        
+        let characterSearchService = CharacterSearchService()
+        
+        var item = ["id":"", "name":"", "description":"","thumbnail":""]
+        // - if a search
+        if (characterDataModel != nil) {
+            item["name"] = characterDataModel?.name
+            item["description"] = characterDataModel?.charDescription
+            item["thumbnail"] = characterDataModel?.thumbnail
+        } else {
+            item["name"] = characterSearchService.getSearchItems(index: index).name
+            item["description"] = characterSearchService.getSearchItems(index: index).description
+            item["thumbnail"] = characterSearchService.getSearchItems(index: index).thumbnail?.url?.absoluteString
+        }
+        
+        return item
+    }
 }

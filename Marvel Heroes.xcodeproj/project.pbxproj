@@ -29,7 +29,6 @@
 		F96F5350274633F500E3B6AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F96F534F274633F500E3B6AC /* GoogleService-Info.plist */; };
 		F96F535327463A8A00E3B6AC /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F96F535227463A8A00E3B6AC /* FirebaseAnalytics */; };
 		F96F535527463A8A00E3B6AC /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = F96F535427463A8A00E3B6AC /* FirebaseCrashlytics */; };
-		F96F535727463BAA00E3B6AC /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96F535627463BAA00E3B6AC /* AnalyticsManager.swift */; };
 		F978E49026F12F0A00CEF509 /* ComicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F978E48F26F12F0A00CEF509 /* ComicsViewController.swift */; };
 		F985BB2527033CC200742139 /* UrlPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = F985BB2427033CC200742139 /* UrlPath.swift */; };
 		F985BB2927033F7000742139 /* UrlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F985BB2827033F7000742139 /* UrlBuilder.swift */; };
@@ -55,6 +54,7 @@
 		F9FAD2C526EA076300D10FB9 /* GenericTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAD2C326EA076300D10FB9 /* GenericTableViewCell.swift */; };
 		F9FAD2C626EA076300D10FB9 /* GenericTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9FAD2C426EA076300D10FB9 /* GenericTableViewCell.xib */; };
 		F9FAD2C826EA0A5900D10FB9 /* CharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAD2C726EA0A5900D10FB9 /* CharacterViewController.swift */; };
+		F9FC9268274826AD00820C8C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FC9267274826AD00820C8C /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,7 +78,6 @@
 		F95E39F726FCF9E9005C2356 /* UIFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFonts.swift; sourceTree = "<group>"; };
 		F9604B26270C1B0B0056BF0D /* GenericTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableViewCellModel.swift; sourceTree = "<group>"; };
 		F96F534F274633F500E3B6AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		F96F535627463BAA00E3B6AC /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		F978E48F26F12F0A00CEF509 /* ComicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicsViewController.swift; sourceTree = "<group>"; };
 		F985BB2427033CC200742139 /* UrlPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlPath.swift; sourceTree = "<group>"; };
 		F985BB2827033F7000742139 /* UrlBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlBuilder.swift; sourceTree = "<group>"; };
@@ -103,6 +102,7 @@
 		F9FAD2C326EA076300D10FB9 /* GenericTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableViewCell.swift; sourceTree = "<group>"; };
 		F9FAD2C426EA076300D10FB9 /* GenericTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericTableViewCell.xib; sourceTree = "<group>"; };
 		F9FAD2C726EA0A5900D10FB9 /* CharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewController.swift; sourceTree = "<group>"; };
+		F9FC9267274826AD00820C8C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,7 +140,6 @@
 		F923B5D726DE209C003F431B /* Marvel Heroes */ = {
 			isa = PBXGroup;
 			children = (
-				F96F535627463BAA00E3B6AC /* AnalyticsManager.swift */,
 				F96F534F274633F500E3B6AC /* GoogleService-Info.plist */,
 				F985C42F271C08B000394C81 /* Network */,
 				F951BDCA2712F4DB00F63C66 /* Tools */,
@@ -267,6 +266,7 @@
 				F9FAD2C726EA0A5900D10FB9 /* CharacterViewController.swift */,
 				F978E48F26F12F0A00CEF509 /* ComicsViewController.swift */,
 				F911422E2738246100542367 /* FavoriteViewController.swift */,
+				F9FC9267274826AD00820C8C /* SettingsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -412,6 +412,7 @@
 				F9DDEA4B2713710800064115 /* ComicDataWrapper.swift in Sources */,
 				F985BB2B27033FA100742139 /* UrlSchema.swift in Sources */,
 				F9604B27270C1B0B0056BF0D /* GenericTableViewCellModel.swift in Sources */,
+				F9FC9268274826AD00820C8C /* SettingsViewController.swift in Sources */,
 				F95E39F826FCF9E9005C2356 /* UIFonts.swift in Sources */,
 				F911422F2738246100542367 /* FavoriteViewController.swift in Sources */,
 				F9DAE1DF273BFBAB00E72111 /* ComicDataModelFactory.swift in Sources */,
@@ -439,7 +440,6 @@
 				F9DAE1DD273BB4F000E72111 /* ComicService.swift in Sources */,
 				F951BDD827132F4B00F63C66 /* Character.swift in Sources */,
 				F9192E132743BB660080FC29 /* ComicSearchService.swift in Sources */,
-				F96F535727463BAA00E3B6AC /* AnalyticsManager.swift in Sources */,
 				F9192E172743BEE60080FC29 /* CharacterFavoriteService.swift in Sources */,
 				F923B5DB26DE209C003F431B /* SceneDelegate.swift in Sources */,
 				F9DDEA4D271372EE00064115 /* ComicDataContainer.swift in Sources */,

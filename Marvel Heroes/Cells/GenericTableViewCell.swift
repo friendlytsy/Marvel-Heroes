@@ -33,8 +33,11 @@ class GenericTableViewCell: UITableViewCell {
             }
             //DispatchQueue.async(self.itemImage.kf.setImage(with: url))
         itemNameLabel.text = character.name
-        itemDescriptionLabel.text = character.description
-        
+        if character.description == "" {
+            itemDescriptionLabel.text = "Sorry, there is no description here :("
+        } else {
+            itemDescriptionLabel.text = character.description
+        }
         itemNameLabel.font = UIFont.regular
         itemDescriptionLabel.font = UIFont.light
     }
@@ -46,7 +49,11 @@ class GenericTableViewCell: UITableViewCell {
             }
             //DispatchQueue.async(self.itemImage.kf.setImage(with: url))
         itemNameLabel.text = comic.title
-        itemDescriptionLabel.text = comic.description
+        if comic.description == "" {
+            itemDescriptionLabel.text = "Sorry, there is no description here :("
+        } else {
+            itemDescriptionLabel.text = comic.description
+        }
         
         itemNameLabel.font = UIFont.regular
         itemDescriptionLabel.font = UIFont.light
@@ -60,9 +67,13 @@ class GenericTableViewCell: UITableViewCell {
             }
             //DispatchQueue.async(self.itemImage.kf.setImage(with: url))
         }
-        
+
         itemNameLabel.text = viewModel.name
-        itemDescriptionLabel.text = viewModel.charDescription
+        if viewModel.charDescription == "" {
+            itemDescriptionLabel.text = "Sorry, there is no description here :("
+        } else {
+            itemDescriptionLabel.text = viewModel.charDescription
+        }
 
         itemNameLabel.font = UIFont.regular
         itemDescriptionLabel.font = UIFont.light
@@ -76,7 +87,11 @@ class GenericTableViewCell: UITableViewCell {
             }
         }
         itemNameLabel.text = viewModel.title
-        itemDescriptionLabel.text = viewModel.comicDescription
+        if viewModel.comicDescription == "" {
+            itemDescriptionLabel.text = "Sorry, there is no description here :("
+        } else {
+            itemDescriptionLabel.text = viewModel.comicDescription
+        }
 
         itemNameLabel.font = UIFont.regular
         itemDescriptionLabel.font = UIFont.light

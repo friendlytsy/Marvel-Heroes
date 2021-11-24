@@ -38,10 +38,15 @@ extension CharacterViewController{
 }
 
 extension CharacterViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {}
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if (searchController.searchBar.text != "") {
-            characterSearchService.searchCharacter(by: searchController.searchBar.text ?? "")
-            characterTableView.reloadData()
+            characterSearchService.searchCharacter(by: searchController.searchBar.text ?? "") {
+                DispatchQueue.main.async {
+                    self.characterTableView.reloadData()
+                }
+            }
         }
     }
     

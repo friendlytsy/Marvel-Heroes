@@ -41,7 +41,6 @@ class CharacterFavoriteService{
         let userDefaults = UserDefaults.standard
         var favorites: [String] = userDefaults.stringArray(forKey: forkey) ?? []
         favorites.remove(at: index)
-        //favorites.removeAll { $0 == String(characterDataModel.id!) }
         userDefaults.set(favorites, forKey: forkey)
         
         return true
@@ -64,5 +63,18 @@ class CharacterFavoriteService{
     
     func getFavoriteCount(of key: String) -> Int {
         return UserDefaults.standard.stringArray(forKey: key)?.count ?? 0
+    }
+    
+    func prepareItemForSegue(where index: Int = 0) -> [String: String] {
+        
+        let characterFavoriteService = CharacterFavoriteService()
+        
+        var item = ["id":"", "name":"", "description":"","thumbnail":""]
+        
+        item["name"] = characterFavoriteService.getFavorite(with: index).name
+        item["description"] = characterFavoriteService.getFavorite(with: index).charDescription
+        item["thumbnail"] = characterFavoriteService.getFavorite(with: index).thumbnail
+        
+        return item
     }
 }

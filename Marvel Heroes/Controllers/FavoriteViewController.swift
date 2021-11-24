@@ -107,13 +107,9 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
             // - NEED TO RE DO HERE
             switch (segmentControl.selectedSegmentIndex){
             case 0:
-                vc!.item = [String(characterFavoriteService.getFavorite(with: favoriteTableView.indexPathForSelectedRow!.row).name!),
-                            String(characterFavoriteService.getFavorite(with: favoriteTableView.indexPathForSelectedRow!.row).charDescription!),
-                            String(characterFavoriteService.getFavorite(with: favoriteTableView.indexPathForSelectedRow!.row).thumbnail!)]
+                vc!.item = characterFavoriteService.prepareItemForSegue(where: favoriteTableView.indexPathForSelectedRow!.row)
             case 1:
-                vc!.item = [String(comicFavoriteService.getFavorite(with: favoriteTableView.indexPathForSelectedRow!.row).title!),
-                            String(comicFavoriteService.getFavorite(with: favoriteTableView.indexPathForSelectedRow!.row).comicDescription!),
-                            String(comicFavoriteService.getFavorite(with: favoriteTableView.indexPathForSelectedRow!.row).thumbnail!)]
+                vc!.item = comicFavoriteService.prepareItemForSegue(where: favoriteTableView.indexPathForSelectedRow!.row)
             default:
                 break
             }

@@ -63,4 +63,17 @@ class ComicFavoriteService{
     func getFavoriteCount(of key: String) -> Int {
         return UserDefaults.standard.stringArray(forKey: key)?.count ?? 0
     }
+    
+    func prepareItemForSegue(where index: Int = 0) -> [String: String] {
+        
+        let comicFavoriteService = ComicFavoriteService()
+        
+        var item = ["id":"", "name":"", "description":"","thumbnail":""]
+        
+        item["name"] = comicFavoriteService.getFavorite(with: index).title
+        item["description"] = comicFavoriteService.getFavorite(with: index).comicDescription
+        item["thumbnail"] = comicFavoriteService.getFavorite(with: index).thumbnail
+        
+        return item
+    }
 }

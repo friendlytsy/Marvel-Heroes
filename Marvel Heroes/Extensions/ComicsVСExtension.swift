@@ -37,13 +37,17 @@ extension ComicsViewController {
 }
 
 extension ComicsViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {}
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if (searchController.searchBar.text != "") {
-            comicSearchService.searchComic(by: searchController.searchBar.text ?? "")
-            comicsTableView.reloadData()
+            comicSearchService.searchComic(by: searchController.searchBar.text ?? "") {
+                DispatchQueue.main.async { [self] in
+                    comicsTableView.reloadData()
+                }
+            }
         }
     }
-    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         observeRealm()
     }

@@ -19,12 +19,12 @@ class ComicDataModelFactory {
         return comic
     }
     
-    func updateComicDataModel(from networkModel: Comic, to realModel: ComicDataModel) -> ComicDataModel {
-        // - Put new vaulues to DataModel incase of changes. This helps to avoid extra tableView reload.
-        if (realModel.title != networkModel.title) {realModel.title = networkModel.title}
-        if (realModel.comicDescription != networkModel.description) {realModel.comicDescription = networkModel.description}
-        if (realModel.thumbnail != networkModel.thumbnail?.url?.absoluteString) {realModel.thumbnail = networkModel.thumbnail?.url?.absoluteString}
-        
-        return realModel
-    }
+//    func updateComicDataModel(from networkModel: Comic, to realModel: ComicDataModel) -> ComicDataModel {
+//        // - Put new vaulues to DataModel incase of changes. This helps to avoid extra tableView reload.
+//        if (realModel.title != networkModel.title) {realModel.title = networkModel.title}
+//        if (realModel.comicDescription != networkModel.description) {realModel.comicDescription = networkModel.description}
+//        if (realModel.thumbnail != networkModel.thumbnail?.url?.absoluteString) {realModel.thumbnail = networkModel.thumbnail?.url?.absoluteString}
+//        
+//        return realModel
+//    }
 }

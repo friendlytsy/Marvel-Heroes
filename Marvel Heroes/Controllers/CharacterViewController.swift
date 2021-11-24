@@ -84,15 +84,11 @@ class CharacterViewController: UIViewController, UISearchBarDelegate, UITableVie
             let vc = segue.destination as? ItemDescriptionViewController
             // - NEED TO RE DO HERE
             if (searchController.searchBar.text != "") {
-                vc!.item = [String(characterSearchService.getSearchItems(index: characterTableView.indexPathForSelectedRow!.row).name!),
-                            String(characterSearchService.getSearchItems(index: characterTableView.indexPathForSelectedRow!.row).description!),
-                            String((characterSearchService.getSearchItems(index: characterTableView.indexPathForSelectedRow!.row).thumbnail?.url?.absoluteString)!)]
+                vc!.item = characterService.prepareItemForSegue(for: nil, where: characterTableView.indexPathForSelectedRow!.row)
             } else {
-                vc!.item = [String((characterDataModel?[characterTableView.indexPathForSelectedRow!.row].name)!),
-                            String((characterDataModel?[characterTableView.indexPathForSelectedRow!.row].charDescription)!),
-                            String((characterDataModel?[characterTableView.indexPathForSelectedRow!.row].thumbnail)!)]
+                vc!.item = characterService.prepareItemForSegue(for: characterDataModel?[characterTableView.indexPathForSelectedRow!.row])
             }
-            characterTableView.deselectRow(at: characterTableView.indexPathForSelectedRow!, animated: true) // Deselect row
+            characterTableView.deselectRow(at: characterTableView.indexPathForSelectedRow!, animated: true)
         }
     }
 }
