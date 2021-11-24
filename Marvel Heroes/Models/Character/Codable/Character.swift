@@ -10,9 +10,9 @@ import Foundation
 struct Character {
     
     let id: Int?
-    let name: String?
-    let description: String?
-    let thumbnail: Image?
+    var name: String?
+    var description: String?
+    var thumbnail: Image?
 
     enum CodingKeys: String, CodingKey {
         case id

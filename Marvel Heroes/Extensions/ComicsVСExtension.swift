@@ -7,6 +7,8 @@
 
 import Foundation
 import RealmSwift
+import SwiftUI
+import Accelerate
 
 extension ComicsViewController {
     func observeRealm() {
@@ -14,7 +16,7 @@ extension ComicsViewController {
             guard (self?.comicsTableView) != nil else {return}
             switch changes {
             case .initial:
-                self?.comicsTableView.reloadData()
+                self!.comicsTableView.reloadData()
             case .update(_, let deletions, let insertions, let modifications):
                 self?.comicsTableView.beginUpdates()
                 self?.comicsTableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
@@ -25,5 +27,48 @@ extension ComicsViewController {
                 fatalError("\(error)")
             }
         }
+    }
+    
+    func showAlert() {
+        let alert = UIAlertController(title: "Can't add to favorite", message: "This comic already added to favorites", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+}
+
+extension ComicsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {}
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if (searchController.searchBar.text != "") {
+            comicSearchService.searchComic(by: searchController.searchBar.text ?? "") {
+                DispatchQueue.main.async { [self] in
+                    comicsTableView.reloadData()
+                }
+            }
+        }
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        observeRealm()
+    }
+}
+
+extension ComicsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return comicSearchService.getSearchCount()
+        }
+        return comicDataModel?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = comicsTableView.dequeueReusableCell(withIdentifier: "GenericTableViewCell", for: indexPath) as! GenericTableViewCell
+        
+        if (!searchController.isActive && searchController.searchBar.text == "") {
+            cell.configureComic(withViewModel: (comicDataModel?[indexPath.row])!)
+        } else {
+            cell.configureComicSearchResult(result: comicSearchService.getSearchItems(index: indexPath.row))
+        }
+        return cell
     }
 }

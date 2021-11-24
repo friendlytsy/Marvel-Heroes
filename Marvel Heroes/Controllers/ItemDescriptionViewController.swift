@@ -6,12 +6,12 @@
 //
 
 import UIKit
+import Foundation
+import Firebase
 
 class ItemDescriptionViewController: UIViewController {
-
-    var itemName = ""
-    var itemDescription = ""
-    var itemThumbnail = ""
+    
+    var item = ["id":"", "name":"", "description":"","thumbnail":""]
     
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var itemNameLabel: UILabel!
@@ -20,26 +20,14 @@ class ItemDescriptionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let url = URL( string: itemThumbnail ) {
-            DispatchQueue.main.async {
-                self.itemImage.kf.setImage(with: url)
-            }
+        if let url = URL( string: item["thumbnail"] ?? "") {
+            DispatchQueue.main.async { self.itemImage.kf.setImage(with: url)}
         }
-
-        itemNameLabel.text = itemName
-        itemDescriptionTextField.text = itemDescription
-        // Do any additional setup after loading the view.
+        itemNameLabel.text = item["name"]
+        if item["description"] == "" {
+            itemDescriptionTextField.text = "Sorry, there is no description here :("
+        } else {
+            itemDescriptionTextField.text = item["description"]
+        }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

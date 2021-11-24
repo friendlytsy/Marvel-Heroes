@@ -8,7 +8,8 @@
 import Foundation
 
 class UrlBuilder {
-    func getUrl(_ urlPath: UrlPath, _ offset: String) -> String {
+    
+    func getUrl(_ urlPath: UrlPath, _ offset: Int, queryCharacter character: String? = nil, queryComic comic: String? = nil) -> String {
         
         let cryptoHelper = CryptoHelper()
 
@@ -18,7 +19,6 @@ class UrlBuilder {
         
         let timestemp: String = String(format: "%f", Date().timeIntervalSince1970)
         let hash = cryptoHelper.getHash(ts: timestemp, apiKeyPrivate: apiKeyPrivate, apiKeyPublic: apiKeyPublic)
-
         
         var urlComponents = URLComponents()
         urlComponents.scheme = UrlSchema.https.rawValue
@@ -28,9 +28,16 @@ class UrlBuilder {
             URLQueryItem(name: "apikey", value: apiKeyPublic),
             URLQueryItem(name: "ts", value: timestemp),
             URLQueryItem(name: "hash", value: hash),
-            URLQueryItem(name: "offset", value: offset),
+            URLQueryItem(name: "offset", value: String(offset)),
             URLQueryItem(name: "limit", value: "50")
         ]
+        if (character != nil) {
+            urlComponents.queryItems?.append(URLQueryItem(name: "nameStartsWith", value: character))
+        }
+        
+        if (comic != nil) {
+            urlComponents.queryItems?.append(URLQueryItem(name: "titleStartsWith", value: comic))
+        }
         
         return urlComponents.url?.absoluteString ?? ""
     }

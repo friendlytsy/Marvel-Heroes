@@ -26,7 +26,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Very short item description" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXH-Oe-lBi">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Very short item description" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXH-Oe-lBi">
                                 <rect key="frame" x="0.0" y="25.5" width="280" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -41,8 +41,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="80" id="0Z4-dg-V5f"/>
-                            <constraint firstAttribute="width" constant="80" id="Vkh-zJ-XvD"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="uyR-2K-PK8"/>
+                            <constraint firstAttribute="width" constant="80" id="uyR-2K-PK8"/>
                         </constraints>
                     </imageView>
                 </subviews>

@@ -7,40 +7,72 @@
 
 import UIKit
 import RealmSwift
+import Firebase
 
-class ComicsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ComicsViewController: UIViewController, UITableViewDelegate, UISearchBarDelegate {
     
     var realm = try? Realm()
     var token: NotificationToken?
     var comicDataModel: Results<ComicDataModel>? = nil
     
-    
+    let comicService = ComicService()
+    let comicSearchService = ComicSearchService()
+    let comicFavoriteService = ComicFavoriteService()
+    let searchController = UISearchController(searchResultsController: nil)
+
     @IBOutlet weak var comicsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         self.comicDataModel = realm?.objects(ComicDataModel.self)
         comicsTableView.dataSource = self
         comicsTableView.delegate = self
         
+        // - Register GenericTableViewCell
         let nib = UINib(nibName: "GenericTableViewCell", bundle: nil)
         comicsTableView.register(nib, forCellReuseIdentifier: "GenericTableViewCell")
         
-        ComicDataModel.updateData()
+        comicService.updateData(0)
         observeRealm()
+        
+        // - Configure UISearch Controller
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Characters"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        searchController.searchBar.delegate = self
+        comicsTableView.tableHeaderView = searchController.searchBar
+        
+        // - Analytics
+        FirebaseAnalytics.Analytics.logEvent("comic_screen_viewed", parameters: [
+            AnalyticsParameterScreenName: "comics-tab"])
+
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return comicDataModel?.count ?? 0
+    // Favorite slider
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        var searchActive = false
+        if (searchController.searchBar.text != "") {searchActive = true}
+        
+        let contextItem = UIContextualAction(style: .normal, title: "Favorite") { [self] (contextualAction, view, boolValue) in
+            boolValue(true) // pass true if you want the handler to allow the action
+            if (!(comicFavoriteService.makeFavorite(isSearch: searchActive, comicDataModel: comicDataModel!, index: indexPath.row)))
+            {
+                self.showAlert()
+            }
+        }
+        contextItem.backgroundColor =  UIColor.systemBlue
+        let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
+        return swipeActions
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = comicsTableView.dequeueReusableCell(withIdentifier: "GenericTableViewCell", for: indexPath) as! GenericTableViewCell
-        cell.configureComic(withViewModel: (comicDataModel?[indexPath.row])!)
-        return cell
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if ((indexPath.row == self.comicDataModel!.count - 1) && !DownloadManager.isDataLoading) {
+            comicService.updateData(self.comicDataModel!.count)
+        }
     }
-    
     
     // segue for comics. Will reuse view controller depenpd on description required to desplay
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -50,11 +82,13 @@ class ComicsViewController: UIViewController, UITableViewDataSource, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is ItemDescriptionViewController {
             let vc = segue.destination as? ItemDescriptionViewController
-            vc?.itemName = (comicDataModel?[comicsTableView.indexPathForSelectedRow!.row].title)!   // Pass value of characterDataModel.characterName by selected row
-            vc?.itemDescription = (comicDataModel?[comicsTableView.indexPathForSelectedRow!.row].comicDescription) ?? "" // Pass value of characterDataModel.characterDescription by selected row
-            vc?.itemThumbnail = (comicDataModel?[comicsTableView.indexPathForSelectedRow!.row].thumbnail)! // Pass string of characterDataModel.thumbnail by selected row
-            
-            comicsTableView.deselectRow(at: comicsTableView.indexPathForSelectedRow!, animated: true)
+            // - NEED TO RE DO HERE
+            if (searchController.searchBar.text != "") {
+                vc!.item = comicService.prepareItemForSegue(for: nil, where: comicsTableView.indexPathForSelectedRow!.row)
+            } else {
+                vc!.item = comicService.prepareItemForSegue(for: comicDataModel?[comicsTableView.indexPathForSelectedRow!.row])
+            }
+            comicsTableView.deselectRow(at: comicsTableView.indexPathForSelectedRow!, animated: true) // Deselect row
         }
     }
 }

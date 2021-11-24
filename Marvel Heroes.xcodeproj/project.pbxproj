@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F911422F2738246100542367 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F911422E2738246100542367 /* FavoriteViewController.swift */; };
+		F9192E112743B7D00080FC29 /* CharacterSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9192E102743B7D00080FC29 /* CharacterSearchService.swift */; };
+		F9192E132743BB660080FC29 /* ComicSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9192E122743BB660080FC29 /* ComicSearchService.swift */; };
+		F9192E152743BE970080FC29 /* ComicFavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9192E142743BE970080FC29 /* ComicFavoriteService.swift */; };
+		F9192E172743BEE60080FC29 /* CharacterFavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9192E162743BEE60080FC29 /* CharacterFavoriteService.swift */; };
 		F923B5D926DE209C003F431B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F923B5D826DE209C003F431B /* AppDelegate.swift */; };
 		F923B5DB26DE209C003F431B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F923B5DA26DE209C003F431B /* SceneDelegate.swift */; };
 		F923B5DD26DE209C003F431B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F923B5DC26DE209C003F431B /* LoginViewController.swift */; };
@@ -21,6 +26,9 @@
 		F951BDE0271330B300F63C66 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = F951BDDF271330B300F63C66 /* Image.swift */; };
 		F95E39F826FCF9E9005C2356 /* UIFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95E39F726FCF9E9005C2356 /* UIFonts.swift */; };
 		F9604B27270C1B0B0056BF0D /* GenericTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9604B26270C1B0B0056BF0D /* GenericTableViewCellModel.swift */; };
+		F96F5350274633F500E3B6AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F96F534F274633F500E3B6AC /* GoogleService-Info.plist */; };
+		F96F535327463A8A00E3B6AC /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F96F535227463A8A00E3B6AC /* FirebaseAnalytics */; };
+		F96F535527463A8A00E3B6AC /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = F96F535427463A8A00E3B6AC /* FirebaseCrashlytics */; };
 		F978E49026F12F0A00CEF509 /* ComicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F978E48F26F12F0A00CEF509 /* ComicsViewController.swift */; };
 		F985BB2527033CC200742139 /* UrlPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = F985BB2427033CC200742139 /* UrlPath.swift */; };
 		F985BB2927033F7000742139 /* UrlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F985BB2827033F7000742139 /* UrlBuilder.swift */; };
@@ -30,11 +38,14 @@
 		F985C437271C1B5D00394C81 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = F985C436271C1B5D00394C81 /* Kingfisher */; };
 		F9B43D2A271D6F5500D99A4F /* ComicDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B43D29271D6F5500D99A4F /* ComicDataModel.swift */; };
 		F9BF5C01270313C1005D66DF /* CryptoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF5C00270313C1005D66DF /* CryptoHelper.swift */; };
-		F9C3D78A27302759009C2337 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C3D78927302758009C2337 /* FavoritesViewController.swift */; };
 		F9D3CBB327268D6F00AAB339 /* ComicsVСExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D3CBB227268D6F00AAB339 /* ComicsVСExtension.swift */; };
 		F9D3CBB527268D9A00AAB339 /* CharacterVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D3CBB427268D9A00AAB339 /* CharacterVCExtension.swift */; };
 		F9D3CBB72726A39E00AAB339 /* LoginVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D3CBB62726A39E00AAB339 /* LoginVCExtension.swift */; };
 		F9D7F2F026F8620100BF37C7 /* ItemDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D7F2EF26F8620100BF37C7 /* ItemDescriptionViewController.swift */; };
+		F9DAE1D7273BA4D700E72111 /* CharacterDataModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DAE1D6273BA4D700E72111 /* CharacterDataModelFactory.swift */; };
+		F9DAE1DB273BB4D400E72111 /* CharacterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DAE1DA273BB4D400E72111 /* CharacterService.swift */; };
+		F9DAE1DD273BB4F000E72111 /* ComicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DAE1DC273BB4F000E72111 /* ComicService.swift */; };
+		F9DAE1DF273BFBAB00E72111 /* ComicDataModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DAE1DE273BFBAB00E72111 /* ComicDataModelFactory.swift */; };
 		F9DDEA4B2713710800064115 /* ComicDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DDEA4A2713710800064115 /* ComicDataWrapper.swift */; };
 		F9DDEA4D271372EE00064115 /* ComicDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DDEA4C271372EE00064115 /* ComicDataContainer.swift */; };
 		F9DDEA4F2713735B00064115 /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DDEA4E2713735B00064115 /* Comic.swift */; };
@@ -43,9 +54,15 @@
 		F9FAD2C526EA076300D10FB9 /* GenericTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAD2C326EA076300D10FB9 /* GenericTableViewCell.swift */; };
 		F9FAD2C626EA076300D10FB9 /* GenericTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9FAD2C426EA076300D10FB9 /* GenericTableViewCell.xib */; };
 		F9FAD2C826EA0A5900D10FB9 /* CharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAD2C726EA0A5900D10FB9 /* CharacterViewController.swift */; };
+		F9FC9268274826AD00820C8C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FC9267274826AD00820C8C /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F911422E2738246100542367 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		F9192E102743B7D00080FC29 /* CharacterSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSearchService.swift; sourceTree = "<group>"; };
+		F9192E122743BB660080FC29 /* ComicSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicSearchService.swift; sourceTree = "<group>"; };
+		F9192E142743BE970080FC29 /* ComicFavoriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicFavoriteService.swift; sourceTree = "<group>"; };
+		F9192E162743BEE60080FC29 /* CharacterFavoriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFavoriteService.swift; sourceTree = "<group>"; };
 		F923B5D526DE209C003F431B /* Marvel Heroes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Marvel Heroes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F923B5D826DE209C003F431B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F923B5DA26DE209C003F431B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +77,7 @@
 		F951BDDF271330B300F63C66 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		F95E39F726FCF9E9005C2356 /* UIFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFonts.swift; sourceTree = "<group>"; };
 		F9604B26270C1B0B0056BF0D /* GenericTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableViewCellModel.swift; sourceTree = "<group>"; };
+		F96F534F274633F500E3B6AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F978E48F26F12F0A00CEF509 /* ComicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicsViewController.swift; sourceTree = "<group>"; };
 		F985BB2427033CC200742139 /* UrlPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlPath.swift; sourceTree = "<group>"; };
 		F985BB2827033F7000742139 /* UrlBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlBuilder.swift; sourceTree = "<group>"; };
@@ -68,11 +86,14 @@
 		F985C42D271C05CF00394C81 /* CharacterDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDataModel.swift; sourceTree = "<group>"; };
 		F9B43D29271D6F5500D99A4F /* ComicDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDataModel.swift; sourceTree = "<group>"; };
 		F9BF5C00270313C1005D66DF /* CryptoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoHelper.swift; sourceTree = "<group>"; };
-		F9C3D78927302758009C2337 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		F9D3CBB227268D6F00AAB339 /* ComicsVСExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComicsVСExtension.swift"; sourceTree = "<group>"; };
 		F9D3CBB427268D9A00AAB339 /* CharacterVCExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterVCExtension.swift; sourceTree = "<group>"; };
 		F9D3CBB62726A39E00AAB339 /* LoginVCExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVCExtension.swift; sourceTree = "<group>"; };
 		F9D7F2EF26F8620100BF37C7 /* ItemDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDescriptionViewController.swift; sourceTree = "<group>"; };
+		F9DAE1D6273BA4D700E72111 /* CharacterDataModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDataModelFactory.swift; sourceTree = "<group>"; };
+		F9DAE1DA273BB4D400E72111 /* CharacterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterService.swift; sourceTree = "<group>"; };
+		F9DAE1DC273BB4F000E72111 /* ComicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicService.swift; sourceTree = "<group>"; };
+		F9DAE1DE273BFBAB00E72111 /* ComicDataModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDataModelFactory.swift; sourceTree = "<group>"; };
 		F9DDEA4A2713710800064115 /* ComicDataWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDataWrapper.swift; sourceTree = "<group>"; };
 		F9DDEA4C271372EE00064115 /* ComicDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDataContainer.swift; sourceTree = "<group>"; };
 		F9DDEA4E2713735B00064115 /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
@@ -81,6 +102,7 @@
 		F9FAD2C326EA076300D10FB9 /* GenericTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableViewCell.swift; sourceTree = "<group>"; };
 		F9FAD2C426EA076300D10FB9 /* GenericTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericTableViewCell.xib; sourceTree = "<group>"; };
 		F9FAD2C726EA0A5900D10FB9 /* CharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewController.swift; sourceTree = "<group>"; };
+		F9FC9267274826AD00820C8C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +112,8 @@
 			files = (
 				F985C437271C1B5D00394C81 /* Kingfisher in Frameworks */,
 				F951BDD627132E6800F63C66 /* RealmSwift in Frameworks */,
+				F96F535527463A8A00E3B6AC /* FirebaseCrashlytics in Frameworks */,
+				F96F535327463A8A00E3B6AC /* FirebaseAnalytics in Frameworks */,
 				F951BDD427132E6800F63C66 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -116,6 +140,7 @@
 		F923B5D726DE209C003F431B /* Marvel Heroes */ = {
 			isa = PBXGroup;
 			children = (
+				F96F534F274633F500E3B6AC /* GoogleService-Info.plist */,
 				F985C42F271C08B000394C81 /* Network */,
 				F951BDCA2712F4DB00F63C66 /* Tools */,
 				F9BF5BFF27031305005D66DF /* Controllers */,
@@ -145,6 +170,10 @@
 			children = (
 				F985C42C271C05AB00394C81 /* Realm */,
 				F985C42B271C059300394C81 /* Codable */,
+				F9DAE1DA273BB4D400E72111 /* CharacterService.swift */,
+				F9DAE1D6273BA4D700E72111 /* CharacterDataModelFactory.swift */,
+				F9192E102743B7D00080FC29 /* CharacterSearchService.swift */,
+				F9192E162743BEE60080FC29 /* CharacterFavoriteService.swift */,
 			);
 			path = Character;
 			sourceTree = "<group>";
@@ -154,6 +183,10 @@
 			children = (
 				F9B43D28271D6F3B00D99A4F /* Realm */,
 				F9B43D27271D6F2700D99A4F /* Codable */,
+				F9DAE1DC273BB4F000E72111 /* ComicService.swift */,
+				F9192E142743BE970080FC29 /* ComicFavoriteService.swift */,
+				F9DAE1DE273BFBAB00E72111 /* ComicDataModelFactory.swift */,
+				F9192E122743BB660080FC29 /* ComicSearchService.swift */,
 			);
 			path = Comics;
 			sourceTree = "<group>";
@@ -232,7 +265,8 @@
 				F9D7F2EF26F8620100BF37C7 /* ItemDescriptionViewController.swift */,
 				F9FAD2C726EA0A5900D10FB9 /* CharacterViewController.swift */,
 				F978E48F26F12F0A00CEF509 /* ComicsViewController.swift */,
-				F9C3D78927302758009C2337 /* FavoritesViewController.swift */,
+				F911422E2738246100542367 /* FavoriteViewController.swift */,
+				F9FC9267274826AD00820C8C /* SettingsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -276,6 +310,7 @@
 				F923B5D126DE209C003F431B /* Sources */,
 				F923B5D226DE209C003F431B /* Frameworks */,
 				F923B5D326DE209C003F431B /* Resources */,
+				F973B84E2746755300890937 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -286,6 +321,8 @@
 				F951BDD327132E6800F63C66 /* Realm */,
 				F951BDD527132E6800F63C66 /* RealmSwift */,
 				F985C436271C1B5D00394C81 /* Kingfisher */,
+				F96F535227463A8A00E3B6AC /* FirebaseAnalytics */,
+				F96F535427463A8A00E3B6AC /* FirebaseCrashlytics */,
 			);
 			productName = "Marvel Heroes";
 			productReference = F923B5D526DE209C003F431B /* Marvel Heroes.app */;
@@ -317,6 +354,7 @@
 			packageReferences = (
 				F951BDD227132E6800F63C66 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				F985C435271C1B5D00394C81 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				F96F535127463A8A00E3B6AC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = F923B5D626DE209C003F431B /* Products */;
 			projectDirPath = "";
@@ -334,12 +372,35 @@
 			files = (
 				F923B5E526DE209F003F431B /* LaunchScreen.storyboard in Resources */,
 				F923B5E226DE209F003F431B /* Assets.xcassets in Resources */,
+				F96F5350274633F500E3B6AC /* GoogleService-Info.plist in Resources */,
 				F923B5E026DE209C003F431B /* Main.storyboard in Resources */,
 				F9FAD2C626EA076300D10FB9 /* GenericTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F973B84E2746755300890937 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${BUILD_DIR%Build/*}SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F923B5D126DE209C003F431B /* Sources */ = {
@@ -351,7 +412,10 @@
 				F9DDEA4B2713710800064115 /* ComicDataWrapper.swift in Sources */,
 				F985BB2B27033FA100742139 /* UrlSchema.swift in Sources */,
 				F9604B27270C1B0B0056BF0D /* GenericTableViewCellModel.swift in Sources */,
+				F9FC9268274826AD00820C8C /* SettingsViewController.swift in Sources */,
 				F95E39F826FCF9E9005C2356 /* UIFonts.swift in Sources */,
+				F911422F2738246100542367 /* FavoriteViewController.swift in Sources */,
+				F9DAE1DF273BFBAB00E72111 /* ComicDataModelFactory.swift in Sources */,
 				F985BB2D27033FCA00742139 /* UrlHost.swift in Sources */,
 				F923B5DD26DE209C003F431B /* LoginViewController.swift in Sources */,
 				F9D3CBB72726A39E00AAB339 /* LoginVCExtension.swift in Sources */,
@@ -364,17 +428,23 @@
 				F9DDEA4F2713735B00064115 /* Comic.swift in Sources */,
 				F951BDE0271330B300F63C66 /* Image.swift in Sources */,
 				F9B43D2A271D6F5500D99A4F /* ComicDataModel.swift in Sources */,
+				F9DAE1D7273BA4D700E72111 /* CharacterDataModelFactory.swift in Sources */,
 				F9D7F2F026F8620100BF37C7 /* ItemDescriptionViewController.swift in Sources */,
 				F9D3CBB527268D9A00AAB339 /* CharacterVCExtension.swift in Sources */,
 				F985C42E271C05CF00394C81 /* CharacterDataModel.swift in Sources */,
 				F9FAD2C526EA076300D10FB9 /* GenericTableViewCell.swift in Sources */,
+				F9192E152743BE970080FC29 /* ComicFavoriteService.swift in Sources */,
 				F985BB2927033F7000742139 /* UrlBuilder.swift in Sources */,
 				F923B5D926DE209C003F431B /* AppDelegate.swift in Sources */,
 				F951BDDA27132F7000F63C66 /* CharacterDataWrapper.swift in Sources */,
+				F9DAE1DD273BB4F000E72111 /* ComicService.swift in Sources */,
 				F951BDD827132F4B00F63C66 /* Character.swift in Sources */,
+				F9192E132743BB660080FC29 /* ComicSearchService.swift in Sources */,
+				F9192E172743BEE60080FC29 /* CharacterFavoriteService.swift in Sources */,
 				F923B5DB26DE209C003F431B /* SceneDelegate.swift in Sources */,
-				F9C3D78A27302759009C2337 /* FavoritesViewController.swift in Sources */,
 				F9DDEA4D271372EE00064115 /* ComicDataContainer.swift in Sources */,
+				F9DAE1DB273BB4D400E72111 /* CharacterService.swift in Sources */,
+				F9192E112743B7D00080FC29 /* CharacterSearchService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,7 +505,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -588,6 +658,14 @@
 				version = 10.17.0;
 			};
 		};
+		F96F535127463A8A00E3B6AC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 		F985C435271C1B5D00394C81 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -608,6 +686,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F951BDD227132E6800F63C66 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
+		};
+		F96F535227463A8A00E3B6AC /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F96F535127463A8A00E3B6AC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		F96F535427463A8A00E3B6AC /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F96F535127463A8A00E3B6AC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 		F985C436271C1B5D00394C81 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
