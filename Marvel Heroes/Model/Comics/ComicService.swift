@@ -30,9 +30,39 @@ class ComicService {
         }
     }
     
+    func searchComic(by name: String, onComplete: @escaping() -> Void) {
+        // Access Shared Defaults Object
+        let userDefaults = UserDefaults.standard
+        let urlBuilder = UrlBuilder()
+        guard let url = URL(string: urlBuilder.getUrl(UrlPath.comicsListUrl, 0, queryComic: name)) else { return print("ERROR") }
+        var comics: [Comic] = []
+        DownloadManager.shared.downloadData(urlPath: url.absoluteString) { data in
+            do {
+                let decoder = JSONDecoder()
+                let getData = try decoder.decode(ComicDataWrapper.self, from: data)
+                // - Decode from JSON to array of struct
+                try getData.data?.results?.forEach{item in
+                    comics.append(item)
+                }
+                
+                // - Encode to save at UserDefaults
+                let encoder = JSONEncoder()
+                do {
+                    let encodedCharacters = try encoder.encode(comics)
+                    userDefaults.set(encodedCharacters, forKey: "comicSearch")
+                }
+            }
+            catch {
+                print(error.localizedDescription)
+            }
+            onComplete()
+        }
+    }
+
+    
     func prepareItemForSegue(for comicDataModel: ComicDataModel? = nil, where index: Int = 0) -> [String: String] {
         
-        let comicSearchService = ComicSearchService()
+        let comicViewModel = ComicViewModel()
         
         var item = ["id":"", "name":"", "description":"","thumbnail":""]
         // - if a search
@@ -41,9 +71,9 @@ class ComicService {
             item["description"] = comicDataModel?.comicDescription
             item["thumbnail"] = comicDataModel?.thumbnail
         } else {
-            item["name"] = comicSearchService.getSearchItems(index: index).title
-            item["description"] = comicSearchService.getSearchItems(index: index).description
-            item["thumbnail"] = comicSearchService.getSearchItems(index: index).thumbnail?.url?.absoluteString
+            item["name"] = comicViewModel.getSearchItem(index: index).title
+            item["description"] = comicViewModel.getSearchItem(index: index).description
+            item["thumbnail"] = comicViewModel.getSearchItem(index: index).thumbnail?.url?.absoluteString
         }
         
         return item

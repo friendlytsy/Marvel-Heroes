@@ -42,7 +42,7 @@ extension CharacterViewController: UISearchResultsUpdating {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if (searchController.searchBar.text != "") {
-            characterSearchService.searchCharacter(by: searchController.searchBar.text ?? "") {
+            characterService.searchCharacter(by: searchController.searchBar.text ?? "") {
                 DispatchQueue.main.async {
                     self.characterTableView.reloadData()
                 }
@@ -58,7 +58,7 @@ extension CharacterViewController: UISearchResultsUpdating {
 extension CharacterViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.isActive && searchController.searchBar.text != "" {
-            return characterSearchService.getSearchCount()
+            return characterViewModel.getSearchCount()
         }
         return characterDataModel?.count ?? 0
     }
@@ -69,7 +69,7 @@ extension CharacterViewController: UITableViewDataSource {
         if (!searchController.isActive && searchController.searchBar.text == "") {
             cell.configureCharacter(withViewModel: (characterDataModel?[indexPath.row])!)
         } else {
-            cell.configureCharacterSearchResult(result: characterSearchService.getSearchItems(index: indexPath.row))
+            cell.configureCharacterSearchResult(result: characterViewModel.getSearchItem(index: indexPath.row))
         }
         return cell
     }

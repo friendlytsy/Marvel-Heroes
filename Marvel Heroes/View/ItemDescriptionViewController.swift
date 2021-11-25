@@ -21,7 +21,7 @@ class ItemDescriptionViewController: UIViewController {
         super.viewDidLoad()
         
         if let url = URL( string: item["thumbnail"] ?? "") {
-            DispatchQueue.main.async { self.itemImage.kf.setImage(with: url)}
+            DispatchQueue.main.async { self.itemImage.kf.setImage(with: url, placeholder: UIImage(systemName: "paintbrush"))}
         }
         itemNameLabel.text = item["name"]
         if item["description"] == "" {

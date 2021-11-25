@@ -29,9 +29,8 @@ class GenericTableViewCell: UITableViewCell {
     func configureCharacterSearchResult(result character: Character) {
         let url = URL(string: (character.thumbnail?.url?.absoluteString)!)
         DispatchQueue.main.async {
-                self.itemImage.kf.setImage(with: url)
+                self.itemImage.kf.setImage(with: url, placeholder: UIImage(systemName: "person"))
             }
-            //DispatchQueue.async(self.itemImage.kf.setImage(with: url))
         itemNameLabel.text = character.name
         if character.description == "" {
             itemDescriptionLabel.text = "Sorry, there is no description here :("
@@ -45,9 +44,8 @@ class GenericTableViewCell: UITableViewCell {
     func configureComicSearchResult(result comic: Comic) {
         let url = URL(string: (comic.thumbnail?.url?.absoluteString)!)
         DispatchQueue.main.async {
-                self.itemImage.kf.setImage(with: url)
+                self.itemImage.kf.setImage(with: url, placeholder: UIImage(systemName: "book"))
             }
-            //DispatchQueue.async(self.itemImage.kf.setImage(with: url))
         itemNameLabel.text = comic.title
         if comic.description == "" {
             itemDescriptionLabel.text = "Sorry, there is no description here :("
@@ -63,9 +61,8 @@ class GenericTableViewCell: UITableViewCell {
 
         if let url = URL( string: viewModel.thumbnail ?? "" ) {
             DispatchQueue.main.async {
-                self.itemImage.kf.setImage(with: url)
+                self.itemImage.kf.setImage(with: url, placeholder: UIImage(systemName: "person"))
             }
-            //DispatchQueue.async(self.itemImage.kf.setImage(with: url))
         }
 
         itemNameLabel.text = viewModel.name
@@ -83,7 +80,7 @@ class GenericTableViewCell: UITableViewCell {
 
         if let url = URL( string: viewModel.thumbnail ?? "" ) {
             DispatchQueue.main.async {
-                self.itemImage.kf.setImage(with: url)
+                self.itemImage.kf.setImage(with: url, placeholder: UIImage(systemName: "book"))
             }
         }
         itemNameLabel.text = viewModel.title

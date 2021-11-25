@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 import Firebase
 
-class CharacterFavoriteService{
+class CharacterViewModel {
     func makeFavorite(isSearch: Bool, characterDataModel: Results<CharacterDataModel>, index: Int) -> Bool{
         let userDefaults = UserDefaults.standard
         var favorites: [String] = userDefaults.stringArray(forKey: "characterFavorites") ?? []
@@ -37,13 +37,11 @@ class CharacterFavoriteService{
         return false
     }
     
-    func makeUnfavorite(forkey: String, index: Int) -> Bool{
+    func makeUnfavorite(forkey: String, index: Int){
         let userDefaults = UserDefaults.standard
         var favorites: [String] = userDefaults.stringArray(forKey: forkey) ?? []
         favorites.remove(at: index)
         userDefaults.set(favorites, forKey: forkey)
-        
-        return true
     }
     
     func getFavorite(with id: Int) -> CharacterDataModel {
@@ -67,14 +65,32 @@ class CharacterFavoriteService{
     
     func prepareItemForSegue(where index: Int = 0) -> [String: String] {
         
-        let characterFavoriteService = CharacterFavoriteService()
+        let characterViewModel = CharacterViewModel()
         
         var item = ["id":"", "name":"", "description":"","thumbnail":""]
         
-        item["name"] = characterFavoriteService.getFavorite(with: index).name
-        item["description"] = characterFavoriteService.getFavorite(with: index).charDescription
-        item["thumbnail"] = characterFavoriteService.getFavorite(with: index).thumbnail
+        item["name"] = characterViewModel.getFavorite(with: index).name
+        item["description"] = characterViewModel.getFavorite(with: index).charDescription
+        item["thumbnail"] = characterViewModel.getFavorite(with: index).thumbnail
         
         return item
+    }
+    
+    func getSearchCount() -> Int {
+        if let items = UserDefaults.standard.data(forKey: "characterSearch") {
+            let decoder = JSONDecoder()
+            if let decoded = try? decoder.decode([Character].self, from: items) {
+                return decoded.count
+            }
+        }
+        return 0
+    }
+    
+    func getSearchItem(index: Int) -> Character {
+        let items = UserDefaults.standard.data(forKey: "characterSearch")!
+        let decoder = JSONDecoder()
+        let decoded = try? decoder.decode([Character].self, from: items)
+        
+        return decoded![index]
     }
 }

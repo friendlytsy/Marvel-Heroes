@@ -41,7 +41,7 @@ extension ComicsViewController: UISearchResultsUpdating {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if (searchController.searchBar.text != "") {
-            comicSearchService.searchComic(by: searchController.searchBar.text ?? "") {
+            comicService.searchComic(by: searchController.searchBar.text ?? "") {
                 DispatchQueue.main.async { [self] in
                     comicsTableView.reloadData()
                 }
@@ -56,7 +56,7 @@ extension ComicsViewController: UISearchResultsUpdating {
 extension ComicsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.isActive && searchController.searchBar.text != "" {
-            return comicSearchService.getSearchCount()
+            return comicViewModel.getSearchCount()
         }
         return comicDataModel?.count ?? 0
     }
@@ -67,7 +67,7 @@ extension ComicsViewController: UITableViewDataSource {
         if (!searchController.isActive && searchController.searchBar.text == "") {
             cell.configureComic(withViewModel: (comicDataModel?[indexPath.row])!)
         } else {
-            cell.configureComicSearchResult(result: comicSearchService.getSearchItems(index: indexPath.row))
+            cell.configureComicSearchResult(result: comicViewModel.getSearchItem(index: indexPath.row))
         }
         return cell
     }

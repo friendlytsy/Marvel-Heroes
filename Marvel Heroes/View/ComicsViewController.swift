@@ -16,10 +16,9 @@ class ComicsViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     var comicDataModel: Results<ComicDataModel>? = nil
     
     let comicService = ComicService()
-    let comicSearchService = ComicSearchService()
-    let comicFavoriteService = ComicFavoriteService()
+    let comicViewModel = ComicViewModel()
     let searchController = UISearchController(searchResultsController: nil)
-
+    
     @IBOutlet weak var comicsTableView: UITableView!
     
     override func viewDidLoad() {
@@ -44,11 +43,6 @@ class ComicsViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         definesPresentationContext = true
         searchController.searchBar.delegate = self
         comicsTableView.tableHeaderView = searchController.searchBar
-        
-        // - Analytics
-        FirebaseAnalytics.Analytics.logEvent("comic_screen_viewed", parameters: [
-            AnalyticsParameterScreenName: "comics-tab"])
-
     }
     
     // Favorite slider
@@ -58,7 +52,7 @@ class ComicsViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         
         let contextItem = UIContextualAction(style: .normal, title: "Favorite") { [self] (contextualAction, view, boolValue) in
             boolValue(true) // pass true if you want the handler to allow the action
-            if (!(comicFavoriteService.makeFavorite(isSearch: searchActive, comicDataModel: comicDataModel!, index: indexPath.row)))
+            if (!(comicViewModel.makeFavorite(isSearch: searchActive, comicDataModel: comicDataModel!, index: indexPath.row)))
             {
                 self.showAlert()
             }
@@ -82,7 +76,6 @@ class ComicsViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is ItemDescriptionViewController {
             let vc = segue.destination as? ItemDescriptionViewController
-            // - NEED TO RE DO HERE
             if (searchController.searchBar.text != "") {
                 vc!.item = comicService.prepareItemForSegue(for: nil, where: comicsTableView.indexPathForSelectedRow!.row)
             } else {

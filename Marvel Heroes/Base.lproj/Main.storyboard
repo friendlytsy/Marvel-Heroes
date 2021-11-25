@@ -110,20 +110,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xm0-1r-fqP">
-                                <rect key="frame" x="20" y="20" width="374" height="374"/>
+                                <rect key="frame" x="1" y="1" width="412" height="374"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="374" id="FcB-vp-Cn4"/>
-                                    <constraint firstAttribute="width" constant="374" id="KOz-j0-tOf"/>
+                                    <constraint firstAttribute="height" constant="374" id="ax8-4Q-f4A"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTC-37-RrV">
-                                <rect key="frame" x="186.5" y="414" width="41.5" height="21"/>
+                                <rect key="frame" x="186.5" y="395" width="41.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6rt-3Q-zQk">
-                                <rect key="frame" x="20" y="455" width="374" height="333"/>
+                                <rect key="frame" x="20" y="436" width="374" height="352"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
@@ -134,19 +133,17 @@
                         <viewLayoutGuide key="safeArea" id="oHL-Yk-wdZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Xm0-1r-fqP" firstAttribute="leading" secondItem="oHL-Yk-wdZ" secondAttribute="leading" constant="1" id="0S2-Bh-pt7"/>
                             <constraint firstItem="oHL-Yk-wdZ" firstAttribute="bottom" secondItem="6rt-3Q-zQk" secondAttribute="bottom" constant="20" id="5yg-xQ-F9Y"/>
+                            <constraint firstItem="Xm0-1r-fqP" firstAttribute="top" secondItem="oHL-Yk-wdZ" secondAttribute="top" constant="1" id="6hG-io-2yg"/>
                             <constraint firstItem="qTC-37-RrV" firstAttribute="centerX" secondItem="hUo-zr-2cl" secondAttribute="centerX" id="7OZ-Fe-m3O"/>
                             <constraint firstItem="qTC-37-RrV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oHL-Yk-wdZ" secondAttribute="leading" id="8y2-FQ-EDb"/>
                             <constraint firstItem="oHL-Yk-wdZ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qTC-37-RrV" secondAttribute="trailing" id="Azh-RF-yl8"/>
-                            <constraint firstItem="Xm0-1r-fqP" firstAttribute="leading" secondItem="oHL-Yk-wdZ" secondAttribute="leading" constant="20" id="Qom-3X-cSl"/>
-                            <constraint firstItem="oHL-Yk-wdZ" firstAttribute="trailing" secondItem="Xm0-1r-fqP" secondAttribute="trailing" constant="20" id="Xbm-Fy-Y8p"/>
-                            <constraint firstItem="Xm0-1r-fqP" firstAttribute="centerX" secondItem="hUo-zr-2cl" secondAttribute="centerX" id="Ysj-9X-WV7"/>
-                            <constraint firstItem="oHL-Yk-wdZ" firstAttribute="bottom" secondItem="Xm0-1r-fqP" secondAttribute="bottom" constant="414" id="d60-TY-7av"/>
                             <constraint firstItem="6rt-3Q-zQk" firstAttribute="centerX" secondItem="hUo-zr-2cl" secondAttribute="centerX" id="dw5-uy-GUZ"/>
-                            <constraint firstItem="Xm0-1r-fqP" firstAttribute="top" secondItem="oHL-Yk-wdZ" secondAttribute="top" constant="20" id="g13-TC-ovp"/>
                             <constraint firstItem="6rt-3Q-zQk" firstAttribute="top" secondItem="qTC-37-RrV" secondAttribute="bottom" constant="20" id="ifN-4P-mGY"/>
                             <constraint firstItem="oHL-Yk-wdZ" firstAttribute="trailing" secondItem="6rt-3Q-zQk" secondAttribute="trailing" constant="20" id="qRV-2q-VZ7"/>
-                            <constraint firstItem="qTC-37-RrV" firstAttribute="top" secondItem="Xm0-1r-fqP" secondAttribute="bottom" constant="20" id="w7K-Yh-XL7"/>
+                            <constraint firstItem="qTC-37-RrV" firstAttribute="top" secondItem="Xm0-1r-fqP" secondAttribute="bottom" constant="20" id="rDN-R3-Kev"/>
+                            <constraint firstItem="oHL-Yk-wdZ" firstAttribute="trailing" secondItem="Xm0-1r-fqP" secondAttribute="trailing" constant="1" id="sst-eF-4xO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="SOb-Wa-eVE"/>

@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class ComicFavoriteService{
+class ComicViewModel{
     func makeFavorite(isSearch: Bool, comicDataModel: Results<ComicDataModel>, index: Int) -> Bool{
         let userDefaults = UserDefaults.standard
         var favorites: [String] = userDefaults.stringArray(forKey: "comicFavorites") ?? []
@@ -64,10 +64,27 @@ class ComicFavoriteService{
         return UserDefaults.standard.stringArray(forKey: key)?.count ?? 0
     }
     
+    func getSearchCount() -> Int {
+        if let items = UserDefaults.standard.data(forKey: "comicSearch") {
+            let decoder = JSONDecoder()
+            if let decoded = try? decoder.decode([Comic].self, from: items) {
+                return decoded.count
+            }
+        }
+        return 0
+    }
+    
+    func getSearchItem(index: Int) -> Comic {
+        let items = UserDefaults.standard.data(forKey: "comicSearch")!
+        let decoder = JSONDecoder()
+        let decoded = try? decoder.decode([Comic].self, from: items)
+        
+        return decoded![index]
+    }
+    
     func prepareItemForSegue(where index: Int = 0) -> [String: String] {
         
-        let comicFavoriteService = ComicFavoriteService()
-        
+        let comicFavoriteService = ComicViewModel()
         var item = ["id":"", "name":"", "description":"","thumbnail":""]
         
         item["name"] = comicFavoriteService.getFavorite(with: index).title

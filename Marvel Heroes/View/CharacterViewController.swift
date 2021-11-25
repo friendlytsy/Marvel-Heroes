@@ -16,8 +16,7 @@ class CharacterViewController: UIViewController, UISearchBarDelegate, UITableVie
     var characterDataModel: Results<CharacterDataModel>? = nil
     
     let characterService = CharacterService()
-    let characterSearchService = CharacterSearchService()
-    let characterFavoriteService = CharacterFavoriteService()
+    let characterViewModel = CharacterViewModel()
     let searchController = UISearchController(searchResultsController: nil)
     
     @IBOutlet weak var characterTableView: UITableView!
@@ -57,7 +56,7 @@ class CharacterViewController: UIViewController, UISearchBarDelegate, UITableVie
         if (searchController.searchBar.text != "") {searchActive = true}
         let contextItem = UIContextualAction(style: .normal, title: "Favorite") { [self] (contextualAction, view, boolValue) in
             boolValue(true) // pass true if you want the handler to allow the action
-            if (!(characterFavoriteService.makeFavorite(isSearch: searchActive, characterDataModel: characterDataModel!, index: indexPath.row)))
+            if (!(characterViewModel.makeFavorite(isSearch: searchActive, characterDataModel: characterDataModel!, index: indexPath.row)))
             {
                 self.showAlert()
             }
@@ -82,7 +81,6 @@ class CharacterViewController: UIViewController, UISearchBarDelegate, UITableVie
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is ItemDescriptionViewController {
             let vc = segue.destination as? ItemDescriptionViewController
-            // - NEED TO RE DO HERE
             if (searchController.searchBar.text != "") {
                 vc!.item = characterService.prepareItemForSegue(for: nil, where: characterTableView.indexPathForSelectedRow!.row)
             } else {

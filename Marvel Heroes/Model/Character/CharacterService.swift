@@ -30,10 +30,36 @@ class CharacterService {
         }
     }
     
+    func searchCharacter(by name: String, onComplete: @escaping() -> Void) {
+        // Access Shared Defaults Object
+        let userDefaults = UserDefaults.standard
+        let urlBuilder = UrlBuilder()
+        guard let url = URL(string: urlBuilder.getUrl(UrlPath.characteresListUrl, 0, queryCharacter: name)) else { return print("ERROR") }
+        var characters: [Character] = []
+        DownloadManager.shared.downloadData(urlPath: url.absoluteString) { data in
+            do {
+                let decoder = JSONDecoder()
+                let getData = try decoder.decode(CharacterDataWrapper.self, from: data)
+                // - Decode from JSON to array of struct
+                try getData.data?.results?.forEach{item in
+                    characters.append(item)
+                }
+                // - Encode to save at UserDefaults
+                let encoder = JSONEncoder()
+                do {
+                    let encodedCharacters = try encoder.encode(characters)
+                    userDefaults.set(encodedCharacters, forKey: "characterSearch")
+                }
+            }
+            catch {
+                print(error.localizedDescription)
+            }
+            onComplete()
+        }
+    }
+    
     func prepareItemForSegue(for characterDataModel: CharacterDataModel? = nil, where index: Int = 0) -> [String: String] {
-        
-        let characterSearchService = CharacterSearchService()
-        
+        let characterViewModel = CharacterViewModel()
         var item = ["id":"", "name":"", "description":"","thumbnail":""]
         // - if a search
         if (characterDataModel != nil) {
@@ -41,11 +67,10 @@ class CharacterService {
             item["description"] = characterDataModel?.charDescription
             item["thumbnail"] = characterDataModel?.thumbnail
         } else {
-            item["name"] = characterSearchService.getSearchItems(index: index).name
-            item["description"] = characterSearchService.getSearchItems(index: index).description
-            item["thumbnail"] = characterSearchService.getSearchItems(index: index).thumbnail?.url?.absoluteString
+            item["name"] = characterViewModel.getSearchItem(index: index).name
+            item["description"] = characterViewModel.getSearchItem(index: index).description
+            item["thumbnail"] = characterViewModel.getSearchItem(index: index).thumbnail?.url?.absoluteString
         }
-        
         return item
     }
 }
