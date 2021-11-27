@@ -36,19 +36,8 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         // - Register custom cell
         let nib = UINib(nibName: "GenericTableViewCell", bundle: nil)
         favoriteTableView.register(nib, forCellReuseIdentifier: "GenericTableViewCell")
+    }
         
-        // - Observer for UserDefaults
-        UserDefaults.standard.addObserver(self, forKeyPath: "characterFavorites", options: .new, context: nil)
-        UserDefaults.standard.addObserver(self, forKeyPath: "comicFavorites", options: .new, context: nil)
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "characterFavorites" || keyPath == "comicFavorites" {
-            favoriteTableView.reloadData()
-//            favoriteTableView.deleteRows(at: [favoriteTableView.indexPathForSelectedRow!], with: .fade)
-        }
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch (segmentControl.selectedSegmentIndex){
         case 0:
@@ -87,10 +76,8 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         let contextItem = UIContextualAction(style: .normal, title: "Unfavorite") { [self] (contextualAction, view, boolValue) in
             boolValue(true) // pass true if you want the handler to allow the action
             characterViewModel.makeUnfavorite(forkey: key, index: indexPath.row)
-//            if (characterFavoriteService.makeUnfavorite(forkey: key, index: indexPath.row))
-//            {
-////                favoriteTableView.deleteRows(at: [indexPath], with: .fade)
-//            }
+            favoriteTableView.deleteRows(at: [indexPath], with: .fade)
+
         }
         contextItem.backgroundColor =  UIColor.systemRed
         let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])

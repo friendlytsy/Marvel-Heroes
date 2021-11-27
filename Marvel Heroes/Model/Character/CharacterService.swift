@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 class CharacterService {
-    func updateData(_ offset: Int) {
+    func updateData(_ offset: Int, onComplete: @escaping() -> Void) {
         let urlBuilder = UrlBuilder()
         let dataModelFactory = CharacterDataModelFactory()
         guard let url = URL(string: urlBuilder.getUrl(UrlPath.characteresListUrl, offset)) else { return print("ERROR") }
@@ -27,6 +27,7 @@ class CharacterService {
             catch {
                 print(error.localizedDescription)
             }
+            onComplete()
         }
     }
     
@@ -34,12 +35,20 @@ class CharacterService {
         // Access Shared Defaults Object
         let userDefaults = UserDefaults.standard
         let urlBuilder = UrlBuilder()
+        let dataModelFactory = CharacterDataModelFactory()
+        
         guard let url = URL(string: urlBuilder.getUrl(UrlPath.characteresListUrl, 0, queryCharacter: name)) else { return print("ERROR") }
         var characters: [Character] = []
         DownloadManager.shared.downloadData(urlPath: url.absoluteString) { data in
             do {
                 let decoder = JSONDecoder()
                 let getData = try decoder.decode(CharacterDataWrapper.self, from: data)
+                let realm = try Realm()
+                try getData.data?.results?.forEach{item in
+                    try realm.write {
+                        realm.add(dataModelFactory.makeCharacterDataModel(from: item), update: .modified)
+                    }
+                }
                 // - Decode from JSON to array of struct
                 try getData.data?.results?.forEach{item in
                     characters.append(item)
