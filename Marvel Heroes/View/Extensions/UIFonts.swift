@@ -9,7 +9,7 @@ import UIKit
 
 extension UIFont {
     static let regular = UIFont(name: "Arial", size: 18.0)!
-    static let light = UIFont(name: "Apple Symbols", size: 12.0)!
+    static let light = UIFont(name: "Apple Symbols", size: 16.0)!
 
     class func regular(size: CGFloat) -> UIFont {
         return UIFont(name: "Avenir-Book", size: size)!

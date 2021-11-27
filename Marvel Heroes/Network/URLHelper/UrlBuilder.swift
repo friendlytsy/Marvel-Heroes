@@ -29,7 +29,7 @@ class UrlBuilder {
             URLQueryItem(name: "ts", value: timestemp),
             URLQueryItem(name: "hash", value: hash),
             URLQueryItem(name: "offset", value: String(offset)),
-            URLQueryItem(name: "limit", value: "50")
+            URLQueryItem(name: "limit", value: "30")
         ]
         if (character != nil) {
             urlComponents.queryItems?.append(URLQueryItem(name: "nameStartsWith", value: character))

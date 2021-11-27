@@ -12,14 +12,12 @@ import Firebase
 class ComicsViewController: UIViewController, UITableViewDelegate, UISearchBarDelegate {
     
     var realm = try? Realm()
-    var token: NotificationToken?
     var comicDataModel: Results<ComicDataModel>? = nil
-    
+    var activityIndicator = UIActivityIndicatorView(style: .large)
     let comicService = ComicService()
-    let comicSearchService = ComicSearchService()
-    let comicFavoriteService = ComicFavoriteService()
+    let comicViewModel = ComicViewModel()
     let searchController = UISearchController(searchResultsController: nil)
-
+    
     @IBOutlet weak var comicsTableView: UITableView!
     
     override func viewDidLoad() {
@@ -33,32 +31,42 @@ class ComicsViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         let nib = UINib(nibName: "GenericTableViewCell", bundle: nil)
         comicsTableView.register(nib, forCellReuseIdentifier: "GenericTableViewCell")
         
-        comicService.updateData(0)
-        observeRealm()
+        // - activityIndicator
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(activityIndicator)
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         // - Configure UISearch Controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Characters"
+        searchController.searchBar.placeholder = "Search Comics"
         navigationItem.searchController = searchController
         definesPresentationContext = true
         searchController.searchBar.delegate = self
         comicsTableView.tableHeaderView = searchController.searchBar
         
-        // - Analytics
-        FirebaseAnalytics.Analytics.logEvent("comic_screen_viewed", parameters: [
-            AnalyticsParameterScreenName: "comics-tab"])
-
+        activityIndicator.startAnimating()
+        comicService.updateData(0) {
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.comicsTableView.reloadData()
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        comicsTableView.reloadData()
     }
     
     // Favorite slider
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         var searchActive = false
         if (searchController.searchBar.text != "") {searchActive = true}
-        
         let contextItem = UIContextualAction(style: .normal, title: "Favorite") { [self] (contextualAction, view, boolValue) in
             boolValue(true) // pass true if you want the handler to allow the action
-            if (!(comicFavoriteService.makeFavorite(isSearch: searchActive, comicDataModel: comicDataModel!, index: indexPath.row)))
+            if (!(comicViewModel.makeFavorite(isSearch: searchActive, comicDataModel: comicDataModel!, index: indexPath.row)))
             {
                 self.showAlert()
             }
@@ -70,7 +78,13 @@ class ComicsViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if ((indexPath.row == self.comicDataModel!.count - 1) && !DownloadManager.isDataLoading) {
-            comicService.updateData(self.comicDataModel!.count)
+            activityIndicator.startAnimating()
+            comicService.updateData(self.comicDataModel!.count) {
+                DispatchQueue.main.async {
+                    self.comicsTableView.reloadData()
+                    self.activityIndicator.stopAnimating()
+                }
+            }
         }
     }
     
@@ -82,7 +96,6 @@ class ComicsViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is ItemDescriptionViewController {
             let vc = segue.destination as? ItemDescriptionViewController
-            // - NEED TO RE DO HERE
             if (searchController.searchBar.text != "") {
                 vc!.item = comicService.prepareItemForSegue(for: nil, where: comicsTableView.indexPathForSelectedRow!.row)
             } else {

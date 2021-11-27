@@ -11,8 +11,8 @@ import Firebase
 
 class FavoriteViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    let characterFavoriteService = CharacterFavoriteService()
-    let comicFavoriteService = ComicFavoriteService()
+    let characterViewModel = CharacterViewModel()
+    let comicViewModel = ComicViewModel()
     
     @IBOutlet weak var favoriteTableView: UITableView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
@@ -33,15 +33,9 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         favoriteTableView.dataSource = self
         favoriteTableView.delegate = self
         
+        // - Register custom cell
         let nib = UINib(nibName: "GenericTableViewCell", bundle: nil)
         favoriteTableView.register(nib, forCellReuseIdentifier: "GenericTableViewCell")
-        
-        favoriteTableView.reloadData()
-        
-        // - Analytics
-        FirebaseAnalytics.Analytics.logEvent("favorite_screen_viewed", parameters: [
-            AnalyticsParameterScreenName: "favorites-tab"])
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,9 +46,9 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch (segmentControl.selectedSegmentIndex){
         case 0:
-            return characterFavoriteService.getFavoriteCount(of: "characterFavorites")
+            return characterViewModel.getFavoriteCount(of: "characterFavorites")
         case 1:
-            return comicFavoriteService.getFavoriteCount(of: "comicFavorites")
+            return comicViewModel.getFavoriteCount(of: "comicFavorites")
         default:
             return 0
         }
@@ -64,9 +58,9 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "GenericTableViewCell", for: indexPath) as! GenericTableViewCell
         switch (segmentControl.selectedSegmentIndex){
         case 0:
-            cell.configureCharacter(withViewModel: characterFavoriteService.getFavorite(with: indexPath.row))
+            cell.configureCharacter(withViewModel: characterViewModel.getFavorite(with: indexPath.row))
         case 1:
-            cell.configureComic(withViewModel: comicFavoriteService.getFavorite(with: indexPath.row))
+            cell.configureComic(withViewModel: comicViewModel.getFavorite(with: indexPath.row))
         default:
             return UITableViewCell()
         }
@@ -86,10 +80,9 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         let contextItem = UIContextualAction(style: .normal, title: "Unfavorite") { [self] (contextualAction, view, boolValue) in
             boolValue(true) // pass true if you want the handler to allow the action
-            if (characterFavoriteService.makeUnfavorite(forkey: key, index: indexPath.row))
-            {
-                favoriteTableView.deleteRows(at: [indexPath], with: .fade)
-            }
+            characterViewModel.makeUnfavorite(forkey: key, index: indexPath.row)
+            favoriteTableView.deleteRows(at: [indexPath], with: .fade)
+
         }
         contextItem.backgroundColor =  UIColor.systemRed
         let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
@@ -104,12 +97,11 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is ItemDescriptionViewController {
             let vc = segue.destination as? ItemDescriptionViewController
-            // - NEED TO RE DO HERE
             switch (segmentControl.selectedSegmentIndex){
             case 0:
-                vc!.item = characterFavoriteService.prepareItemForSegue(where: favoriteTableView.indexPathForSelectedRow!.row)
+                vc!.item = characterViewModel.prepareItemForSegue(where: favoriteTableView.indexPathForSelectedRow!.row)
             case 1:
-                vc!.item = comicFavoriteService.prepareItemForSegue(where: favoriteTableView.indexPathForSelectedRow!.row)
+                vc!.item = comicViewModel.prepareItemForSegue(where: favoriteTableView.indexPathForSelectedRow!.row)
             default:
                 break
             }
