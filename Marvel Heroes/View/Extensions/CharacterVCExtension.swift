@@ -22,37 +22,41 @@ extension CharacterViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {}
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if (searchController.searchBar.text != "") {
-            activityIndicator.startAnimating()
-            characterService.searchCharacter(by: searchController.searchBar.text ?? "") {
-                DispatchQueue.main.async {
-                    self.characterTableView.reloadData()
-                    self.activityIndicator.stopAnimating()
-                }
+        activityIndicator.startAnimating()
+        characterService.searchCharacter(by: searchController.searchBar.text ?? "") {
+            DispatchQueue.main.async {
+                self.characterTableView.reloadData()
+                self.activityIndicator.stopAnimating()
             }
         }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        characterTableView.reloadData()
+        activityIndicator.startAnimating()
+        characterService.updateData(0){
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.characterTableView.reloadData()
+            }
+        }
+        characterViewModel.cleanupSearch()
     }
 }
 
 extension CharacterViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.isActive && searchController.searchBar.text != "" {
-            return characterViewModel.getSearchCount()
+        if (searchController.isActive && searchController.searchBar.text != "") {
+            return characterViewModel.getSearchCount(of: "characterSearch")
         }
         return characterDataModel?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = characterTableView.dequeueReusableCell(withIdentifier: "GenericTableViewCell", for: indexPath) as! GenericTableViewCell
-        
-        if (!searchController.isActive && searchController.searchBar.text == "") {
+        if !searchController.isActive {
             cell.configureCharacter(withViewModel: (characterDataModel?[indexPath.row])!)
         } else {
-            cell.configureCharacterSearchResult(result: characterViewModel.getSearchItem(index: indexPath.row))
+            cell.configureCharacter(withViewModel: characterViewModel.getSearchItem(index: indexPath.row))
         }
         return cell
     }

@@ -37,7 +37,12 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         let nib = UINib(nibName: "GenericTableViewCell", bundle: nil)
         favoriteTableView.register(nib, forCellReuseIdentifier: "GenericTableViewCell")
     }
-        
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        favoriteTableView.reloadData()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch (segmentControl.selectedSegmentIndex){
         case 0:

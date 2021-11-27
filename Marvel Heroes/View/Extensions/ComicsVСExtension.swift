@@ -11,24 +11,6 @@ import SwiftUI
 import Accelerate
 
 extension ComicsViewController {
-    func observeRealm() {
-        self.token = self.comicDataModel?.observe {  [weak self] ( changes: RealmCollectionChange) in
-            guard (self?.comicsTableView) != nil else {return}
-            switch changes {
-            case .initial:
-                self!.comicsTableView.reloadData()
-            case .update(_, let deletions, let insertions, let modifications):
-                self?.comicsTableView.beginUpdates()
-                self?.comicsTableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                self?.comicsTableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                self?.comicsTableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                self?.comicsTableView.endUpdates()
-            case .error(let error):
-                fatalError("\(error)")
-            }
-        }
-    }
-    
     func showAlert() {
         let alert = UIAlertController(title: "Can't add to favorite", message: "This comic already added to favorites", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
@@ -40,34 +22,42 @@ extension ComicsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {}
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if (searchController.searchBar.text != "") {
-            comicService.searchComic(by: searchController.searchBar.text ?? "") {
-                DispatchQueue.main.async { [self] in
-                    comicsTableView.reloadData()
-                }
+        activityIndicator.startAnimating()
+        comicService.searchComic(by: searchController.searchBar.text ?? "") {
+            DispatchQueue.main.async {
+                self.comicsTableView.reloadData()
+                self.activityIndicator.stopAnimating()
             }
         }
+        
     }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        observeRealm()
+        activityIndicator.startAnimating()
+        comicService.updateData(0){
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.comicsTableView.reloadData()
+            }
+        }
+        comicViewModel.cleanupSearch()
     }
 }
 
 extension ComicsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.isActive && searchController.searchBar.text != "" {
-            return comicViewModel.getSearchCount()
+            return comicViewModel.getSearchCount(of: "comicSearch")
         }
         return comicDataModel?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = comicsTableView.dequeueReusableCell(withIdentifier: "GenericTableViewCell", for: indexPath) as! GenericTableViewCell
-        
-        if (!searchController.isActive && searchController.searchBar.text == "") {
+        if !searchController.isActive {
             cell.configureComic(withViewModel: (comicDataModel?[indexPath.row])!)
         } else {
-            cell.configureComicSearchResult(result: comicViewModel.getSearchItem(index: indexPath.row))
+            cell.configureComic(withViewModel: comicViewModel.getSearchItem(index: indexPath.row))
         }
         return cell
     }

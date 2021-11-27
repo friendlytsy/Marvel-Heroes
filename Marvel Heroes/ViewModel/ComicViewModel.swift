@@ -12,7 +12,7 @@ class ComicViewModel{
     func makeFavorite(isSearch: Bool, comicDataModel: Results<ComicDataModel>, index: Int) -> Bool{
         let userDefaults = UserDefaults.standard
         var favorites: [String] = userDefaults.stringArray(forKey: "comicFavorites") ?? []
-        
+        let search : [String] = userDefaults.stringArray(forKey: "comicSearch") ?? []
         // if makeFavorite not from search
         if !isSearch {
             if (!favorites.contains(String(comicDataModel[index].id!))) {
@@ -23,12 +23,8 @@ class ComicViewModel{
         }
         // if makeFavorite from search
         if isSearch {
-            let search = UserDefaults.standard.data(forKey: "comicSearch")
-            // - decode from userDefaults
-            let decoder = JSONDecoder()
-            let decoded = try? decoder.decode([Character].self, from: search!)
-            if(!favorites.contains(String(decoded![index].id!))) {
-                favorites.append(String(decoded![index].id!))
+            if(!favorites.contains(String(search[index]))) {
+                favorites.append(String(search[index]))
                 userDefaults.set(favorites, forKey: "comicFavorites")
                 return true
             }
@@ -36,13 +32,11 @@ class ComicViewModel{
         return false
     }
     
-    func makeUnvorite(comicDataModel: ComicDataModel) -> Bool{
+    func makeUnvorite(forkey: String, index: Int) {
         let userDefaults = UserDefaults.standard
         var favorites: [String] = userDefaults.stringArray(forKey: "comicFavorites") ?? []
-        favorites.removeAll { $0 == String(comicDataModel.id!) }
+        favorites.remove(at: index)
         userDefaults.set(favorites, forKey: "comicFavorites")
-        
-        return true
     }
     
     func getFavorite(with id: Int) -> ComicDataModel {
@@ -64,22 +58,23 @@ class ComicViewModel{
         return UserDefaults.standard.stringArray(forKey: key)?.count ?? 0
     }
     
-    func getSearchCount() -> Int {
-        if let items = UserDefaults.standard.data(forKey: "comicSearch") {
-            let decoder = JSONDecoder()
-            if let decoded = try? decoder.decode([Comic].self, from: items) {
-                return decoded.count
-            }
-        }
-        return 0
+    func getSearchCount(of key: String) -> Int {
+        return UserDefaults.standard.stringArray(forKey: key)?.count ?? 0
     }
     
-    func getSearchItem(index: Int) -> Comic {
-        let items = UserDefaults.standard.data(forKey: "comicSearch")!
-        let decoder = JSONDecoder()
-        let decoded = try? decoder.decode([Comic].self, from: items)
+    func getSearchItem(index: Int) -> ComicDataModel {
+        var result: ComicDataModel? = nil
+        let userDefaults = UserDefaults.standard
+        let search: [String] = userDefaults.stringArray(forKey: "comicSearch") ?? []
         
-        return decoded![index]
+        do {
+            let realm = try Realm()
+            result = realm.objects(ComicDataModel.self).filter("id == \(search[index])").first
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+        return result!
     }
     
     func prepareItemForSegue(where index: Int = 0) -> [String: String] {
@@ -92,5 +87,9 @@ class ComicViewModel{
         item["thumbnail"] = comicFavoriteService.getFavorite(with: index).thumbnail
         
         return item
+    }
+    
+    func cleanupSearch() {
+        UserDefaults.standard.removeObject(forKey: "comicSearch")
     }
 }

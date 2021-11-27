@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 class ComicService {
-    func updateData(_ offset: Int) {
+    func updateData(_ offset: Int, onComplete: @escaping() -> Void) {
         let urlBuilder = UrlBuilder()
         let dataModelFactory = ComicDataModelFactory()
         guard let url = URL(string: urlBuilder.getUrl(UrlPath.comicsListUrl, offset)) else { return print("ERROR") }
@@ -27,29 +27,29 @@ class ComicService {
             catch {
                 print(error.localizedDescription)
             }
+            onComplete()
         }
     }
     
     func searchComic(by name: String, onComplete: @escaping() -> Void) {
-        // Access Shared Defaults Object
         let userDefaults = UserDefaults.standard
+        var search: [String] = userDefaults.stringArray(forKey: "characterSearch") ?? []
         let urlBuilder = UrlBuilder()
         guard let url = URL(string: urlBuilder.getUrl(UrlPath.comicsListUrl, 0, queryComic: name)) else { return print("ERROR") }
-        var comics: [Comic] = []
+        let dataModelFactory = ComicDataModelFactory()
         DownloadManager.shared.downloadData(urlPath: url.absoluteString) { data in
             do {
                 let decoder = JSONDecoder()
                 let getData = try decoder.decode(ComicDataWrapper.self, from: data)
-                // - Decode from JSON to array of struct
+                let realm = try Realm()
                 try getData.data?.results?.forEach{item in
-                    comics.append(item)
-                }
-                
-                // - Encode to save at UserDefaults
-                let encoder = JSONEncoder()
-                do {
-                    let encodedCharacters = try encoder.encode(comics)
-                    userDefaults.set(encodedCharacters, forKey: "comicSearch")
+                    try realm.write {
+                        realm.add(dataModelFactory.makeComicDataModel(from: item), update: .modified)
+                    }
+                    if (!search.contains(String(item.id!))) {
+                        search.append(String(item.id!))
+                        userDefaults.set(search, forKey: "comicSearch")
+                    }
                 }
             }
             catch {
@@ -61,9 +61,7 @@ class ComicService {
 
     
     func prepareItemForSegue(for comicDataModel: ComicDataModel? = nil, where index: Int = 0) -> [String: String] {
-        
         let comicViewModel = ComicViewModel()
-        
         var item = ["id":"", "name":"", "description":"","thumbnail":""]
         // - if a search
         if (comicDataModel != nil) {
@@ -72,10 +70,9 @@ class ComicService {
             item["thumbnail"] = comicDataModel?.thumbnail
         } else {
             item["name"] = comicViewModel.getSearchItem(index: index).title
-            item["description"] = comicViewModel.getSearchItem(index: index).description
-            item["thumbnail"] = comicViewModel.getSearchItem(index: index).thumbnail?.url?.absoluteString
+            item["description"] = comicViewModel.getSearchItem(index: index).comicDescription
+            item["thumbnail"] = comicViewModel.getSearchItem(index: index).thumbnail
         }
-        
         return item
     }
 

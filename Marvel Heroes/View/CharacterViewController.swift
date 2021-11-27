@@ -12,11 +12,8 @@ import FirebaseAnalytics
 class CharacterViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate {
     
     var realm = try? Realm()
-    var token: NotificationToken?
     var characterDataModel: Results<CharacterDataModel>? = nil
-
     var activityIndicator = UIActivityIndicatorView(style: .large)
-
     let characterService = CharacterService()
     let characterViewModel = CharacterViewModel()
     let searchController = UISearchController(searchResultsController: nil)
@@ -41,15 +38,6 @@ class CharacterViewController: UIViewController, UISearchBarDelegate, UITableVie
         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        activityIndicator.startAnimating()
-
-        characterService.updateData(0){
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-                self.characterTableView.reloadData()
-            }
-        }
-        
         // - Configure UISearch Controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -59,9 +47,23 @@ class CharacterViewController: UIViewController, UISearchBarDelegate, UITableVie
         searchController.searchBar.delegate = self
         characterTableView.tableHeaderView = searchController.searchBar
         
+        
+        activityIndicator.startAnimating()
+        characterService.updateData(0){
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.characterTableView.reloadData()
+            }
+        }
+        
         // - Analytics
         FirebaseAnalytics.Analytics.logEvent("character_screen_viewed", parameters: [
             AnalyticsParameterScreenName: "characters-tab"])
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        characterTableView.reloadData()
     }
     
     // Favorite slider

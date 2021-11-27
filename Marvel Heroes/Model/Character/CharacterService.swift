@@ -32,13 +32,11 @@ class CharacterService {
     }
     
     func searchCharacter(by name: String, onComplete: @escaping() -> Void) {
-        // Access Shared Defaults Object
         let userDefaults = UserDefaults.standard
+        var search: [String] = userDefaults.stringArray(forKey: "characterSearch") ?? []
         let urlBuilder = UrlBuilder()
         let dataModelFactory = CharacterDataModelFactory()
-        
         guard let url = URL(string: urlBuilder.getUrl(UrlPath.characteresListUrl, 0, queryCharacter: name)) else { return print("ERROR") }
-        var characters: [Character] = []
         DownloadManager.shared.downloadData(urlPath: url.absoluteString) { data in
             do {
                 let decoder = JSONDecoder()
@@ -48,16 +46,10 @@ class CharacterService {
                     try realm.write {
                         realm.add(dataModelFactory.makeCharacterDataModel(from: item), update: .modified)
                     }
-                }
-                // - Decode from JSON to array of struct
-                try getData.data?.results?.forEach{item in
-                    characters.append(item)
-                }
-                // - Encode to save at UserDefaults
-                let encoder = JSONEncoder()
-                do {
-                    let encodedCharacters = try encoder.encode(characters)
-                    userDefaults.set(encodedCharacters, forKey: "characterSearch")
+                    if (!search.contains(String(item.id!))) {
+                        search.append(String(item.id!))
+                        userDefaults.set(search, forKey: "characterSearch")
+                    }
                 }
             }
             catch {
@@ -77,8 +69,8 @@ class CharacterService {
             item["thumbnail"] = characterDataModel?.thumbnail
         } else {
             item["name"] = characterViewModel.getSearchItem(index: index).name
-            item["description"] = characterViewModel.getSearchItem(index: index).description
-            item["thumbnail"] = characterViewModel.getSearchItem(index: index).thumbnail?.url?.absoluteString
+            item["description"] = characterViewModel.getSearchItem(index: index).charDescription
+            item["thumbnail"] = characterViewModel.getSearchItem(index: index).thumbnail
         }
         return item
     }

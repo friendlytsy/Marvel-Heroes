@@ -7,13 +7,12 @@
 
 import Foundation
 import RealmSwift
-import Firebase
 
 class CharacterViewModel {
     func makeFavorite(isSearch: Bool, characterDataModel: Results<CharacterDataModel>, index: Int) -> Bool{
         let userDefaults = UserDefaults.standard
         var favorites: [String] = userDefaults.stringArray(forKey: "characterFavorites") ?? []
-        
+        let search : [String] = userDefaults.stringArray(forKey: "characterSearch") ?? []
         // if makeFavorite not from search
         if !isSearch {
             if (!favorites.contains(String(characterDataModel[index].id!))) {
@@ -24,12 +23,8 @@ class CharacterViewModel {
         }
         // if makeFavorite from search
         if isSearch {
-            let search = UserDefaults.standard.data(forKey: "characterSearch")
-            // - decode from userDefaults
-            let decoder = JSONDecoder()
-            let decoded = try? decoder.decode([Character].self, from: search!)
-            if(!favorites.contains(String(decoded![index].id!))) {
-                favorites.append(String(decoded![index].id!))
+            if(!favorites.contains(String(search[index]))) {
+                favorites.append(String(search[index]))
                 userDefaults.set(favorites, forKey: "characterFavorites")
                 return true
             }
@@ -76,21 +71,26 @@ class CharacterViewModel {
         return item
     }
     
-    func getSearchCount() -> Int {
-        if let items = UserDefaults.standard.data(forKey: "characterSearch") {
-            let decoder = JSONDecoder()
-            if let decoded = try? decoder.decode([Character].self, from: items) {
-                return decoded.count
-            }
-        }
-        return 0
+    func getSearchCount(of key: String) -> Int {
+        return UserDefaults.standard.stringArray(forKey: key)?.count ?? 0
     }
     
-    func getSearchItem(index: Int) -> Character {
-        let items = UserDefaults.standard.data(forKey: "characterSearch")!
-        let decoder = JSONDecoder()
-        let decoded = try? decoder.decode([Character].self, from: items)
+    func getSearchItem(index: Int) -> CharacterDataModel {
+        var result: CharacterDataModel? = nil
+        let userDefaults = UserDefaults.standard
+        let search: [String] = userDefaults.stringArray(forKey: "characterSearch") ?? []
         
-        return decoded![index]
+        do {
+            let realm = try Realm()
+            result = realm.objects(CharacterDataModel.self).filter("id == \(search[index])").first
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+        return result!
+    }
+    
+    func cleanupSearch() {
+        UserDefaults.standard.removeObject(forKey: "characterSearch")
     }
 }
