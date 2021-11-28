@@ -19,13 +19,4 @@ class CharacterDataModelFactory {
          
         return character
     }
-        
-//    func updateCharacterDataModel(from networkModel: Character, to realModel: CharacterDataModel) -> CharacterDataModel {
-//        // - Put new vaulues to DataModel incase of changes. This helps to avoid extra tableView reload.
-//        if (realModel.name != networkModel.name) {realModel.name = networkModel.name}
-//        if (realModel.charDescription != networkModel.description) {realModel.charDescription = networkModel.description}
-//        if (realModel.thumbnail != networkModel.thumbnail?.url?.absoluteString) {realModel.thumbnail = networkModel.thumbnail?.url?.absoluteString}
-//        
-//        return realModel
-//    }
 }

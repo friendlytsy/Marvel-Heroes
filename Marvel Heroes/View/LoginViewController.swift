@@ -14,13 +14,13 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginInputField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBAction func doLogonButton(_ sender: UIButton) {
-//        self.saveLogin()
+        self.saveLogin()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-//        self.isSavedLogin()
+        self.isSavedLogin()
     }
 }
 
