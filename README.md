@@ -6,6 +6,7 @@ https://developer.marvel.com/docs
 Please note that app require Marvel Developer API key.
 Known issues - constraint warning, despite on this looks fine at iPhone 11/iPhone 5se.
 
+Public API key, for testing purpose: 6365e29ac17d2e2f2dc319a02fc0c26e
 
 Comic and character codable structs:
 --
