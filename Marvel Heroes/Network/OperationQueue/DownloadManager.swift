@@ -25,5 +25,13 @@ class DownloadManager {
         }
         DownloadManager.operationQueue.addOperations([operation], waitUntilFinished: false)
     }
+    
+    func verifyApiKey(urlPath: String, completion: @escaping(Int) -> Void) {
+        let operation = DownloadOperation(urlSession: urlSession, urlPath: urlPath)
+        operation.completionBlock = {
+            completion(operation.requestStatus!)
+        }
+        DownloadManager.operationQueue.addOperations([operation], waitUntilFinished: false)
+    }
 }
 

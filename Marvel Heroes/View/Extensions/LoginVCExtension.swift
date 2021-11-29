@@ -10,10 +10,22 @@ import SwiftUI
 
 extension LoginViewController {
     func saveLogin() {
-        if (loginInputField.text! != "") {
-            UserDefaults.standard.set(loginInputField.text, forKey: "restKey")
-        } else {
-            showAlert()
+        var status: Int? = nil
+        let urlBuilder = UrlBuilder()
+        // - Make this operation sync
+        let semaphore = DispatchSemaphore(value: 0)
+        // - Save value from text field
+        UserDefaults.standard.set(self.loginInputField.text, forKey: "restKey")
+        guard let url = URL(string: urlBuilder.getUrl(UrlPath.characteresListUrl, 0)) else { return print("ERROR") }
+        DownloadManager.shared.verifyApiKey(urlPath: url.absoluteString){httpStatus in
+            status = httpStatus
+            semaphore.signal()
+        }
+        semaphore.wait()
+        // - Remove "restKey" if status != 200
+        if status != 200 {
+            UserDefaults.standard.removeObject(forKey: "restKey")
+            self.showAlert()
         }
     }
     

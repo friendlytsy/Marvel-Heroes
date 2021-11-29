@@ -10,6 +10,7 @@ import SwiftUI
 
 class DownloadOperation : Operation {
     
+    var requestStatus: Int? = nil
     var operationResult: Data? = nil
     var urlPath: String = ""
     private var dataTask: URLSessionDataTask?
@@ -38,6 +39,7 @@ class DownloadOperation : Operation {
                 if httpResponse.statusCode == 200{
                     self.operationResult = data
                 }
+                self.requestStatus = httpResponse.statusCode
             }
             semaphore.signal()
         })
