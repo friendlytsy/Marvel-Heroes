@@ -7,7 +7,6 @@
 
 import UIKit
 import RealmSwift
-import FirebaseAnalytics
 
 class CharacterViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate {
     
@@ -55,10 +54,6 @@ class CharacterViewController: UIViewController, UISearchBarDelegate, UITableVie
                 self.characterTableView.reloadData()
             }
         }
-        
-        // - Analytics
-        FirebaseAnalytics.Analytics.logEvent("character_screen_viewed", parameters: [
-            AnalyticsParameterScreenName: "characters-tab"])
     }
     
     override func viewWillAppear(_ animated: Bool) {

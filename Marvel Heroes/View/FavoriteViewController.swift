@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import Firebase
 
 class FavoriteViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
