@@ -1,0 +1,25 @@
+/* 
+  localize.strings
+  Marvel Heroes
+
+  Created by Александр Цыганков on 08.12.2021.
+  
+*/
+"searchCharacterPlaceholder" = "Search Characters";
+"addToFavoriteSlider" = "Favorite";
+
+"searchComicPlaceholder" = "Search Comics";
+"removeFromFavoriteSlider" = "Unfavorite";
+
+"comicAlertTitle" = "Can't add to favorite";
+"comicAlertMessage" = "This comic already added to favorites";
+
+"characterAlertTitle" = "Can't add to favorite";
+"characterAlertMessage" = "This character already added to favorites";
+
+"apiFieldPlaceHolder" = "Please input your REST API here";
+"loginAlertTitle" = "API wasn't saved";
+"loginAlertMessage" = "Something goes wrong, API will not be saved. Please try later";
+
+"segmentControlTitle_0" = "Characters";
+"segmentControlTitle_1" = "Comis";

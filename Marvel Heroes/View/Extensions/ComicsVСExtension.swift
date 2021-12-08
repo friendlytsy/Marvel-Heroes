@@ -12,7 +12,7 @@ import Accelerate
 
 extension ComicsViewController {
     func showAlert() {
-        let alert = UIAlertController(title: "Can't add to favorite", message: "This comic already added to favorites", preferredStyle: .alert)
+        let alert = UIAlertController(title: NSLocalizedString("comicAlertTitle", comment: ""), message: NSLocalizedString("comicAlertMessage", comment: ""), preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true)
     }

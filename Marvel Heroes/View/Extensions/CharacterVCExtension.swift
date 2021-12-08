@@ -12,7 +12,7 @@ import Accelerate
 
 extension CharacterViewController{
     func showAlert() {
-        let alert = UIAlertController(title: "Can't add to favorite", message: "This character already added to favorite", preferredStyle: .alert)
+        let alert = UIAlertController(title: NSLocalizedString("characterAlertTitle", comment: ""), message: NSLocalizedString("characterAlertMessage", comment: ""), preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true)
     }

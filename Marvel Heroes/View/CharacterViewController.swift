@@ -40,7 +40,7 @@ class CharacterViewController: UIViewController, UISearchBarDelegate, UITableVie
         // - Configure UISearch Controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Characters"
+        searchController.searchBar.placeholder = NSLocalizedString("searchCharacterPlaceholder", comment: "")
         navigationItem.searchController = searchController
         definesPresentationContext = true
         searchController.searchBar.delegate = self
@@ -65,7 +65,7 @@ class CharacterViewController: UIViewController, UISearchBarDelegate, UITableVie
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         var searchActive = false
         if (searchController.searchBar.text != "") {searchActive = true}
-        let contextItem = UIContextualAction(style: .normal, title: "Favorite") { [self] (contextualAction, view, boolValue) in
+        let contextItem = UIContextualAction(style: .normal, title: NSLocalizedString("addToFavoriteSlider", comment: "")) { [self] (contextualAction, view, boolValue) in
             boolValue(true) // pass true if you want the handler to allow the action
             if (!(characterViewModel.makeFavorite(isSearch: searchActive, characterDataModel: characterDataModel!, index: indexPath.row)))
             {
