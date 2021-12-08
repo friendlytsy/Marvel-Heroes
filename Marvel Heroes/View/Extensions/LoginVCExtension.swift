@@ -33,12 +33,12 @@ extension LoginViewController {
         if (UserDefaults.standard.string(forKey: "restKey") != nil) {
             loginInputField.text = UserDefaults.standard.string(forKey: "restKey")
         } else {
-            loginInputField.placeholder = "Please input your REST API here."
+            loginInputField.placeholder = NSLocalizedString("apiFieldPlaceHolder", comment: "")
         }
     }
     
     func showAlert() {
-        let alert = UIAlertController(title: "API wasn't saved", message: "Something goes wrong, API will not be saved. Please try later", preferredStyle: .alert)
+        let alert = UIAlertController(title: NSLocalizedString("loginAlertTitle", comment: ""), message: NSLocalizedString("loginAlertMessage", comment: ""), preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true)
     }

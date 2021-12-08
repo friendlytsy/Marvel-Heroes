@@ -26,8 +26,8 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         
         // - Configure segment control
-        segmentControl.setTitle("Characters", forSegmentAt: 0)
-        segmentControl.setTitle("Comics", forSegmentAt: 1)
+        segmentControl.setTitle(NSLocalizedString("segmentControlTitle_0", comment: ""), forSegmentAt: 0)
+        segmentControl.setTitle(NSLocalizedString("segmentControlTitle_1", comment: ""), forSegmentAt: 1)
         
         favoriteTableView.dataSource = self
         favoriteTableView.delegate = self
@@ -77,7 +77,7 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         default:
             break
         }
-        let contextItem = UIContextualAction(style: .normal, title: "Unfavorite") { [self] (contextualAction, view, boolValue) in
+        let contextItem = UIContextualAction(style: .normal, title: NSLocalizedString("removeFromFavoriteSlider", comment: "")) { [self] (contextualAction, view, boolValue) in
             boolValue(true) // pass true if you want the handler to allow the action
             characterViewModel.makeUnfavorite(forkey: key, index: indexPath.row)
             favoriteTableView.deleteRows(at: [indexPath], with: .fade)

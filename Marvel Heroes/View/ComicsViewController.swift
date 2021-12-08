@@ -39,7 +39,7 @@ class ComicsViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         // - Configure UISearch Controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Comics"
+        searchController.searchBar.placeholder = NSLocalizedString("searchComicPlaceholder", comment: "")
         navigationItem.searchController = searchController
         definesPresentationContext = true
         searchController.searchBar.delegate = self
@@ -63,7 +63,7 @@ class ComicsViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         var searchActive = false
         if (searchController.searchBar.text != "") {searchActive = true}
-        let contextItem = UIContextualAction(style: .normal, title: "Favorite") { [self] (contextualAction, view, boolValue) in
+        let contextItem = UIContextualAction(style: .normal, title: NSLocalizedString("addToFavoriteSlider", comment: "")) { [self] (contextualAction, view, boolValue) in
             boolValue(true) // pass true if you want the handler to allow the action
             if (!(comicViewModel.makeFavorite(isSearch: searchActive, comicDataModel: comicDataModel!, index: indexPath.row)))
             {

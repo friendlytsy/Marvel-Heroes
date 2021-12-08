@@ -1,0 +1,36 @@
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "6rt-3Q-zQk"; */
+"6rt-3Q-zQk.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UITabBarItem"; title = "Heroes"; ObjectID = "9Vq-fn-eMv"; */
+"9Vq-fn-eMv.title" = "Герои";
+
+/* Class = "UIButton"; normalTitle = "Apply API Key"; ObjectID = "E3b-TV-vXL"; */
+"E3b-TV-vXL.normalTitle" = "Применить API ключ";
+
+/* Class = "UITabBarItem"; title = "Favorites"; ObjectID = "HN5-pc-aby"; */
+"HN5-pc-aby.title" = "Избранное";
+
+/* Class = "UIButton"; configuration.title = "Crash!"; ObjectID = "Qd6-tG-z1h"; */
+"Qd6-tG-z1h.configuration.title" = "Уронить!";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Qd6-tG-z1h"; */
+"Qd6-tG-z1h.normalTitle" = "Button";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "SPy-vX-9ba"; */
+"SPy-vX-9ba.title" = "Настройки";
+
+/* Class = "UITabBarItem"; title = "Comics"; ObjectID = "Udi-NY-tzV"; */
+"Udi-NY-tzV.title" = "Комиксы";
+
+/* Class = "UILabel"; text = "Input Marvel Dev REST API key"; ObjectID = "UwO-kF-Ipg"; */
+"UwO-kF-Ipg.text" = "Введите Marvel REST API ключ";
+
+/* Class = "UISegmentedControl"; lL3-n6-MK1.segmentTitles[0] = "First"; ObjectID = "lL3-n6-MK1"; */
+"lL3-n6-MK1.segmentTitles[0]" = "Герои";
+
+/* Class = "UISegmentedControl"; lL3-n6-MK1.segmentTitles[1] = "Second"; ObjectID = "lL3-n6-MK1"; */
+"lL3-n6-MK1.segmentTitles[1]" = "Комиксы";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "qTC-37-RrV"; */
+"qTC-37-RrV.text" = "Label";
